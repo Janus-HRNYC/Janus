@@ -5,20 +5,21 @@ const Placeholder = (props) => {
 
 return (
   <div>
-    <p>{props.test}</p>
-    <button onClick={props.onTestHandler}>Increment </button>
+    <p>{props.load ? 'loading' : props.test[0].name}</p>
+    <button onClick={props.onTestHandler}>Test API</button>
   </div>
 )
 };
 const mapStateToProps = state => {
   return {
-    test: state.tr.test
+    test: state.tr.test,
+    load: state.tr.load
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTestHandler: () => dispatch(actionCreators.testRandom())
+    onTestHandler: () => dispatch(actionCreators.testFetch())
   }
 }
 

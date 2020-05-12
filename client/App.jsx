@@ -1,6 +1,6 @@
 import React from "react";
 import ReactRouter from "./utility/ReactRouter.jsx";
-import Placeholder from "./containers/placeholder.js";
+import Placeholder from "./containers/placeholder.jsx";
 
 const App = () => {
   return (
