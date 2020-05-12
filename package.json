@@ -4,17 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/server.js"
+    "test": "jest",
+    "build": "webpack -d",
+    "build:watch": "npm run build -- --watch",
+    "start": "nodemon server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "eslint-plugin-react-redux": "^3.0.3",
+=======
+    "babel-jest": "^26.0.1",
+    "core-js": "^3.6.5",
+>>>>>>> master
     "express": "^4.17.1",
+    "jest": "^26.0.1",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^3.0.4",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
