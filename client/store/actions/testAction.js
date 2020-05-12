@@ -1,4 +1,5 @@
 import * as actionTypes from './action'
+import axios from 'axios';
 
 export const testRandom = (data) => {
   return {
@@ -9,10 +10,12 @@ export const testRandom = (data) => {
   }
 }
 
-   export const testFetch = () => {
-    return dispatch => {
-      // axios.get(//endpoint) {
-        // promise ? dispatch(testRandom(results.data))
-      // }
-    }
+export const testFetch = () => {
+  return dispatch => {
+    axios.get('http://18.224.200.47/products/list?page=6')
+      .then((results) => {
+        dispatch(testRandom(results.data))
+      })
+      .catch((err) => console.log(err));
   }
+}
