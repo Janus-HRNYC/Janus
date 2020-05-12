@@ -1,13 +1,15 @@
 import React from "react";
-import Placeholder from './containers/placeholder.js'
+import ReactRouter from "./utility/ReactRouter.jsx";
+import Placeholder from "./containers/placeholder.js";
 
 const App = () => {
-return (
-<div>
-  <Placeholder />
-</div>  
-)
-
+  return (
+    <div>
+      Display App
+      <Placeholder />
+      <ReactRouter />
+    </div>
+  );
 };
 
 export default App;
