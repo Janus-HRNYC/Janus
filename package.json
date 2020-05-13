@@ -12,15 +12,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "eslint-plugin-react-redux": "^3.0.3",
+=======
+    "axios": "^0.19.2",
+    "babel-jest": "^26.0.1",
+    "core-js": "^3.6.5",
+>>>>>>> 78273ab10b0785420ece0fab52be898e6f81d47b
     "express": "^4.17.1",
     "jest": "^26.0.1",
     "jest-puppeteer": "^4.4.0",
     "puppeteer": "^3.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
     "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
