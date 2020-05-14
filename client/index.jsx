@@ -1,13 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.jsx";
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import testReducer  from '../client/store/reducers/testReducer.js'
+import relatedProductsReducer  from '../client/related_products/redux/store/reducers/relatedProductsReducer.js';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  tr: testReducer,
+  relatedProductsReducer : relatedProductsReducer,
 });
 
 // custom middleware to print state before dispatching and print new states
@@ -22,6 +24,6 @@ const logger = store => {
   }
 }
 
-const store = createStore(rootReducer, applyMiddleware(logger, thunk));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(logger, thunk)));
 
 ReactDOM.render(< Provider store={store}> <App /> </Provider>, document.getElementById("app"));
