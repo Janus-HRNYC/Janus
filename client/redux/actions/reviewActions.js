@@ -6,6 +6,11 @@ const reviewActions = {
     results: data,
   }),
 
+  setProductID: (id) => ({
+    type: 'SET_PRODUCT_ID',
+    results: id,
+  }),
+
   getReviews: (productId, sort, count = 50) => {
     return (dispatch) => {
       let query = {
@@ -19,6 +24,7 @@ const reviewActions = {
         .then((res) => {
           console.log('Successful in GET: ', res.data);
           dispatch(reviewActions.setReviewResults(res.data.results));
+          dispatch(reviewActions.setProductID(productId));
         })
         .catch((err) => {
           console.log('Error in GET: ', err);

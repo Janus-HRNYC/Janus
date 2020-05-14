@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
       Display App
-      <ReactRouter />
+      {/* <ReactRouter /> */}
       <div>
         {/* <DisplayRelatedItems /> */}
         <ReviewContainer />

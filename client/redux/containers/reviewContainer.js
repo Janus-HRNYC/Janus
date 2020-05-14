@@ -3,6 +3,7 @@ import Review from '../../ratings_reviews/Reviews.jsx';
 import reviewActions from '../actions/reviewActions.js';
 
 const mapStateToProps = (store) => ({
+  productId: store.productId,
   reviewResults: store.reviewResults,
 });
 

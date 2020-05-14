@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import ReviewItem from './ReviewItem.jsx';
 
-const ReviewList = ({ list }) => {
+const ReviewList = ({ list, id }) => {
   console.log('List length-> ', list.length);
+  console.log('Product id-> ', id);
+
   const [limit, setLimit] = useState(2);
 
   const renderReviewItem = () => {
