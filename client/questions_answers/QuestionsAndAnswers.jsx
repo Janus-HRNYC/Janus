@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
+import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
 // import janus from '../lib/axiosRequests';
 
@@ -20,13 +21,18 @@ const QuestionsAndAnswers = () => {
 
 
   return (
-    <div>
+    <Box>
+        <Container>
       <h3>QUESTIONS AND ANSWERS</h3>
-      <div>
+        
         <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} questions={questions} setQuestions={setQuestions} productId={productId} setTempQuestions={setTempQuestions} tempQuestions={tempQuestions}/>
+       
+        <Grid>
         <QuestionsAndAnswersList questions={searchTerm.length > 2 ? tempQuestions : questions} />
-      </div>
-    </div>
+        </Grid>
+      
+        </Container>
+    </Box>
   );
 };
 

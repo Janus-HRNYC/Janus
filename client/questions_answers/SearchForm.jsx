@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TextField } from '@material-ui/core';
 
 
 const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) => {
@@ -31,8 +32,14 @@ const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) 
   return (
     <div>
       <form>
-        <input type="text" value={searchTerm} placeholder="Have a question? Search for answers..." onChange={handleSearchChange} />
-      </form>
+        {/* <input type="text" value={searchTerm} placeholder="Have a question? Search for answers..." onChange={handleSearchChange} /> */}
+        <TextField id="outlined-basic" 
+        fullWidth
+        variant="outlined" 
+        value={searchTerm} 
+        placeholder="Have a question? Search for answers..." 
+        onChange={handleSearchChange}/>
+        </form>
     </div>
   );
 };
