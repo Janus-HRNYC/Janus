@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import StarRating from "../../ratings_reviews/StarRating";
+import Box from "@material-ui/core/Box";
 
 const ProductInfo = () => {
   const [product_id, setProduct_id] = useState(50);
@@ -13,30 +15,36 @@ const ProductInfo = () => {
   }, []);
 
   const [rating, setRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
     axios
       .get(`http://18.224.200.47/reviews/${product_id}/list`)
       .then((result) => {
         const payload = result.data.results;
+        console.log(payload);
         let sum = 0;
         for (let i = 0; i < payload.length; i++) {
           sum += payload[i].rating;
         }
-        const temp = sum / payload.length;
-        setRating(temp);
+        const avg = sum / payload.length;
+        setRating(avg);
+        setRatingCount(payload.length);
       })
       .catch((err) => console.error(err));
-  });
+  }, []);
 
   return (
     <div>
-      <div>{rating} read all reviews</div>
+      <Box>
+        <StarRating star={rating} />
+        <div>{`Read all ${ratingCount} reviews`}</div>
+      </Box>
+
       <div>{info.category}</div>
       <div>{info.name}</div>
       <div>{info.default_price}</div>
       <div>{info.description}</div>
       <div>
-        {/* social media buttons */}
         <button>Twitter</button>
         <button>Facebook</button>
         <button>Pintrest</button>
