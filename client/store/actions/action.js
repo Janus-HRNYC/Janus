@@ -1,1 +1,0 @@
-export const TEST_RANDOM = 'TEST_RANDOM';
