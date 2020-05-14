@@ -7,9 +7,9 @@ const App = () => {
   return (
     <div>
       Display App
-      <ReactRouter />
+      {/* <ReactRouter /> */}
       <div>
-        <DisplayRelatedItems />
+        {/* <DisplayRelatedItems /> */}
         <Reviews />
       </div>
     </div>

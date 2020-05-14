@@ -25,7 +25,7 @@ const Reviews = () => {
   };
 
   useEffect(() => {
-    getReviews(27, null, 100);
+    getReviews(28, 'newest', 100);
   }, []);
 
   return (
