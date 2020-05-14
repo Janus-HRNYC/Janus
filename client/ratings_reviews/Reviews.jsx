@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { Box, Grid, Container } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
 
-const Reviews = ({ productId, reviewResults, getReviews }) => {
+const Reviews = (props) => {
+  const { productId, reviewResults, getReviews, displayBySort } = props;
+
   useEffect(() => {
-    getReviews(28, 'newest', 100);
+    getReviews(27);
   }, []);
 
   return (
@@ -18,7 +20,11 @@ const Reviews = ({ productId, reviewResults, getReviews }) => {
           </Grid>
           <Grid item md={8}>
             Second Column
-            <ReviewList list={reviewResults} id={productId} />
+            <ReviewList
+              list={reviewResults}
+              id={productId}
+              displayBySort={displayBySort}
+            />
           </Grid>
         </Grid>
       </Container>

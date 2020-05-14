@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import ReviewItem from './ReviewItem.jsx';
+import { FormControl, Select, MenuItem } from '@material-ui/core';
 
-const ReviewList = ({ list, id }) => {
+const ReviewList = (props) => {
+  const { list, id, displayBySort } = props;
+  const [limit, setLimit] = useState(2);
+  const [sort, setSort] = useState('relevant');
+  let listLength = list.length;
+
   console.log('List length-> ', list.length);
   console.log('Product id-> ', id);
-
-  const [limit, setLimit] = useState(2);
 
   const renderReviewItem = () => {
     let displayReviews = list.filter((item) => {
@@ -26,10 +30,25 @@ const ReviewList = ({ list, id }) => {
     setLimit(limit + 2);
   };
 
+  const handleChange = (e) => {
+    setSort(e.target.value);
+    displayBySort(id, e.target.value);
+  };
+
+  const renderMenu = () => (
+    <FormControl>
+      <Select value={sort} onChange={handleChange}>
+        <MenuItem value={'relevant'}>Relevant</MenuItem>
+        <MenuItem value={'helpful'}>Helpful</MenuItem>
+        <MenuItem value={'newest'}>Newest</MenuItem>
+      </Select>
+    </FormControl>
+  );
+
   return (
     <div>
       <h4>
-        {list.length} reviews, sorted by <strong>TODO: create dropdown</strong>
+        {listLength} reviews, sorted by {renderMenu()}
       </h4>
       {renderReviewItem()}
       <div>

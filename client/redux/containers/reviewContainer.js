@@ -5,12 +5,16 @@ import reviewActions from '../actions/reviewActions.js';
 const mapStateToProps = (store) => ({
   productId: store.productId,
   reviewResults: store.reviewResults,
+  sortDisplay: store.sortDisplay,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getReviews: (productId, sort, count) => {
       return dispatch(reviewActions.getReviews(productId, sort, count));
+    },
+    displayBySort: (productId, sort) => {
+      return dispatch(reviewActions.getReviews(productId, sort));
     },
   };
 };

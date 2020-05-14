@@ -11,7 +11,7 @@ const reviewActions = {
     results: id,
   }),
 
-  getReviews: (productId, sort, count = 50) => {
+  getReviews: (productId, sort = 'relevant', count = 100) => {
     return (dispatch) => {
       let query = {
         params: {
