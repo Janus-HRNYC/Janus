@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box, Grid, Container } from '@material-ui/core';
-import axios from 'axios';
 import ReviewList from './ReviewList.jsx';
 
-const Reviews = () => {
-  const [list, setList] = useState([]);
-
-  const getReviews = (productId, sort, count = 50) => {
-    let query = {
-      params: {
-        sort: sort,
-        count: count,
-      },
-    };
-    return axios
-      .get(`http://18.224.200.47/reviews/${productId}/list`, query)
-      .then((res) => {
-        console.log('Successful : ', res.data);
-        setList(res.data.results);
-      })
-      .catch((err) => {
-        console.log('Error : ', err);
-      });
-  };
-
+const Reviews = ({ reviewResults, getReviews }) => {
   useEffect(() => {
-    getReviews(27, null, 100);
+    getReviews(28, 'newest', 100);
   }, []);
 
   return (
@@ -39,7 +18,7 @@ const Reviews = () => {
           </Grid>
           <Grid item md={8}>
             Second Column
-            <ReviewList list={list} />
+            <ReviewList list={reviewResults} />
           </Grid>
         </Grid>
       </Container>

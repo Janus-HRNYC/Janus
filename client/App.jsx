@@ -2,6 +2,10 @@ import React from "react";
 import ReactRouter from "./utility/ReactRouter.jsx";
 // import Placeholder from "./containers/placeholder.jsx";
 import Overview from "./overview/index.jsx";
+import React from "react";
+import ReactRouter from "./utility/ReactRouter.jsx";
+// import DisplayRelatedItems from './related_products/redux/containers/DisplayRelatedItems';
+import ReviewContainer from "./redux/containers/reviewContainer.js";
 
 const App = () => {
   return (
@@ -10,6 +14,8 @@ const App = () => {
       <ReactRouter />
       <div>
         <Overview />
+        {/* <DisplayRelatedItems /> */}
+        <ReviewContainer />
       </div>
     </div>
   );
