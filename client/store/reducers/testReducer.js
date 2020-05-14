@@ -6,14 +6,14 @@ const initalState = {
 }
 
 const testReducer = (state = initalState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionTypes.TEST_RANDOM:
       return {
         ...state,
         test: [...state.test].concat(action.payload.data),
         load: false,
       }
-      default: 
+    default: 
       return state;
   }
 }
