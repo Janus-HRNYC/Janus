@@ -5,7 +5,7 @@ import reviewActions from '../actions/reviewActions.js';
 const mapStateToProps = (store) => ({
   productId: store.productId,
   reviewResults: store.reviewResults,
-  sortDisplay: store.sortDisplay,
+  ratingsMeta: store.ratingsMeta,
 });
 
 const mapDispatchToProps = (dispatch) => {
