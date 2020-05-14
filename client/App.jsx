@@ -1,13 +1,16 @@
 import React from "react";
 import ReactRouter from "./utility/ReactRouter.jsx";
-import Placeholder from "./containers/placeholder.jsx";
+import DisplayRelatedItems from "./related_products/redux/containers/DisplayRelatedItems";
 
 const App = () => {
   return (
     <div>
       Display App
-      <Placeholder />
       <ReactRouter />
+
+      <div>
+        <DisplayRelatedItems />
+      </div>
     </div>
   );
 };
