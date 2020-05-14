@@ -7,7 +7,6 @@ const App = () => {
   return (
     <div>
       Display App
-      <Placeholder />
       <ReactRouter />
       <div>
         <Overview />
