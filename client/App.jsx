@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactRouter from './utility/ReactRouter.jsx';
-import DisplayRelatedItems from './related_products/redux/containers/DisplayRelatedItems';
-import Reviews from './ratings_reviews/Reviews.jsx';
+// import DisplayRelatedItems from './related_products/redux/containers/DisplayRelatedItems';
+import ReviewContainer from './redux/containers/reviewContainer.js';
 
 const App = () => {
   return (
@@ -9,8 +9,8 @@ const App = () => {
       Display App
       <ReactRouter />
       <div>
-        <DisplayRelatedItems />
-        <Reviews />
+        {/* <DisplayRelatedItems /> */}
+        <ReviewContainer />
       </div>
     </div>
   );
