@@ -7,9 +7,11 @@ const App = () => {
   return (
     <div>
       Display App
-      <Overview />
       <Placeholder />
       <ReactRouter />
+      <div>
+        <Overview />
+      </div>
     </div>
   );
 };
