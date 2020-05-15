@@ -1,1 +1,0 @@
-export const getRelatedItems = 'GET_RELATED_ITEMS';
