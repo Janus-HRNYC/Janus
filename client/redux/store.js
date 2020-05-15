@@ -6,12 +6,25 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
   reviewResults: [],
+  relatedProducts: [],
+  outfit: {},
 };
+
+const logger = (store) => {
+  return next => {
+    return action => {
+      console.log(`|Middleware| Dispatching:`, action);
+      const results = next(action);
+      console.log('|Middleware| next state', store.getState());
+      return results
+    }
+  }
+}
 
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(logger, thunk))
 );
 
 export default store;

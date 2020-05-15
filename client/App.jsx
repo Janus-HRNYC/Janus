@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactRouter from './utility/ReactRouter.jsx';
-// import DisplayRelatedItems from './related_products/redux/containers/DisplayRelatedItems';
+import RelatedItems from './redux/containers/RelatedProductsContainer';
 import ReviewContainer from './redux/containers/reviewContainer.js';
+import OutfitContainter from './redux/containers/outfitContainer.js'
 
 const App = () => {
   return (
@@ -9,7 +10,12 @@ const App = () => {
       Display App
       <ReactRouter />
       <div>
-        {/* <DisplayRelatedItems /> */}
+        <h2>RELATED PRODUCTS</h2>
+        <RelatedItems />
+        <h2>YOUR OUTFIT</h2>
+        <OutfitContainter />
+      </div>
+      <div>
         <ReviewContainer />
       </div>
     </div>
