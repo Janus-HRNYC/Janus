@@ -5,7 +5,9 @@ import rootReducer from './reducers/rootReducer.js';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
+  productId: 0,
   reviewResults: [],
+  ratingsMeta: {},
 };
 
 const store = createStore(
