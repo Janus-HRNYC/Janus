@@ -1,17 +1,20 @@
-import Overview from "./overview/index.jsx";
 import React from "react";
 import ReactRouter from "./utility/ReactRouter.jsx";
-// import DisplayRelatedItems from './related_products/redux/containers/DisplayRelatedItems';
-import ReviewContainer from "./redux/containers/reviewContainer.js";
+import QuestionsAndAnswersContainer from './redux/containers/QuestionsAndAnswersContainer.js'
+import ReviewContainer from './redux/containers/reviewContainer.js';
+
 
 const App = () => {
   return (
     <div>
       Display App
-      {/* <ReactRouter /> */}
+      
+      
+      <ReactRouter />
       <div>
-        <Overview />
-        {/* <DisplayRelatedItems /> */}
+        <QuestionsAndAnswersContainer />
+      </div>
+      <div>
         <ReviewContainer />
       </div>
     </div>
