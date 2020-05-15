@@ -28,7 +28,14 @@ const QuestionsAndAnswers = () => {
         <Container>
       <h3>QUESTIONS AND ANSWERS</h3>
         
-        <SearchForm searchTerm={searchTerm} setSearchTerm={setSearchTerm} questions={questions} setQuestions={setQuestions} productId={productId} setTempQuestions={setTempQuestions} tempQuestions={tempQuestions}/>
+        <SearchForm
+         searchTerm={searchTerm} 
+         setSearchTerm={setSearchTerm} 
+         questions={questions} 
+         setQuestions={setQuestions} 
+         productId={productId} 
+         setTempQuestions={setTempQuestions} 
+         tempQuestions={tempQuestions}/>
        
         <Grid>
         <QuestionsAndAnswersList questions={searchTerm.length > 2 ? tempQuestions : questions} />
