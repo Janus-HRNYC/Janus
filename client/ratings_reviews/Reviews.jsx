@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react';
 import { Box, Grid, Container } from '@material-ui/core';
 import ReviewList from './ReviewList.jsx';
+import Ratings from './Ratings.jsx';
 
-const Reviews = ({ reviewResults, getReviews }) => {
+const Reviews = (props) => {
+  const {
+    productId,
+    reviewResults,
+    getReviews,
+    displayBySort,
+    ratingsMeta,
+  } = props;
+
   useEffect(() => {
-    getReviews(28, 'newest', 100);
+    getReviews(27);
   }, []);
 
   return (
@@ -14,11 +23,15 @@ const Reviews = ({ reviewResults, getReviews }) => {
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
             First Column
-            <h4> TODO: This is where the Meta component</h4>
+            <Ratings ratingsMeta={ratingsMeta} />
           </Grid>
           <Grid item md={8}>
             Second Column
-            <ReviewList list={reviewResults} />
+            <ReviewList
+              list={reviewResults}
+              id={productId}
+              displayBySort={displayBySort}
+            />
           </Grid>
         </Grid>
       </Container>
