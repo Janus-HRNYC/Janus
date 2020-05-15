@@ -13,7 +13,7 @@ const Reviews = (props) => {
   } = props;
 
   useEffect(() => {
-    getReviews(30);
+    getReviews(27);
   }, []);
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReviewItem from './ReviewItem.jsx';
-import { FormControl, Select, MenuItem, Grid } from '@material-ui/core';
+import { FormControl, Select, MenuItem, Grid, Button } from '@material-ui/core';
 
 const ReviewList = (props) => {
   const { list, id, displayBySort } = props;
@@ -35,6 +35,7 @@ const ReviewList = (props) => {
   const handleChange = (e) => {
     setSort(e.target.value);
     displayBySort(id, e.target.value);
+    setLimit(2);
   };
 
   const renderMenu = () => (
@@ -49,7 +50,11 @@ const ReviewList = (props) => {
 
   const renderMoreReviewButton = () => {
     if (listLength > limit && listLength !== 0)
-      return <button onClick={addMoreReviews}>MORE REVIEWS</button>;
+      return (
+        <Button variant='contained' onClick={addMoreReviews}>
+          MORE REVIEWS
+        </Button>
+      );
   };
 
   return (
@@ -62,7 +67,7 @@ const ReviewList = (props) => {
         <br />
         <Grid container direction='row'>
           {renderMoreReviewButton()}
-          <button>ADD A REVIEW +</button>
+          <Button variant='contained'>ADD A REVIEW +</Button>
         </Grid>
       </div>
     </div>

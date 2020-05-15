@@ -3,13 +3,13 @@ import { Box, Grid } from '@material-ui/core';
 import StarRating from './StarRating.jsx';
 
 const RatingSummary = ({ ratings, recommended }) => {
-  if (recommended) {
-    console.log(
-      'This is the RECOMMENDED values: ',
-      recommended['0'],
-      recommended['1']
-    );
-  }
+  // if (recommended) {
+  //   console.log(
+  //     'This is the RECOMMENDED values: ',
+  //     recommended['0'],
+  //     recommended['1']
+  //   );
+  // }
 
   const renderStarRating = () => {
     let totalStars = 0,

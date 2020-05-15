@@ -2,63 +2,43 @@ import React from 'react';
 import { Box, LinearProgress, Grid } from '@material-ui/core';
 import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 
-const RatingBreakdown = ({ ratings }) => {
-  if (ratings) {
-    console.log('Here are the ratings: ', ratings);
-  }
+const RatingBreakdown = (props) => {
+  const { rating, ratingValue } = props;
+
   const BorderLinearProgress = withStyles({
     root: {
-      height: 10,
-      backgroundColor: lighten('#ff6c5c', 0.5),
+      height: 12,
+      backgroundColor: lighten('#ff6c5c'),
+      marginTop: '8px',
     },
     bar: {
-      borderRadius: 20,
+      borderRadius: 10,
       backgroundColor: '#ff6c5c',
     },
   })(LinearProgress);
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
-    },
-    margin: {
       margin: theme.spacing(1),
     },
   }));
 
   const classes = useStyles();
 
-  let val1 = (1 / 10) * 100;
-  let val2 = (2 / 10) * 100;
-  let val3 = (2 / 10) * 100;
-
   return (
-    <div>
-      1:{' '}
-      <BorderLinearProgress
-        className={classes.margin}
-        variant='determinate'
-        color='primary'
-        value={val1}
-      />
-      <br />
-      2:{' '}
-      <BorderLinearProgress
-        className={classes.margin}
-        variant='determinate'
-        color='primary'
-        value={val2}
-      />
-      <br />
-      3:{' '}
-      <BorderLinearProgress
-        className={classes.margin}
-        variant='determinate'
-        color='primary'
-        value={val3}
-      />
-      <br />
-    </div>
+    <Grid container direction='row'>
+      <Grid item sm={12} md={2}>
+        {rating} {rating === 1 ? 'star' : 'stars'}:
+      </Grid>
+      <Grid item sm={12} md={7}>
+        <BorderLinearProgress
+          className={classes.margin}
+          variant='determinate'
+          color='primary'
+          value={ratingValue}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
