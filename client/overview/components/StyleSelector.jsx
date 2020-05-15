@@ -30,10 +30,20 @@ const StyleSelector = () => {
       <Grid container spacing={1}>
         {images.map((style, i = 0) => (
           <Grid item key={i++}>
-            <Avatar
-              src={style}
-              style={{ margin: "10px", width: "80px", height: "80px" }}
-            />
+            <Badge
+              overlap="circle"
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              badgeContent="✔"
+              color="primary"
+            >
+              <Avatar
+                src={style}
+                style={{ margin: "10px", width: "80px", height: "80px" }}
+              />
+            </Badge>
           </Grid>
         ))}
       </Grid>
