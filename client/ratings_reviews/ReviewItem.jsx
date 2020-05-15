@@ -15,7 +15,7 @@ const ReviewItem = ({ item }) => {
   return (
     <Box borderBottom={1}>
       <Grid container direct='row' justify='space-between'>
-        <StarRating star={item.rating} />
+        <StarRating star={item.rating} size={'small'} />
         {item.recommend ? <CheckCircleOutlineRoundedIcon /> : null}
         <p>Reviewer: {item.reviewer_name}</p>
         <p>Date: {item.date}</p>

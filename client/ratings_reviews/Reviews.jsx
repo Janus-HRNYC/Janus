@@ -23,7 +23,7 @@ const Reviews = (props) => {
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
             First Column
-            <Ratings ratings={ratingsMeta} />
+            <Ratings ratingsMeta={ratingsMeta} />
           </Grid>
           <Grid item md={8}>
             Second Column
