@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
 import axios from "axios";
+import { Box, Grid } from "@material-ui/core";
+import { AvatarGroup } from "@material-ui/lab";
 
 const StyleSelector = () => {
   const [product_id, setProduct_id] = useState(50);
@@ -24,27 +25,26 @@ const StyleSelector = () => {
   }, []);
 
   return (
-    <div>
-      <div>
-        <div>{selected.name}</div>
-        <Grid container spacing={1}>
-          {images.map((style, i = 0) => {
-            // talk to team and fix this
-            while (i <= 4) {
-              return (
-                <Grid item key={i++}>
-                  <Avatar src={style} />
-                </Grid>
-              );
-            }
-          })}
-        </Grid>
-      </div>
-    </div>
+    <Box>
+      <Box>Style > {selected.name}</Box>
+      <Grid container spacing={1}>
+        {images.map((style, i = 0) => (
+          <Grid item>
+            <Avatar key={i++} src={style} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 
 export default StyleSelector;
+
+/* <AvatarGroup max={4} spacing={10}>
+  {images.map((style, i = 0) => (
+    <Avatar key={i++} src={style} />
+  ))}
+</AvatarGroup> */
 
 // all styles should display as thumbnails
 // toggle/click between styles

@@ -4,21 +4,31 @@ import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 // import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
-import { Grid, Box, Row } from "@material-ui/core";
+import { Grid, Box } from "@material-ui/core";
 
 const mapStateToProps = (store) => ({});
 
 const Overview = () => {
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid
+        container
+        direction="row"
+        spacing={3}
+        justify="center"
+        alignItems="center"
+      >
         <Grid item>
           <Gallery />
         </Grid>
         <Grid item>
-          <ProductInfo />
-          <StyleSelector />
-          {/* <AddToCart /> */}
+          <Box>
+            <ProductInfo />
+          </Box>
+          <Box>
+            <StyleSelector />
+          </Box>
+          {/* <Box><AddToCart /></Box> */}
         </Grid>
       </Grid>
     </div>

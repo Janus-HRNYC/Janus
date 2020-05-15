@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
-import Box from "@material-ui/core/Box";
+import { Box, ButtonGroup, Button, Grid } from "@material-ui/core";
 
 const ProductInfo = () => {
   const [product_id, setProduct_id] = useState(50);
-
   const [info, setInfo] = useState({});
   useEffect(() => {
     axios
@@ -13,7 +12,6 @@ const ProductInfo = () => {
       .then((result) => setInfo(result.data))
       .catch((err) => console.error(err));
   }, []);
-
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
@@ -34,22 +32,29 @@ const ProductInfo = () => {
   }, []);
 
   return (
-    <div>
-      <Box>
-        <StarRating star={rating} />
-        <div>{`Read all ${ratingCount} reviews`}</div>
-      </Box>
-
-      <div>{info.category}</div>
-      <div>{info.name}</div>
-      <div>{info.default_price}</div>
-      <div>{info.description}</div>
-      <div>
-        <button>Twitter</button>
-        <button>Facebook</button>
-        <button>Pintrest</button>
-      </div>
-    </div>
+    <Box>
+      <Grid container direction="row" spacing={1}>
+        <Grid item>
+          <StarRating star={rating} />
+        </Grid>
+        <Grid item>
+          <Box>{`Read all ${ratingCount} reviews`}</Box>
+        </Grid>
+      </Grid>
+      <Box>{info.category}</Box>
+      <Box>{info.name}</Box>
+      <Box>{info.default_price}</Box>
+      <Box width="50%">{info.description}</Box>
+      <ButtonGroup
+        color="primary"
+        size="small"
+        aria-label="small outlined primary button group"
+      >
+        <Button>Twitter</Button>
+        <Button>Facebook</Button>
+        <Button>Pintrest</Button>
+      </ButtonGroup>
+    </Box>
   );
 };
 
