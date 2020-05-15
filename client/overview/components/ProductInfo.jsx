@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
-import { Box, ButtonGroup, Button, Grid, Avatar } from "@material-ui/core";
+import { Box, Grid, Avatar } from "@material-ui/core";
 
 const ProductInfo = () => {
   const [product_id, setProduct_id] = useState(50);
@@ -42,7 +42,9 @@ const ProductInfo = () => {
         </Grid>
       </Grid>
       <Box>{info.category}</Box>
-      <Box>{info.name}</Box>
+      <Box>
+        <h2>{info.name}</h2>
+      </Box>
       <Box>{info.default_price}</Box>
       <Box width="50%">{info.description}</Box>
       <Grid container direction="row" spacing={1}>
