@@ -10,8 +10,10 @@ const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) 
     if (searchTerm.length > 2) {
       questions.map((question) => {
         let obj = { ...question };
-        let lowerCaseQuestion = question.question_body.toLowerCase();
-        let lowerCaseSearchTerm = searchTerm.toLowerCase();
+        let lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
+        let lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
+        // let lowerCaseSearchTermRemoveSpaces = lowerCaseSearchTerm.split(' ').join('')
+        // let lowerCaseQuestionRemoveSpaces = lowerCaseQuestion.split(' ').join('')
         if (lowerCaseQuestion.includes(lowerCaseSearchTerm)) {
           newSearchedQuestions.push(obj);
         }
@@ -31,7 +33,7 @@ const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) 
 
   return (
     <div>
-      <form>
+      <form onSubmit={(e) => {e.preventDefault()}}>
         <TextField id="outlined-basic" 
         fullWidth
         variant="outlined" 

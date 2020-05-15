@@ -31,11 +31,9 @@ const QuestionsAndAnswers = () => {
         <SearchForm
          searchTerm={searchTerm} 
          setSearchTerm={setSearchTerm} 
-         questions={questions} 
-         setQuestions={setQuestions} 
-         productId={productId} 
+         questions={questions}
          setTempQuestions={setTempQuestions} 
-         tempQuestions={tempQuestions}/>
+        />
        
         <Grid>
         <QuestionsAndAnswersList questions={searchTerm.length > 2 ? tempQuestions : questions} />

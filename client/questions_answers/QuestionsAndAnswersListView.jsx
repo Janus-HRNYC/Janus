@@ -37,14 +37,13 @@ const QuestionsAndAnswersListView = ({ question }) => {
   const checkForSeller = (answer) => {
     const removedSellerArray = [];
     let foundSeller = false;
-    let x;
-    for (x of answer) {
-      if (x.answerer_name !== 'Seller') {
-        removedSellerArray.push(x);
+    let ele;
+    for (ele of answer) {
+      if (ele.answerer_name !== 'Seller') {
+        removedSellerArray.push(ele);
       }
-      if (x.answerer_name === 'Seller') {
-        console.log('found seller with seller name', x)
-        setSeller([x]);
+      if (ele.answerer_name === 'Seller') {
+        setSeller(ele);
         foundSeller = true;
       }
     }
@@ -57,14 +56,12 @@ const QuestionsAndAnswersListView = ({ question }) => {
   const displayAnswersIfAny = () => {
     let finalAnswers;
     answersWithSellers.length > 0 ? finalAnswers = answersWithSellers.slice()
-    : finalAnswers = answers;
+    : finalAnswers = answers.slice();
   
-
     if (finalAnswers.length > 0) {
       let sortedAnswers = finalAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
-      if (seller !== '') {
-        sortedAnswers.unshift(seller[0]);
-      }
+      if (seller !== '') sortedAnswers.unshift(seller);
+      
       return sortedAnswers.map((answer, i) => renderAnswers(i, answer));
     }
   };
