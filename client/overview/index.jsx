@@ -10,28 +10,26 @@ const mapStateToProps = (store) => ({});
 
 const Overview = () => {
   return (
-    <div>
-      <Grid
-        container
-        direction="row"
-        spacing={3}
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item>
-          <Gallery />
-        </Grid>
-        <Grid item>
-          <Box>
-            <ProductInfo />
-          </Box>
-          <Box>
-            <StyleSelector />
-          </Box>
-          {/* <Box><AddToCart /></Box> */}
-        </Grid>
+    <Grid
+      container
+      direction="row"
+      spacing={3}
+      justify="center"
+      alignItems="center"
+    >
+      <Grid item>
+        <Gallery />
       </Grid>
-    </div>
+      <Grid item>
+        <Box>
+          <ProductInfo />
+        </Box>
+        <Box>
+          <StyleSelector />
+        </Box>
+        {/* <Box><AddToCart /></Box> */}
+      </Grid>
+    </Grid>
   );
 };
 

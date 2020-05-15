@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
-import { Box, ButtonGroup, Button, Grid } from "@material-ui/core";
+import { Box, ButtonGroup, Button, Grid, Avatar } from "@material-ui/core";
 
 const ProductInfo = () => {
   const [product_id, setProduct_id] = useState(50);
@@ -45,15 +45,38 @@ const ProductInfo = () => {
       <Box>{info.name}</Box>
       <Box>{info.default_price}</Box>
       <Box width="50%">{info.description}</Box>
-      <ButtonGroup
-        color="primary"
-        size="small"
-        aria-label="small outlined primary button group"
-      >
-        <Button>Twitter</Button>
-        <Button>Facebook</Button>
-        <Button>Pintrest</Button>
-      </ButtonGroup>
+      <Grid container direction="row" spacing={1}>
+        <Avatar
+          style={{
+            backgroundColor: "blue",
+            margin: "10px",
+            width: "60px",
+            height: "60px",
+          }}
+        >
+          tweet
+        </Avatar>
+        <Avatar
+          style={{
+            backgroundColor: "blue",
+            margin: "10px",
+            width: "60px",
+            height: "60px",
+          }}
+        >
+          fb
+        </Avatar>
+        <Avatar
+          style={{
+            backgroundColor: "red",
+            margin: "10px",
+            width: "60px",
+            height: "60px",
+          }}
+        >
+          pintrest
+        </Avatar>
+      </Grid>
     </Box>
   );
 };

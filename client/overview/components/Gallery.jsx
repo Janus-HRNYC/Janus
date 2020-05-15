@@ -16,7 +16,7 @@ const Gallery = () => {
   }, []);
   return (
     <Box>
-      <img src={images[0]} width="300" height="300" />
+      <img src={images[0]} width="400px" height="300px" />
     </Box>
   );
 };

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import axios from "axios";
-import { Box, Grid } from "@material-ui/core";
-import { AvatarGroup } from "@material-ui/lab";
+import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    large: { width: theme.spacing(7), height: theme.spacing(7) },
+  },
+}));
 
 const StyleSelector = () => {
   const [product_id, setProduct_id] = useState(50);
@@ -24,13 +28,21 @@ const StyleSelector = () => {
       .catch((err) => console.error(err));
   }, []);
 
+  const classes = useStyles();
+
   return (
     <Box>
-      <Box>Style > {selected.name}</Box>
+      <Box>
+        <h2>Style > {selected.name}</h2>
+      </Box>
       <Grid container spacing={1}>
         {images.map((style, i = 0) => (
-          <Grid item>
-            <Avatar key={i++} src={style} />
+          <Grid item className={classes.root}>
+            <Avatar
+              key={i++}
+              src={style}
+              style={{ margin: "10px", width: "80px", height: "80px" }}
+            />
           </Grid>
         ))}
       </Grid>
@@ -39,12 +51,6 @@ const StyleSelector = () => {
 };
 
 export default StyleSelector;
-
-/* <AvatarGroup max={4} spacing={10}>
-  {images.map((style, i = 0) => (
-    <Avatar key={i++} src={style} />
-  ))}
-</AvatarGroup> */
 
 // all styles should display as thumbnails
 // toggle/click between styles
