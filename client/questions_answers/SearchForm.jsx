@@ -32,7 +32,6 @@ const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) 
   return (
     <div>
       <form>
-        {/* <input type="text" value={searchTerm} placeholder="Have a question? Search for answers..." onChange={handleSearchChange} /> */}
         <TextField id="outlined-basic" 
         fullWidth
         variant="outlined" 

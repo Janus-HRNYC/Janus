@@ -14,11 +14,14 @@ const QuestionsAndAnswers = () => {
 
 
   useEffect(() => {
-    Axios.get(`http://18.224.200.47/qa/${productId}?count=100`)
-      .then((res) => setQuestions(res.data.results))
-      .catch((err) => console.log(err));
+    axiosQuestionRequest(productId)
   }, []);
 
+  const axiosQuestionRequest = (prodId) => {
+    Axios.get(`http://18.224.200.47/qa/${prodId}?count=100`)
+    .then((res) => setQuestions(res.data.results))
+    .catch((err) => console.log(err));
+  }
 
   return (
     <Box>

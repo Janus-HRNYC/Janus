@@ -37,13 +37,14 @@ const QuestionsAndAnswersListView = ({ question }) => {
   const checkForSeller = (answer) => {
     const removedSellerArray = [];
     let foundSeller = false;
-    for (let i = 0; i < answer.length; i++) {
-      if (answer[i].answerer_name !== 'Seller') {
-        removedSellerArray.push(answer[i]);
+    let x;
+    for (x of answer) {
+      if (x.answerer_name !== 'Seller') {
+        removedSellerArray.push(x);
       }
-      if (answer[i].answerer_name === 'Seller') {
-        console.log('found seller with seller name', answer[i])
-        setSeller([answer[i]]);
+      if (x.answerer_name === 'Seller') {
+        console.log('found seller with seller name', x)
+        setSeller([x]);
         foundSeller = true;
       }
     }
@@ -55,11 +56,9 @@ const QuestionsAndAnswersListView = ({ question }) => {
 
   const displayAnswersIfAny = () => {
     let finalAnswers;
-    if (answersWithSellers.length > 0) {
-      finalAnswers = answersWithSellers.slice();
-    } else {
-      finalAnswers = answers;
-    }
+    answersWithSellers.length > 0 ? finalAnswers = answersWithSellers.slice()
+    : finalAnswers = answers;
+  
 
     if (finalAnswers.length > 0) {
       let sortedAnswers = finalAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
@@ -81,15 +80,22 @@ const QuestionsAndAnswersListView = ({ question }) => {
     return 'Collapse Answers';
   };
 
+//   const handleHelpfulQuestionClick = () => {
+//     Axios.put(`http://18.224.200.47/qa/question/${question_id}/helpful`)
+//     .then(() => {
+        
+//     })
+//   }
+
   return (
     <div>
 
       <p>
         Q:
         {question.question_body}
-        , Helpful:
-        {question.question_helpfulness}
       </p>
+      <p>Helpful? </p>
+      <p> ({question.question_helpfulness})</p>
       {displayAnswersIfAny()}
       {seeMoreAnswersButton()}
     </div>

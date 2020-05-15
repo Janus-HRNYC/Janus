@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
 
 const QuestionsAndAnswersList = ({ questions }) => {
-  const [questionLimit, setQuestionLimit] = useState(4);
+  const [questionLimit, setQuestionLimit] = useState(2);
   const [moreQuestionsButtonClicked, setMoreQuestionsButtonClicked] = useState(false);
 
-  const originalQuestionLimit = 4;
-
   const handleMoreQuestionsClick = () => {
-    if (questionLimit === 4) {
-      setQuestionLimit(questions.length);
-    } else {
-      setQuestionLimit(4);
-    }
-    setMoreQuestionsButtonClicked(!moreQuestionsButtonClicked);
+    setQuestionLimit(questionLimit + 2);
   };
 
   const renderQuestions = (question, i) => {
@@ -23,15 +16,15 @@ const QuestionsAndAnswersList = ({ questions }) => {
   };
 
   const moreQuestionsButton = () => {
-    if (questions.length > originalQuestionLimit) {
-      return <button onClick={handleMoreQuestionsClick}>{questionButtonTextChange()}</button>;
+    if (questions.length >= questionLimit) {
+      return <button onClick={handleMoreQuestionsClick}>More Answered Questions</button>;
     }
   };
 
-  const questionButtonTextChange = () => {
-    if (!moreQuestionsButtonClicked) return 'More Answered Questions';
-    return 'Collapse Questions';
-  };
+//   const questionButtonTextChange = () => {
+//     if (!moreQuestionsButtonClicked) return 'More Answered Questions';
+//     return 'Collapse Questions';
+//   };
 
   return (
     <div>
