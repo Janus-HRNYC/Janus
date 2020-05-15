@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
+import RatingSummary from './RatingSummary.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 
 const Ratings = ({ ratingsMeta }) => {
@@ -9,7 +10,8 @@ const Ratings = ({ ratingsMeta }) => {
 
   return (
     <Box>
-      <RatingBreakdown ratings={ratings} recommended={recommended} />
+      <RatingSummary ratings={ratings} recommended={recommended} />
+      <RatingBreakdown />
     </Box>
   );
 };

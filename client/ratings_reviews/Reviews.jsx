@@ -13,7 +13,7 @@ const Reviews = (props) => {
   } = props;
 
   useEffect(() => {
-    getReviews(27);
+    getReviews(30);
   }, []);
 
   return (
@@ -22,11 +22,9 @@ const Reviews = (props) => {
         <h2>RATINGS & REVIEWS</h2>
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
-            First Column
             <Ratings ratingsMeta={ratingsMeta} />
           </Grid>
           <Grid item md={8}>
-            Second Column
             <ReviewList
               list={reviewResults}
               id={productId}

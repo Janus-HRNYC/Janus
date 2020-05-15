@@ -1,32 +1,8 @@
 import React from 'react';
-import { Box, Grid } from '@material-ui/core';
-import StarRating from './StarRating.jsx';
+import { Box } from '@material-ui/core';
 
-const RatingBreakdown = ({ ratings, recommmended }) => {
-  const renderStarRating = () => {
-    let totalStars = 0,
-      totalReviews = 0,
-      averageRating = 0;
-
-    for (let stars in ratings) {
-      totalStars += stars * ratings[stars];
-      totalReviews += ratings[stars];
-    }
-
-    if (totalReviews !== 0) {
-      averageRating = totalStars / totalReviews;
-      averageRating = Number(averageRating.toFixed(1));
-    }
-
-    return (
-      <Grid container direction='row'>
-        <h3>Ave: {averageRating}</h3>
-        <StarRating star={averageRating} size={'large'} />
-      </Grid>
-    );
-  };
-
-  return <Box>{renderStarRating()}</Box>;
+const RatingBreakdown = () => {
+  return <Box>This is the breakdown</Box>;
 };
 
 export default RatingBreakdown;
