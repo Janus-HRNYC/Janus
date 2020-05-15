@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    large: { width: theme.spacing(7), height: theme.spacing(7) },
-  },
-}));
-
 const StyleSelector = () => {
   const [product_id, setProduct_id] = useState(50);
   const [styles, setStyles] = useState([]);
@@ -28,8 +22,6 @@ const StyleSelector = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const classes = useStyles();
-
   return (
     <Box>
       <Box>
@@ -37,9 +29,8 @@ const StyleSelector = () => {
       </Box>
       <Grid container spacing={1}>
         {images.map((style, i = 0) => (
-          <Grid item className={classes.root}>
+          <Grid item key={i++}>
             <Avatar
-              key={i++}
               src={style}
               style={{ margin: "10px", width: "80px", height: "80px" }}
             />

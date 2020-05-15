@@ -19,10 +19,9 @@ const ProductInfo = () => {
       .get(`http://18.224.200.47/reviews/${product_id}/list`)
       .then((result) => {
         const payload = result.data.results;
-        console.log(payload);
         let sum = 0;
-        for (let i = 0; i < payload.length; i++) {
-          sum += payload[i].rating;
+        for (const rating of payload) {
+          sum += rating.rating;
         }
         const avg = sum / payload.length;
         setRating(avg);
