@@ -11,7 +11,7 @@ const Ratings = ({ ratingsMeta }) => {
   return (
     <Box>
       <RatingSummary ratings={ratings} recommended={recommended} />
-      <RatingBreakdown />
+      <RatingBreakdown ratings={ratings} />
     </Box>
   );
 };
