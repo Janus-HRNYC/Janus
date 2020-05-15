@@ -4,7 +4,7 @@ import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 // import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
-import { Grid, Box } from "@material-ui/core";
+import { Grid, Box, Row } from "@material-ui/core";
 
 const mapStateToProps = (store) => ({});
 
