@@ -26,13 +26,12 @@ const RatingBreakdown = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid container direction='row'>
+    <Grid container direction='row' className={classes.margin}>
       <Grid item sm={12} md={2}>
         {rating} {rating === 1 ? 'star' : 'stars'}:
       </Grid>
       <Grid item sm={12} md={7}>
         <BorderLinearProgress
-          className={classes.margin}
           variant='determinate'
           color='primary'
           value={ratingValue}
