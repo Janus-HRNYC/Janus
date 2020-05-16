@@ -1,65 +1,95 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button } from '@material-ui/core';
-import ReviewForm from './ReviewForm.jsx';
+import {
+  Grid,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  InputLabel,
+} from '@material-ui/core';
+import StarRating from './StarRating.jsx';
+import Recommend from './form_components/Recommend.jsx';
 
-const getModalStyle = () => {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
+const formDefault = {
+  rating: 0,
+  recommend: '',
+  characteristics: {},
+  summary: '',
+  body: '',
+  email: '',
+  name: '',
+  phots: [],
 };
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 800,
-    height: 500,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
-const AddReview = () => {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = useState(getModalStyle);
-  const [displayModal, setDisplayModal] = useState(false);
+const ReviewForm = () => {
+  const [form, setForm] = useState(formDefault);
+  const [displayDialog, setDisplayDialog] = useState(false);
 
   const handleClick = () => {
-    setDisplayModal(!displayModal);
+    setDisplayDialog(!displayDialog);
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <ReviewForm />
-      <Button variant='contained' onClick={handleClick}>
-        Submit
-      </Button>
-    </div>
-  );
-
   return (
-    <div>
+    <>
       <Button variant='contained' onClick={handleClick}>
         ADD REVIEW +
       </Button>
-      <Modal
-        open={displayModal}
+      <Dialog
+        open={displayDialog}
         onClose={handleClick}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'
+        aria-labelledby='form-dialog-title'
+        fullWidth
       >
-        {body}
-      </Modal>
-    </div>
+        <DialogTitle id='form-dialog-title'>Write Your Review</DialogTitle>
+        <DialogContent>
+          <DialogContentText>About the Product Name</DialogContentText>
+          <Grid>
+            <InputLabel required={true}>Overall Rating</InputLabel>
+            <StarRating
+              star={form.rating}
+              size={'large'}
+              update={true}
+              setForm={setForm}
+            />
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>
+              Do you recommend this product?
+            </InputLabel>
+            <Recommend value={form.recommend} setForm={setForm} />
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>Characteristics</InputLabel>
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>Review Summary</InputLabel>
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>Review Body</InputLabel>
+          </Grid>
+          <Grid>
+            <InputLabel>Upload Your Photos</InputLabel>
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>What is your nickname</InputLabel>
+          </Grid>
+          <Grid>
+            <InputLabel required={true}>Your email</InputLabel>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClick} color='secondary'>
+            Cancel
+          </Button>
+          <Button onClick={handleClick} color='primary'>
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 
-export default AddReview;
+export default ReviewForm;
