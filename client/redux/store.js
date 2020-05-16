@@ -13,15 +13,15 @@ const initialState = {
 };
 
 const logger = (store) => {
-  return next => {
-    return action => {
+  return (next) => {
+    return (action) => {
       console.log(`|Middleware| Dispatching:`, action);
       const results = next(action);
       console.log('|Middleware| next state', store.getState());
-      return results
-    }
-  }
-}
+      return results;
+    };
+  };
+};
 
 const store = createStore(
   rootReducer,

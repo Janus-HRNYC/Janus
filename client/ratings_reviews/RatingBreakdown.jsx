@@ -1,32 +1,44 @@
 import React from 'react';
-import { Box, Grid } from '@material-ui/core';
-import StarRating from './StarRating.jsx';
+import { Box, LinearProgress, Grid } from '@material-ui/core';
+import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 
-const RatingBreakdown = ({ ratings, recommmended }) => {
-  const renderStarRating = () => {
-    let totalStars = 0,
-      totalReviews = 0,
-      averageRating = 0;
+const RatingBreakdown = (props) => {
+  const { rating, ratingValue } = props;
 
-    for (let stars in ratings) {
-      totalStars += stars * ratings[stars];
-      totalReviews += ratings[stars];
-    }
+  const BorderLinearProgress = withStyles({
+    root: {
+      height: 12,
+      backgroundColor: lighten('#ff6c5c'),
+      marginTop: '8px',
+    },
+    bar: {
+      borderRadius: 10,
+      backgroundColor: '#ff6c5c',
+    },
+  })(LinearProgress);
 
-    if (totalReviews !== 0) {
-      averageRating = totalStars / totalReviews;
-      averageRating = Number(averageRating.toFixed(1));
-    }
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      margin: theme.spacing(1),
+    },
+  }));
 
-    return (
-      <Grid container direction='row'>
-        <h3>Ave: {averageRating}</h3>
-        <StarRating star={averageRating} size={'large'} />
+  const classes = useStyles();
+
+  return (
+    <Grid container direction='row' className={classes.margin}>
+      <Grid item sm={12} md={2}>
+        {rating} {rating === 1 ? 'star' : 'stars'}:
       </Grid>
-    );
-  };
-
-  return <Box>{renderStarRating()}</Box>;
+      <Grid item sm={12} md={7}>
+        <BorderLinearProgress
+          variant='determinate'
+          color='primary'
+          value={ratingValue}
+        />
+      </Grid>
+    </Grid>
+  );
 };
 
 export default RatingBreakdown;
