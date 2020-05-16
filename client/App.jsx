@@ -11,7 +11,7 @@ const App = () => {
     <div>
       Display App
       {/* <ReactRouter /> */}
-      {/* <Overview />
+      <Overview />
       <div>
         <h2>RELATED PRODUCTS</h2>
         <RelatedItems />
@@ -20,7 +20,7 @@ const App = () => {
       </div>
       <div>
         <QuestionsAndAnswersContainer />
-      </div> */}
+      </div>
       <div>
         <ReviewContainer />
       </div>

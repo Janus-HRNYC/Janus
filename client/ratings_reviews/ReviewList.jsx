@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import ReviewItem from './ReviewItem.jsx';
 import { FormControl, Select, MenuItem, Grid, Button } from '@material-ui/core';
+import ReviewItem from './ReviewItem.jsx';
+import AddReview from './AddReview.jsx';
 
 const ReviewList = (props) => {
   const { list, id, displayBySort } = props;
@@ -67,7 +68,7 @@ const ReviewList = (props) => {
         <br />
         <Grid container direction='row'>
           {renderMoreReviewButton()}
-          <Button variant='contained'>ADD A REVIEW +</Button>
+          <AddReview />
         </Grid>
       </div>
     </div>
