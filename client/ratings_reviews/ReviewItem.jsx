@@ -1,11 +1,18 @@
 import React from 'react';
 import StarRating from './StarRating.jsx';
 import { Grid, Box } from '@material-ui/core';
+import CheckIcon from '@material-ui/icons/Check';
 import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 
 const ReviewItem = ({ item }) => {
   const renderRecommend = (recommend) => {
-    return recommend ? <div>I recommend this product</div> : '';
+    return recommend ? (
+      <div>
+        <CheckIcon />I recommend this product
+      </div>
+    ) : (
+      ''
+    );
   };
 
   const renderResponse = (response) => {
@@ -26,7 +33,10 @@ const ReviewItem = ({ item }) => {
       {renderRecommend(item.recommend)}
       <br />
       {renderResponse(item.response)}
-      <p> Helpful ? Yes ({item.helpfulness}) | Report </p>
+      <p>
+        Helpful ? <a href='#'>Yes</a> ({item.helpfulness}) |{' '}
+        <a href='#'>Report</a>
+      </p>
     </Box>
   );
 };

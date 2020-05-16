@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Button } from '@material-ui/core';
+import ReviewForm from './ReviewForm.jsx';
 
 const getModalStyle = () => {
   const top = 50;
@@ -37,10 +38,7 @@ const AddReview = () => {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id='simple-modal-title'>Text in a modal</h2>
-      <p id='simple-modal-description'>
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
+      <ReviewForm />
       <Button variant='contained' onClick={handleClick}>
         Submit
       </Button>
