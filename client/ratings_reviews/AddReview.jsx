@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import StarRating from './StarRating.jsx';
 import Recommend from './form_components/Recommend.jsx';
+import TextFieldForm from './form_components/TextFieldForm.jsx';
 
 const formDefault = {
   rating: 0,
@@ -65,18 +66,30 @@ const ReviewForm = () => {
           </Grid>
           <Grid>
             <InputLabel required={true}>Review Summary</InputLabel>
+            <TextFieldForm
+              type={'summary'}
+              value={form.summary}
+              setForm={setForm}
+            />
           </Grid>
           <Grid>
             <InputLabel required={true}>Review Body</InputLabel>
+            <TextFieldForm type={'body'} value={form.body} setForm={setForm} />
           </Grid>
           <Grid>
             <InputLabel>Upload Your Photos</InputLabel>
           </Grid>
           <Grid>
             <InputLabel required={true}>What is your nickname</InputLabel>
+            <TextFieldForm type={'name'} value={form.name} setForm={setForm} />
           </Grid>
           <Grid>
             <InputLabel required={true}>Your email</InputLabel>
+            <TextFieldForm
+              type={'email'}
+              value={form.email}
+              setForm={setForm}
+            />
           </Grid>
         </DialogContent>
         <DialogActions>
