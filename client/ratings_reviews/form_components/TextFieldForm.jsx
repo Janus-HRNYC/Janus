@@ -1,46 +1,17 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
+import REFERENCES from '../references.js';
 
-const reference = {
-  summary: {
-    multiline: false,
-    required: true,
-    maxLength: 60,
-    placeholder: `Example: Best purchase ever!`,
-    helperText: ``,
-  },
-  body: {
-    multiline: true,
-    required: true,
-    maxLength: 1000,
-    placeholder: `Why did you like the product or not?`,
-    helperText: ``,
-  },
-  name: {
-    multiline: false,
-    required: true,
-    maxLength: 60,
-    placeholder: `Example: jackson11!`,
-    helperText: `For privacy reasons, do not use your full name or email address`,
-  },
-  email: {
-    multiline: false,
-    required: true,
-    maxLength: 60,
-    placeholder: `Example: jackson11@email.com`,
-    helperText: `For authentication reasons, you will not be emailed`,
-  },
-};
 const TextFieldForm = ({ type, value, setForm, error }) => {
   let attributes;
   if (type === 'summary') {
-    attributes = reference.summary;
+    attributes = REFERENCES.TEXTFIELDFORM.summary;
   } else if (type === 'body') {
-    attributes = reference.body;
+    attributes = REFERENCES.TEXTFIELDFORM.body;
   } else if (type === 'name') {
-    attributes = reference.name;
+    attributes = REFERENCES.TEXTFIELDFORM.name;
   } else {
-    attributes = reference.email;
+    attributes = REFERENCES.TEXTFIELDFORM.email;
   }
 
   const handleChange = (e) => {

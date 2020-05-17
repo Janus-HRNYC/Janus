@@ -14,17 +14,9 @@ import Recommend from './form_components/Recommend.jsx';
 import TextFieldForm from './form_components/TextFieldForm.jsx';
 import Characteristics from './form_components/Characteristics.jsx';
 import validation from './form_components/validation.js';
+import REFERENCES from './references.js';
 
-const formDefault = {
-  rating: 0,
-  recommend: '',
-  characteristics: {},
-  summary: '',
-  body: '',
-  email: '',
-  name: '',
-  phots: [],
-};
+const formDefault = REFERENCES.ADDREVIEW.formDefault;
 
 const AddReview = ({ ratingsMeta }) => {
   const [char, setChar] = useState({});
@@ -52,7 +44,8 @@ const AddReview = ({ ratingsMeta }) => {
     // console.log('Characteristics error:', charac, charac.length);
     // console.log('error:', errors);
     if (!errors) {
-      setForm(formDefault);
+      console.log('Form Submitted: ', form);
+      // setForm(formDefault);
     }
   };
   return (
