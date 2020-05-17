@@ -7,12 +7,7 @@ const ReviewList = (props) => {
   const { list, id, displayBySort, ratingsMeta } = props;
   const [limit, setLimit] = useState(2);
   const [sort, setSort] = useState('relevant');
-  let listLength = list.length;
-
-  // console.log('List length-> ', listLength);
-  // console.log('LIMIT-> ', limit);
-  // console.log('LIMIT-> ', listLength > limit);
-  // console.log('Product id-> ', id);
+  const listLength = list.length;
 
   const renderReviewItem = () => {
     let displayReviews = list.filter((item) => {
@@ -59,7 +54,7 @@ const ReviewList = (props) => {
   };
 
   return (
-    <div>
+    <Grid>
       <h4>
         {listLength} reviews, sorted by {renderMenu()}
       </h4>
@@ -71,7 +66,7 @@ const ReviewList = (props) => {
           <AddReview ratingsMeta={ratingsMeta} />
         </Grid>
       </div>
-    </div>
+    </Grid>
   );
 };
 

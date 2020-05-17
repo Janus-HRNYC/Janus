@@ -40,12 +40,8 @@ const AddReview = ({ ratingsMeta }) => {
     const listOfErrors = validation(form, char);
     setErrors(listOfErrors);
 
-    // let charac = Object.values(form.characteristics);
-    // console.log('Characteristics error:', charac, charac.length);
-    // console.log('error:', errors);
     if (!errors) {
       console.log('Form Submitted: ', form);
-      // setForm(formDefault);
     }
   };
   return (

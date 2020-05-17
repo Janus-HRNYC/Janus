@@ -1,8 +1,9 @@
 import React from 'react';
 import StarRating from './StarRating.jsx';
+import moment from 'moment';
 import { Grid, Box } from '@material-ui/core';
 import CheckIcon from '@material-ui/icons/Check';
-import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const ReviewItem = ({ item }) => {
   const renderRecommend = (recommend) => {
@@ -23,9 +24,10 @@ const ReviewItem = ({ item }) => {
     <Box borderBottom={1}>
       <Grid container direct='row' justify='space-between'>
         <StarRating star={item.rating} size={'small'} />
-        {item.recommend ? <CheckCircleOutlineRoundedIcon /> : null}
-        <p>Reviewer: {item.reviewer_name}</p>
-        <p>Date: {item.date}</p>
+        <Grid>
+          {item.recommend ? <CheckCircleIcon fontSize='small' /> : null}{' '}
+          {item.reviewer_name}, {moment(item.date).format('MMMM DD, YYYY')}
+        </Grid>
       </Grid>
       <p>Summary: {item.summary}</p>
       <p>Body: {item.body}</p>

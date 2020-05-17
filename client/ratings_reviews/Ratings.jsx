@@ -10,11 +10,6 @@ const Ratings = ({ ratingsMeta }) => {
 
   const { ratings, recommended, characteristics } = ratingsMeta;
 
-  // if (characteristics) {
-  //   console.log('Here are the ratings: ', characteristics);
-  //   console.log('Here is the array: ', characteristics.Comfort.value);
-  // }
-
   const renderRatingBreakdown = () => {
     if (ratings) {
       let totalRating = Object.values(ratings).reduce((sum, num) => {
