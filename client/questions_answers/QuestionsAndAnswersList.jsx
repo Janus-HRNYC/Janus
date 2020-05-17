@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
+import AddQuestionModal from './AddQuestionModal';
 
-const QuestionsAndAnswersList = ({ questions }) => {
+const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
-  const [moreQuestionsButtonClicked, setMoreQuestionsButtonClicked] = useState(false);
-
+  
   const handleMoreQuestionsClick = () => {
     setQuestionLimit(questionLimit + 2);
   };
 
   const renderQuestions = (question, i) => {
     if (i <= (questionLimit - 1)) {
-      return <QuestionsAndAnswersListView question={question} key={i} />;
+      return <QuestionsAndAnswersListView productId={productId} axiosQuestionRequest={axiosQuestionRequest} question={question} key={i} />;
     }
   };
 
@@ -21,10 +21,6 @@ const QuestionsAndAnswersList = ({ questions }) => {
     }
   };
 
-//   const questionButtonTextChange = () => {
-//     if (!moreQuestionsButtonClicked) return 'More Answered Questions';
-//     return 'Collapse Questions';
-//   };
 
   return (
     <div>
@@ -33,6 +29,7 @@ const QuestionsAndAnswersList = ({ questions }) => {
           .map((question, i) => renderQuestions(question, i))}
       </div>
       {moreQuestionsButton()}
+      <AddQuestionModal />
     </div>
   );
 };
