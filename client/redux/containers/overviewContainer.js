@@ -1,5 +1,10 @@
 import { connect } from "react-redux";
-import { getStyleData, getProductInfo } from "../actions/overviewActions";
+import {
+  getStyleData,
+  getProductInfo,
+  getSelectedData,
+  getSelectedStyleID,
+} from "../actions/overviewActions";
 import Overview from "../../overview/index";
 
 const mapStateToProps = (store) => ({
@@ -11,8 +16,10 @@ const mapStateToProps = (store) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setStyles: (id) => dispatch(getStyleData(id)),
-    setInfo: (id) => dispatch(getProductInfo(id)),
+    getStyles: (id) => dispatch(getStyleData(id)),
+    getInfo: (id) => dispatch(getProductInfo(id)),
+    getSelected: (id) => dispatch(getSelectedData(id)),
+    getProduct_ID: (id) => dispatch(getSelectedStyleID(id)),
   };
 };
 

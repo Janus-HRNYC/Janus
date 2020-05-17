@@ -2,46 +2,34 @@ import Redux from "redux";
 import * as actionType from "../actions/actionsTypes";
 
 const productIdReducer = {
-  setProductId: (state = {}, action) => {
+  setProductId: (state = [], action) => {
     switch (action.type) {
       case actionType.setProductId:
-        return {
-          ...state,
-          state: action.result,
-        };
+        return action.result;
       default:
         return state;
     }
   },
-  setStyles: (state = [], action) => {
+  getStyles: (state = [], action) => {
     switch (action.type) {
-      case actionType.setStyles:
-        return {
-          ...state,
-          state: [...state].concat(action.results),
-        };
+      case actionType.getStyles:
+        return [...state].concat(action.results);
       default:
         return state;
     }
   },
-  setSelected: (state = [], action) => {
+  getSelected: (state = [], action) => {
     switch (action.type) {
-      case actionType.setSelected:
-        return {
-          ...state,
-          state: [...state].concat(action.results),
-        };
+      case actionType.getSelected:
+        return action.results;
       default:
         return state;
     }
   },
-  setInfo: (state = {}, action) => {
+  getInfo: (state = [], action) => {
     switch (action.type) {
-      case actionType.setInfo:
-        return {
-          ...state,
-          state: action.results.payload,
-        };
+      case actionType.getInfo:
+        return action.results.payload;
       default:
         return state;
     }

@@ -10,9 +10,10 @@ const rootReducer = combineReducers({
   relatedProducts: relatedReducer.relatedProductsReducer,
   outfit: outfitReducer.changeOutfit,
   ratingsMeta: reviewReducer.setRatingsMeta,
-  info: productIdReducer.setInfo,
-  selected: productIdReducer.setSelected,
-  styles: productIdReducer.setStyles,
+  selected_id: productIdReducer.setProductId,
+  info: productIdReducer.getInfo,
+  selected: productIdReducer.getSelected,
+  styles: productIdReducer.getStyles,
 });
 
 export default rootReducer;

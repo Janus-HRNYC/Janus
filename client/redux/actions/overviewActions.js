@@ -1,8 +1,8 @@
 import {
   setProductId,
-  setStyles,
-  setSelected,
-  setInfo,
+  getStyles,
+  getSelected,
+  getInfo,
 } from "./actionsTypes.js";
 import axios from "axios";
 
@@ -11,16 +11,16 @@ export const setOverviewData = {
     type: setProductId,
     results: id,
   }),
-  setStyles: (id) => ({
-    type: setStyles,
+  getStyles: (id) => ({
+    type: getStyles,
     results: id,
   }),
-  setSelected: (id) => ({
-    type: setSelected,
+  getSelected: (id) => ({
+    type: getSelected,
     results: id,
   }),
-  setInfo: (id) => ({
-    type: setInfo,
+  getInfo: (id) => ({
+    type: getInfo,
     results: {
       payload: id,
     },
@@ -34,9 +34,33 @@ export const getStyleData = (id) => {
       .then((result) => {
         return Promise.all([
           dispatch(setOverviewData.setProductId(result.data.product_id)),
-          dispatch(setOverviewData.setStyles(result.data.results)),
-          dispatch(setOverviewData.setSelected(result.data.results[0])),
+          dispatch(setOverviewData.getStyles(result.data.results)),
+          // dispatch(setOverviewData.getSelected(result.data.results[0])),
         ]);
+      })
+      .catch((err) => console.error(err));
+  };
+};
+
+export const getSelectedData = (id) => {
+  return (dispatch) => {
+    return axios
+      .get(`http://18.224.200.47/products/${id}/styles`)
+      .then((result) => {
+        return Promise.all([
+          dispatch(setOverviewData.getSelected(result.data.results[0])),
+        ]);
+      })
+      .catch((err) => console.error(err));
+  };
+};
+
+export const getSelectedStyleID = (id) => {
+  return (dispatch) => {
+    return axios
+      .get(`http://18.224.200.47/products/${id}/styles`)
+      .then((result) => {
+        return Promise.all([dispatch(setOverviewData.setProductId(id))]);
       })
       .catch((err) => console.error(err));
   };
@@ -47,7 +71,8 @@ export const getProductInfo = (id) => {
     return axios
       .get(`http://18.224.200.47/products/${id}`)
       .then((result) => {
-        dispatch(setOverviewData.setInfo(result.data));
+        dispatch(setOverviewData.getInfo(result.data));
+        dispatch(setOverviewData.setProductId(id));
       })
       .catch((err) => console.error(err));
   };

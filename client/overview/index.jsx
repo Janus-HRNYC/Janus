@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 // import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
 import { Grid, Box } from "@material-ui/core";
-import { setInfo, setSelected } from "../redux/containers/overviewContainer";
+// import OverviewContainer from "../redux/containers/overviewContainer";
 
 const Overview = (props) => {
-  const dispatch = useDispatch();
+  const {
+    id = 27,
+    info,
+    getInfo,
+    styles,
+    getStyles,
+    selected,
+    getSelected,
+  } = props;
 
   useEffect(() => {
-    dispatch({ type: setInfo });
-  });
-
-  // const [product_id, setProduct_id] = useState(50);
-
-  // const [product_id, setProduct_id] = useState([]);
-  const [styles, setStyles] = useState([]);
-  const [selected, setSelected] = useState([]);
-  // const [images, setImages] = useState([]);
-
-  // useEffect(() => props.setStyles(50));
-  // OverviewContainer.setInfo(50);
-  // const [info, setInfo] = useState([]);
-  // setInfo(50);
-  // console.log("|info|", props);
+    const id = 27;
+    getInfo(id);
+    getStyles(id);
+    getSelected(id);
+  }, []);
 
   return (
     <Grid
@@ -36,14 +33,14 @@ const Overview = (props) => {
       alignItems="center"
     >
       <Grid item>
-        <Gallery />
+        <Gallery id={id} />
       </Grid>
       <Grid item>
         <Box>
-          <ProductInfo />
+          <ProductInfo info={info} id={id} />
         </Box>
         <Box>
-          <StyleSelector />
+          <StyleSelector styles={styles} selected={selected} />
         </Box>
         {/* <Box><AddToCart /></Box> */}
       </Grid>
