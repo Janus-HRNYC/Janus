@@ -31,7 +31,7 @@ const reference = {
     helperText: `For authentication reasons, you will not be emailed`,
   },
 };
-const TextFieldForm = ({ type, value, setForm }) => {
+const TextFieldForm = ({ type, value, setForm, error }) => {
   let attributes;
   if (type === 'summary') {
     attributes = reference.summary;
@@ -53,7 +53,6 @@ const TextFieldForm = ({ type, value, setForm }) => {
   return (
     <>
       <TextField
-        autoFocus
         margin='dense'
         name={type}
         required={attributes.required}
@@ -63,6 +62,7 @@ const TextFieldForm = ({ type, value, setForm }) => {
         onChange={handleChange}
         value={value}
         helperText={attributes.helperText}
+        error={error}
         fullWidth
       />
       <br />

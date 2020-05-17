@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Grid,
   Button,
@@ -12,6 +12,8 @@ import {
 import StarRating from './StarRating.jsx';
 import Recommend from './form_components/Recommend.jsx';
 import TextFieldForm from './form_components/TextFieldForm.jsx';
+import Characteristics from './form_components/Characteristics.jsx';
+import validation from './form_components/validation.js';
 
 const formDefault = {
   rating: 0,
@@ -24,14 +26,35 @@ const formDefault = {
   phots: [],
 };
 
-const ReviewForm = () => {
+const AddReview = ({ ratingsMeta }) => {
+  const [char, setChar] = useState({});
   const [form, setForm] = useState(formDefault);
+  const [errors, setErrors] = useState(false);
   const [displayDialog, setDisplayDialog] = useState(false);
+
+  useEffect(() => {
+    if (ratingsMeta.characteristics) {
+      setChar(ratingsMeta.characteristics);
+    }
+  });
 
   const handleClick = () => {
     setDisplayDialog(!displayDialog);
+    setForm(formDefault);
+    setErrors(false);
   };
 
+  const handleSubmit = () => {
+    const listOfErrors = validation(form, char);
+    setErrors(listOfErrors);
+
+    // let charac = Object.values(form.characteristics);
+    // console.log('Characteristics error:', charac, charac.length);
+    // console.log('error:', errors);
+    if (!errors) {
+      setForm(formDefault);
+    }
+  };
   return (
     <>
       <Button variant='contained' onClick={handleClick}>
@@ -47,7 +70,9 @@ const ReviewForm = () => {
         <DialogContent>
           <DialogContentText>About the Product Name</DialogContentText>
           <Grid>
-            <InputLabel required={true}>Overall Rating</InputLabel>
+            <InputLabel required={true} error={errors.hasOwnProperty('rating')}>
+              Overall Rating
+            </InputLabel>
             <StarRating
               star={form.rating}
               size={'large'}
@@ -56,39 +81,75 @@ const ReviewForm = () => {
             />
           </Grid>
           <Grid>
-            <InputLabel required={true}>
+            <InputLabel
+              required={true}
+              error={errors.hasOwnProperty('recommend')}
+            >
               Do you recommend this product?
             </InputLabel>
             <Recommend value={form.recommend} setForm={setForm} />
           </Grid>
           <Grid>
-            <InputLabel required={true}>Characteristics</InputLabel>
+            <InputLabel
+              required={true}
+              error={errors.hasOwnProperty('characteristics')}
+            >
+              Characteristics
+            </InputLabel>
+            <Characteristics
+              value={form.characteristics}
+              setForm={setForm}
+              char={char}
+            />
           </Grid>
           <Grid>
-            <InputLabel required={true}>Review Summary</InputLabel>
+            <InputLabel
+              required={true}
+              error={errors.hasOwnProperty('summary')}
+            >
+              Review Summary
+            </InputLabel>
             <TextFieldForm
               type={'summary'}
               value={form.summary}
               setForm={setForm}
+              error={errors.hasOwnProperty('summary')}
             />
           </Grid>
           <Grid>
-            <InputLabel required={true}>Review Body</InputLabel>
-            <TextFieldForm type={'body'} value={form.body} setForm={setForm} />
+            <InputLabel required={true} error={errors.hasOwnProperty('body')}>
+              Review Body
+            </InputLabel>
+            <TextFieldForm
+              type={'body'}
+              value={form.body}
+              setForm={setForm}
+              error={errors.hasOwnProperty('body')}
+            />
           </Grid>
           <Grid>
             <InputLabel>Upload Your Photos</InputLabel>
           </Grid>
           <Grid>
-            <InputLabel required={true}>What is your nickname</InputLabel>
-            <TextFieldForm type={'name'} value={form.name} setForm={setForm} />
+            <InputLabel required={true} error={errors.hasOwnProperty('name')}>
+              What is your nickname
+            </InputLabel>
+            <TextFieldForm
+              type={'name'}
+              value={form.name}
+              setForm={setForm}
+              error={errors.hasOwnProperty('name')}
+            />
           </Grid>
           <Grid>
-            <InputLabel required={true}>Your email</InputLabel>
+            <InputLabel required={true} error={errors.hasOwnProperty('email')}>
+              Your email
+            </InputLabel>
             <TextFieldForm
               type={'email'}
               value={form.email}
               setForm={setForm}
+              error={errors.hasOwnProperty('email')}
             />
           </Grid>
         </DialogContent>
@@ -96,7 +157,7 @@ const ReviewForm = () => {
           <Button onClick={handleClick} color='secondary'>
             Cancel
           </Button>
-          <Button onClick={handleClick} color='primary'>
+          <Button onClick={handleSubmit} color='primary'>
             Submit
           </Button>
         </DialogActions>
@@ -105,4 +166,4 @@ const ReviewForm = () => {
   );
 };
 
-export default ReviewForm;
+export default AddReview;
