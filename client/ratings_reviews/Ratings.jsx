@@ -3,16 +3,12 @@ import { Box } from '@material-ui/core';
 import RatingSummary from './RatingSummary.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
+import REFERENCES from './references.js';
 
 const Ratings = ({ ratingsMeta }) => {
   console.log('Ratings Meta records : ', ratingsMeta);
 
   const { ratings, recommended, characteristics } = ratingsMeta;
-
-  // if (characteristics) {
-  //   console.log('Here are the ratings: ', characteristics);
-  //   console.log('Here is the array: ', characteristics.Comfort.value);
-  // }
 
   const renderRatingBreakdown = () => {
     if (ratings) {
@@ -33,20 +29,7 @@ const Ratings = ({ ratingsMeta }) => {
   };
 
   const renderFit = () => {
-    const marks = [
-      {
-        value: 0,
-        label: 'Too Small',
-      },
-      {
-        value: 50,
-        label: 'Perfect',
-      },
-      {
-        value: 100,
-        label: 'Too Large',
-      },
-    ];
+    const marks = REFERENCES.RATINGS.fitMarks;
     if (characteristics) {
       let fitValue = !characteristics.Fit ? 0 : characteristics.Fit.value;
       fitValue = (fitValue / 5) * 100;
@@ -54,17 +37,8 @@ const Ratings = ({ ratingsMeta }) => {
     }
   };
 
-  const renderComfort = (value) => {
-    const marks = [
-      {
-        value: 0,
-        label: 'Poor',
-      },
-      {
-        value: 100,
-        label: 'Perfect',
-      },
-    ];
+  const renderComfort = () => {
+    const marks = REFERENCES.RATINGS.comfortMarks;
     if (characteristics) {
       let comfortValue = !characteristics.Comfort
         ? 0

@@ -13,7 +13,7 @@ const Reviews = (props) => {
   } = props;
 
   useEffect(() => {
-    getReviews(33);
+    getReviews(1);
   }, []);
 
   return (
@@ -29,6 +29,7 @@ const Reviews = (props) => {
               list={reviewResults}
               id={productId}
               displayBySort={displayBySort}
+              ratingsMeta={ratingsMeta}
             />
           </Grid>
         </Grid>

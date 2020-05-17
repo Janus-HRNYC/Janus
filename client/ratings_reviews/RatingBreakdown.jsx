@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, LinearProgress, Grid } from '@material-ui/core';
+import { LinearProgress, Grid } from '@material-ui/core';
 import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 
 const RatingBreakdown = (props) => {
