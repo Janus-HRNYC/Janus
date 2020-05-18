@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import Axios from 'axios';
+import moment from 'moment';
+import { Grid, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const AnswerListView = ({ answer, question, getAnswers }) => {
   
@@ -18,27 +22,49 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
         Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id}/report`)
         .then(res => getAnswers(question))
         .catch(err => console.log(err));
-           
-        
     }
+
+    const useStyles = makeStyles((theme) => ({
+        root: {
+          flexGrow: 1,
+        },
+        control: {
+          padding: theme.spacing(2),
+        },
+      }));
+
+      const classes = useStyles();
   
     return (
-        <div>
-            <p>
-            A:
+        <Grid >
+            <Grid >
+            <b>A:</b>{' '}
             {answer.body}
-            </p>
-            <p>
-            by
-            {answer.answerer_name}
+            </Grid>
+            <Grid 
+            container
+            direction='row'
+            justify='flex-start'
+            className={classes.root} spacing={2}
+            >
+            <Grid item xs={4}>
+            by{' '}
+            {
+            answer.answerer_name === "Seller" ?
+            <b>{answer.answerer_name}</b>
+            :
+            answer.answerer_name}
             ,
-            {answer.date}
-            </p>
-            <p onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
-            Helpful? Yes({answer.helpfulness}) |
-            </p>
-            <p onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</p>
-        </div>
+            {' '}{moment(answer.date).format('MMMM DD, YYYY')}{'  '}
+            </Grid>
+            <Grid item xs={4} onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
+            Helpful? Yes({answer.helpfulness}){' | '}
+            </Grid>
+            <Grid item xs={4} onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>
+                Report
+            </Grid>
+            </Grid>
+        </Grid>
   )
 
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import AnswerListView from './AnswerListView';
 import AddAnswerModal from './AddAnswerModal';
+import { Grid, Box } from '@material-ui/core';
 
 const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName }) => {
   const [answers, setAnswers] = useState([]);
@@ -49,7 +50,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const seeMoreAnswersButton = () => {
     if (answers.length > 2) {
-      return <button onClick={handleSeeMoreAnswersClicked}>{answerButtonTextChange()}</button>;
+      return <p onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
     }
   };
 
@@ -59,26 +60,34 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   };
 
   return (
-    <div>
-        <div>
+   
+    <Grid container justify='space-between' direction='row'>
+        <Grid item xs={8}
+         >
         <p>
-            Q:
-            {question.question_body}
+            <b>Q:</b>
+            <b>{question.question_body}</b>
         </p>
-        </div>
-        <div>
+        </Grid >
+        <Grid item xs={2}>
             <p onClick={handleHelpfulQuestionClick} 
             style={{cursor: 'pointer'}}>
             Helpful? Yes({question.question_helpfulness})
             </p>
+        </Grid>
+          
             <AddAnswerModal 
             getAnswers={getAnswers} 
             question={question} 
             productName={productName}/>
+        
+        
+        
+        <Grid>
             {displayAnswersIfAny()}
             {seeMoreAnswersButton()}
-        </div>
-    </div>
+        </Grid>
+    </Grid>
   );
 };
 

@@ -4,11 +4,11 @@ import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
-const QuestionsAndAnswers = (props) => {
+const QuestionsAndAnswers = ({ productId }) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [productName, setProductName] = useState([]);
-  const productId = 1;
+//   const productId = 1;
 
 
   useEffect(() => {
@@ -30,26 +30,30 @@ const QuestionsAndAnswers = (props) => {
   }
 
   return (
-    <Box>
-        <Container>
-      <h3>QUESTIONS AND ANSWERS</h3>
-        <SearchForm
-         searchTerm={searchTerm} 
-         setSearchTerm={setSearchTerm} 
-        />
-       
-        <Grid>
-        <QuestionsAndAnswersList 
-        productName={productName} 
-        productId={productId} 
-        axiosQuestionRequest={axiosQuestionRequest} 
-        searchTerm={searchTerm} 
-        questions={questions}
-        />
-        </Grid>
-      
-        </Container>
-    </Box>
+     <div >
+        <Box >
+            <Container >
+            <h3>QUESTIONS AND ANSWERS</h3>
+            
+            
+            <SearchForm
+            searchTerm={searchTerm} 
+            setSearchTerm={setSearchTerm} 
+            />
+        
+            
+            <QuestionsAndAnswersList 
+            productName={productName} 
+            productId={productId} 
+            axiosQuestionRequest={axiosQuestionRequest} 
+            searchTerm={searchTerm} 
+            questions={questions}
+            />
+            
+        
+            </Container>
+        </Box>
+     </div> 
   );
 };
 
