@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
 import AddQuestionModal from './AddQuestionModal';
 
-const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId }) => {
+const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, productName }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
   
   const handleMoreQuestionsClick = () => {
@@ -11,7 +11,12 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId })
 
   const renderQuestions = (question, i) => {
     if (i <= (questionLimit - 1)) {
-      return <QuestionsAndAnswersListView productId={productId} axiosQuestionRequest={axiosQuestionRequest} question={question} key={i} />;
+      return <QuestionsAndAnswersListView 
+      productId={productId} 
+      axiosQuestionRequest={axiosQuestionRequest} 
+      question={question} 
+      key={i}
+      productName={productName} />;
     }
   };
 
@@ -29,7 +34,10 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId })
           .map((question, i) => renderQuestions(question, i))}
       </div>
       {moreQuestionsButton()}
-      <AddQuestionModal />
+      <AddQuestionModal 
+      productName={productName} 
+      productId={productId} 
+      axiosQuestionRequest={axiosQuestionRequest} />
     </div>
   );
 };
