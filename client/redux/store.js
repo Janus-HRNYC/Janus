@@ -1,16 +1,18 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers/rootReducer.js';
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/rootReducer.js";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export const initialState = {
-  productId: 0,
+const initialState = {
+  // productId: 0,
   reviewResults: [],
   relatedProducts: [],
   ratingsMeta: {},
-  outfit: [],
-  compareProducts: {},
+  // selected_id: 0,
+  styles: [],
+  selected_id: 0,
+  info: {},
 };
 
 const logger = (store) => {
@@ -18,7 +20,7 @@ const logger = (store) => {
     return (action) => {
       console.log(`|Middleware| Dispatching:`, action);
       const results = next(action);
-      console.log('|Middleware| next state', store.getState());
+      console.log("|Middleware| next state", store.getState());
       return results;
     };
   };
