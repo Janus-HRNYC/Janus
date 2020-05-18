@@ -10,11 +10,13 @@ const Reviews = (props) => {
     getReviews,
     displayBySort,
     ratingsMeta,
+    info,
   } = props;
 
-  useEffect(() => {
-    getReviews(1);
-  }, []);
+  // useEffect(() => {
+  //   // getReviews(1);
+  //   console.log(('Product Info: ', info));
+  // }, []);
 
   return (
     <Box>

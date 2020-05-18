@@ -10,14 +10,14 @@ const reviewReducer = {
     }
   },
 
-  setProductIdReducer: (state = 0, action) => {
-    switch (action.type) {
-      case 'SET_PRODUCT_ID':
-        return action.results;
-      default:
-        return state;
-    }
-  },
+  // setProductIdReducer: (state = 0, action) => {
+  //   switch (action.type) {
+  //     case 'SET_PRODUCT_ID':
+  //       return action.results;
+  //     default:
+  //       return state;
+  //   }
+  // },
 
   setRatingsMeta: (state = {}, action) => {
     switch (action.type) {
@@ -30,4 +30,3 @@ const reviewReducer = {
 };
 
 export default reviewReducer;
- 

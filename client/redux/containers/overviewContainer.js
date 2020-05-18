@@ -1,11 +1,12 @@
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   getStyleData,
   getProductInfo,
   getSelectedData,
   getSelectedStyleID,
-} from "../actions/overviewActions";
-import Overview from "../../overview/index";
+} from '../actions/overviewActions';
+import Overview from '../../overview/index';
+import ReviewActions from '../actions/reviewActions.js';
 
 const mapStateToProps = (store) => ({
   id: store.productIdReducer,
@@ -20,6 +21,7 @@ const mapDispatchToProps = (dispatch) => {
     getInfo: (id) => dispatch(getProductInfo(id)),
     getSelected: (id) => dispatch(getSelectedData(id)),
     getProduct_ID: (id) => dispatch(getSelectedStyleID(id)),
+    getReviews: (id) => dispatch(ReviewActions.getReviews(id)),
   };
 };
 

@@ -1,11 +1,11 @@
-import Redux from "redux";
-import * as actionType from "../actions/actionsTypes";
+import Redux from 'redux';
+import * as actionType from '../actions/actionsTypes';
 
 const productIdReducer = {
   setProductId: (state = [], action) => {
     switch (action.type) {
       case actionType.setProductId:
-        return action.result;
+        return action.results;
       default:
         return state;
     }

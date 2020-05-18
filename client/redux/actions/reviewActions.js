@@ -1,15 +1,15 @@
-import axios from "axios";
+import axios from 'axios';
 
 const reviewActions = {
   setReviewResults: (data) => ({
-    type: "SET_REVIEW_RESULTS",
+    type: 'SET_REVIEW_RESULTS',
     results: data,
   }),
 
-  setProductID: (id) => ({
-    type: 'SET_PRODUCT_ID',
-    results: id,
-  }),
+  // setProductID: (id) => ({
+  //   type: 'SET_PRODUCT_ID',
+  //   results: id,
+  // }),
 
   setRatingsMeta: (data) => ({
     type: 'SET_RATINGS_META',
@@ -27,13 +27,13 @@ const reviewActions = {
       return axios
         .get(`http://18.224.200.47/reviews/${productId}/list`, query)
         .then((res) => {
-          console.log("Successful in GET: ", res.data);
+          console.log('Successful in GET: ', res.data);
           dispatch(reviewActions.setReviewResults(res.data.results));
-          dispatch(reviewActions.setProductID(productId));
+          // dispatch(reviewActions.setProductID(productId));
           dispatch(reviewActions.getRatings(productId));
         })
         .catch((err) => {
-          console.log("Error in GET: ", err);
+          console.log('Error in GET: ', err);
         });
     };
   },

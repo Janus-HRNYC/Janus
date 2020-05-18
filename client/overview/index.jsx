@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Gallery from "./components/Gallery";
-import ProductInfo from "./components/ProductInfo";
+import React, { useState, useEffect } from 'react';
+import Gallery from './components/Gallery';
+import ProductInfo from './components/ProductInfo';
 // import AddToCart from "./components/AddToCart";
-import StyleSelector from "./components/StyleSelector";
-import { Grid, Box } from "@material-ui/core";
+import StyleSelector from './components/StyleSelector';
+import { Grid, Box } from '@material-ui/core';
 // import OverviewContainer from "../redux/containers/overviewContainer";
 
 const Overview = (props) => {
@@ -15,6 +15,7 @@ const Overview = (props) => {
     getStyles,
     selected,
     getSelected,
+    getReviews,
   } = props;
 
   useEffect(() => {
@@ -22,15 +23,16 @@ const Overview = (props) => {
     getInfo(id);
     getStyles(id);
     getSelected(id);
+    getReviews(id);
   }, []);
 
   return (
     <Grid
       container
-      direction="row"
+      direction='row'
       spacing={3}
-      justify="center"
-      alignItems="center"
+      justify='center'
+      alignItems='center'
     >
       <Grid item>
         <Gallery id={id} />
