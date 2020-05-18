@@ -1,20 +1,23 @@
 import Redux from 'redux';
 import * as actionType from '../actions/actionsTypes'
 
-const outfitReducer = { 
+
+const outfitReducer = {
   changeOutfit: (state = {}, action) => {
     switch (action.type) {
-      case actionType.addOutfit:
-        return Object.assign({}, state, action.outfits)
+      case actionType.addOutfit: {
+      // return Object.assign({}, state, action.outfit);
+        return [...state, (action.outfit)];
+      }
       case actionType.removeOutfit:
-        const key = action.id;
-        const { [key]: value, ...newObj } = state;
-        return {
-          ...state,
-          state: newObj,
-        }
+        // newState = Object.assign({}, state);
+        // delete newState[action.id];
+        // return Object.assign({}, state, newState);
+        // returns a new array without the element to be removed
+        const newState = state.filter((ele) => ele.id !== action.id)
+        return newState;
       default:
-        return state
+        return state;
     }
   }
 }
