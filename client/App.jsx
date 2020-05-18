@@ -19,7 +19,7 @@ const App = ({store}) => {
         <OutfitContainter />
       </div>
       <div>
-        <QuestionsAndAnswersContainer store={store}/>
+        <QuestionsAndAnswersContainer />
       </div>
       <div>
         <ReviewContainer />
