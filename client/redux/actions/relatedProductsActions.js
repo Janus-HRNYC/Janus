@@ -8,7 +8,7 @@ export const saveRelatedProducts = (results) => {
   }
 }
 // default is id is being used for testing purposes
-export const fetchRelatedProducts = (id = 2) => {
+export const fetchRelatedProducts = (id) => {
   return dispatch => {
     let promise = [];
     axios.get(`http://18.224.200.47/products/${id}/related`)

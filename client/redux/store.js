@@ -5,7 +5,7 @@ import rootReducer from './reducers/rootReducer.js';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const initialState = {
-  productId: 0,
+  productId: 2, // set to two to test Related Items
   reviewResults: [],
   relatedProducts: [],
   ratingsMeta: {},

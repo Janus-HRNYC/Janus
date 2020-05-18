@@ -3,8 +3,20 @@ import { Grid } from '@material-ui/core';
 import RelatedItemsCard from './RelatedItemsCard'
 import ComparisonModal from './ComparisonModal';
 
-const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent, compareProducts }) => {
-  console.log(compareProducts);
+
+const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, compareProducts,  onAddOutfit}) => {
+  console.log(productId);
+  
+  
+  // let previousState;
+  // console.log('previousState', previousState4);
+  // const renderCurrentProduct = () => {
+  //   if (previousState !== productId) {  
+  //   console.log('should render');
+  //   onGetRelated(productId);
+  //   previousState = productId;
+  //   }
+  // }
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -16,7 +28,8 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
           container
           direction={'row'}
           justify='space-between'
-        >
+          >
+      
           {relatedProducts.state.map((item, i) => {
             return (
               <RelatedItemsCard key={i} item={item} addOutfit={onAddOutfit} currentItem={compareProducts} compareItem={item} />
@@ -29,7 +42,9 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
 
   return (
     <div>
-      <button onClick={onGetRelated}>TEST_Display_Related_Items_ID_2</button>      
+
+      {/* {renderCurrentProduct()} */}
+
       <Grid
         container direction='row'
         justify='space-between'
@@ -41,3 +56,4 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
   )
 }
 export default RelatedItems;
+

@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
 
@@ -61,3 +62,34 @@ const Outfitcards = (props) => {
 }
 
 export default Outfitcards
+
+const displayItems = () => {
+  return (
+    <Card>
+      <CardHeader
+        action={
+          <IconButton aria-label="settings" onClick={() => { props.removeOutfit(props.item.id) }}>
+            <HighlightOffIcon />
+          </IconButton>
+        }
+
+      />
+      <CardContent>
+        <Typography variant="h5" component="h2">
+
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          {props.item.category}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {props.item.name}
+          <br />
+          {`$${props.item.price}`}
+        </Typography>
+        <Box component='fieldset' mb={3} borderColor='transparent'>
+          <Rating name='read-only' value={5} readOnly />
+        </Box>
+      </CardContent>
+    </Card>
+  );
+}

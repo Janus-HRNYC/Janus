@@ -13,6 +13,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import { comparisonBuilder } from './../utility/relatedUtility.js';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 
 const styles = (theme) => ({
   root: {
@@ -69,9 +71,9 @@ console.log(compareItem);
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Will Map this button to Star
-      </Button>
+      <IconButton aria-label="settings" color="primary" onClick={handleClickOpen}>
+        <StarBorderIcon/>
+      </IconButton>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Comparison
