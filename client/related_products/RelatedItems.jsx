@@ -1,10 +1,10 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import RelatedItemsCard from './RelatedItemsCard'
-import InformationModal from './informationModal';
+import ComparisonModal from './ComparisonModal';
 
-const RelatedItems = ({ relatedProducts, onGetRelated }) => {
-  console.log(relatedProducts.state);
+const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent, compareProducts }) => {
+  console.log(compareProducts);
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -19,7 +19,7 @@ const RelatedItems = ({ relatedProducts, onGetRelated }) => {
         >
           {relatedProducts.state.map((item, i) => {
             return (
-              <RelatedItemsCard key={i} item={item} />
+              <RelatedItemsCard key={i} item={item} addOutfit={onAddOutfit} currentItem={compareProducts} compareItem={item} />
             )
           })}
         </Grid>
@@ -29,12 +29,12 @@ const RelatedItems = ({ relatedProducts, onGetRelated }) => {
 
   return (
     <div>
-      <button onClick={onGetRelated}>TEST_Display_Related_Items_ID_2</button>
+      <button onClick={onGetRelated}>TEST_Display_Related_Items_ID_2</button>      
       <Grid
         container direction='row'
         justify='space-between'
       >
-        {getReleatedItems()}   
+        {getReleatedItems()}
       </Grid>
     </div>
 
