@@ -7,10 +7,10 @@ import {
 import axios from "axios";
 
 export const setOverviewData = {
-  setProductId: (id) => ({
-    type: setProductId,
-    results: id,
-  }),
+  // setProductId: (id) => ({
+  //   type: setProductId,
+  //   results: id,
+  // }),
   getStyles: (id) => ({
     type: getStyles,
     results: id,
@@ -33,7 +33,7 @@ export const getStyleData = (id) => {
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
         return Promise.all([
-          dispatch(setOverviewData.setProductId(result.data.product_id)),
+          // dispatch(setOverviewData.setProductId(result.data.product_id)),
           dispatch(setOverviewData.getStyles(result.data.results)),
           // dispatch(setOverviewData.getSelected(result.data.results[0])),
         ]);
@@ -48,23 +48,25 @@ export const getSelectedData = (id) => {
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
         return Promise.all([
-          dispatch(setOverviewData.getSelected(result.data.results[0])),
+          dispatch(setOverviewData.getSelected(result.data.results)),
         ]);
       })
       .catch((err) => console.error(err));
   };
 };
 
-export const getSelectedStyleID = (id) => {
-  return (dispatch) => {
-    return axios
-      .get(`http://18.224.200.47/products/${id}/styles`)
-      .then((result) => {
-        return Promise.all([dispatch(setOverviewData.setProductId(id))]);
-      })
-      .catch((err) => console.error(err));
-  };
-};
+// export const getSelectedStyleID = (id) => {
+//   return (dispatch) => {
+//     return axios
+//       .get(`http://18.224.200.47/products/${id}/styles`)
+//       .then((result) => {
+//         return Promise.all([
+//           dispatch(setOverviewData.setProductId(result.data.style_id)),
+//         ]);
+//       })
+//       .catch((err) => console.error(err));
+//   };
+// };
 
 export const getProductInfo = (id) => {
   return (dispatch) => {

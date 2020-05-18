@@ -10,7 +10,7 @@ const initialState = {
   relatedProducts: [],
   outfit: {},
   ratingsMeta: {},
-  selected_style_id: 0,
+  // selected_id: 0,
   styles: [],
   selected: {},
   info: {},

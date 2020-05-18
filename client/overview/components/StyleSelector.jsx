@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
+import { Box, Grid, Badge, Avatar } from "@material-ui/core";
 
-const StyleSelector = ({ styles, selected }) => {
-  const [id, setId] = useState(27);
+const StyleSelector = ({ styles, selected, id }) => {
   const [images, setImages] = useState([]);
   useEffect(() => {
     axios
@@ -17,30 +16,55 @@ const StyleSelector = ({ styles, selected }) => {
       .catch((err) => console.error(err));
   }, []);
 
+  // const holder = () => {
+  //   clicked ?
+  // }
+
   return (
     <Box>
-      <Box>
-        <h2>Style {selected.name}</h2>
-      </Box>
+      <h2>
+        {"Style >"} {selected.name}
+      </h2>
       <Grid container spacing={1}>
-        {images.map((style, i = 0) => (
-          <Grid item key={i++}>
-            <Badge
-              overlap="circle"
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              badgeContent="✔"
-              color="primary"
-            >
-              <Avatar
-                src={style}
-                style={{ margin: "10px", width: "80px", height: "80px" }}
-              />
-            </Badge>
-          </Grid>
-        ))}
+        {images.map((style, i = 0) =>
+          i === 1 ? (
+            <Grid item key={i++} xs={3}>
+              <Badge
+                overlap="circle"
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                badgeContent="✔"
+                color="primary"
+              >
+                <Avatar
+                  src={style}
+                  // onClick={}
+                  style={{ margin: "10px", width: "80px", height: "80px" }}
+                />
+              </Badge>
+            </Grid>
+          ) : (
+            <Grid item key={i++} xs={3}>
+              <Badge
+                overlap="circle"
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                // badgeContent="✔"
+                color="primary"
+              >
+                <Avatar
+                  src={style}
+                  // onClick={}
+                  style={{ margin: "10px", width: "80px", height: "80px" }}
+                />
+              </Badge>
+            </Grid>
+          )
+        )}
       </Grid>
     </Box>
   );

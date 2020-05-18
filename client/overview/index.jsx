@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
-// import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
+// import AddToCart from "./components/AddToCart";
 import { Grid, Box } from "@material-ui/core";
-// import OverviewContainer from "../redux/containers/overviewContainer";
 
 const Overview = (props) => {
   const {
-    id = 27,
+    id = 5,
     info,
     getInfo,
     styles,
@@ -18,7 +17,6 @@ const Overview = (props) => {
   } = props;
 
   useEffect(() => {
-    const id = 27;
     getInfo(id);
     getStyles(id);
     getSelected(id);
@@ -28,22 +26,20 @@ const Overview = (props) => {
     <Grid
       container
       direction="row"
-      spacing={3}
+      spacing={2}
       justify="center"
       alignItems="center"
     >
-      <Grid item>
+      <Grid xs={2}></Grid>
+      <Grid item sm>
         <Gallery id={id} />
       </Grid>
-      <Grid item>
-        <Box>
-          <ProductInfo info={info} id={id} />
-        </Box>
-        <Box>
-          <StyleSelector styles={styles} selected={selected} />
-        </Box>
+      <Grid item sm>
+        <ProductInfo info={info} id={id} />
+        <StyleSelector styles={styles} selected={selected} id={id} />
         {/* <Box><AddToCart /></Box> */}
       </Grid>
+      <Grid xs={2}></Grid>
     </Grid>
   );
 };

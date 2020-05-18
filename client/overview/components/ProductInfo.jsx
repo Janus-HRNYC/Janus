@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
 import { Box, Grid, Avatar } from "@material-ui/core";
-import OverviewContainer from "../../redux/containers/overviewContainer";
 
 const ProductInfo = ({ info, id }) => {
   const [rating, setRating] = useState(0);
@@ -29,16 +28,16 @@ const ProductInfo = ({ info, id }) => {
         <Grid item>
           <StarRating star={rating} />
         </Grid>
-        <Grid item>
-          <Box>{`Read all ${ratingCount} reviews`}</Box>
-        </Grid>
+        <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
-      <Box>{info.category}</Box>
-      <Box>
-        <h2>{info.name}</h2>
-      </Box>
-      <Box>{info.default_price}</Box>
-      <Box width="50%">{info.description}</Box>
+      {info.category}
+      {/* <Box></Box> */}
+      {/* <Box> */}
+      <h2>{info.name}</h2>
+      {/* </Box> */}
+      {info.default_price}
+      {/* <Box></Box> */}
+      <div width="50%">{info.description}</div>
       <Grid container direction="row" spacing={1}>
         <Avatar
           style={{
@@ -47,6 +46,7 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
+          xs={4}
         >
           tweet
         </Avatar>
@@ -57,6 +57,7 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
+          xs={4}
         >
           fb
         </Avatar>
@@ -67,6 +68,7 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
+          xs={4}
         >
           pintrest
         </Avatar>

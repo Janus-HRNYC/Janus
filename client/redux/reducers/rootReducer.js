@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   relatedProducts: relatedReducer.relatedProductsReducer,
   outfit: outfitReducer.changeOutfit,
   ratingsMeta: reviewReducer.setRatingsMeta,
-  selected_id: productIdReducer.setProductId,
+  // selected_id: productIdReducer.setProductId,
   info: productIdReducer.getInfo,
   selected: productIdReducer.getSelected,
   styles: productIdReducer.getStyles,
