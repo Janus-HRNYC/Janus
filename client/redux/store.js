@@ -10,6 +10,7 @@ const initialState = {
   relatedProducts: [],
   outfit: {},
   ratingsMeta: {},
+  successDisplay: false,
 };
 
 const logger = (store) => {

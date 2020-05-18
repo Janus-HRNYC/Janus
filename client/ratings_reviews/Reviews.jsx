@@ -10,6 +10,8 @@ const Reviews = (props) => {
     getReviews,
     displayBySort,
     ratingsMeta,
+    postReview,
+    successDisplay,
   } = props;
 
   useEffect(() => {
@@ -30,6 +32,8 @@ const Reviews = (props) => {
               id={productId}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
+              postReview={postReview}
+              successDisplay={successDisplay}
             />
           </Grid>
         </Grid>

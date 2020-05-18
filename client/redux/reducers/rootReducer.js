@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   relatedProducts: relatedReducer.relatedProductsReducer,
   outfit: outfitReducer.changeOutfit,
   ratingsMeta: reviewReducer.setRatingsMeta,
+  successDisplay: reviewReducer.setSuccessDisplay,
 });
 
 export default rootReducer;

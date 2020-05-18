@@ -16,6 +16,11 @@ export const reviewActions = {
     type: actionTypes.setRatingsMeta,
     results: data,
   }),
+
+  setSuccessDisplay: (bool) => ({
+    type: actionTypes.setSuccessDisplay,
+    results: bool,
+  }),
 };
 
 export const getReviews = (productId, sort = 'relevant', count = 100) => {
@@ -52,4 +57,15 @@ export const getRatings = (productId) => {
         console.log('Error in GET meta: ', err);
       });
   };
+};
+
+export const postReview = (productId, form) => {
+  axios
+    .post(`http://18.224.200.47/reviews/${productId}`, form)
+    .then((res) => {
+      console.log('Successful in POST review: ', res);
+    })
+    .catch((err) => {
+      console.log('Error in POST review: ', err);
+    });
 };
