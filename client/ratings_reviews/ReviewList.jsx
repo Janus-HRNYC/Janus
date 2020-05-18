@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
+import { FormControl, Select, MenuItem, Grid, Button } from '@material-ui/core';
 import ReviewItem from './ReviewItem.jsx';
-import { FormControl, Select, MenuItem, Grid } from '@material-ui/core';
+import AddReview from './AddReview.jsx';
 
 const ReviewList = (props) => {
-  const { list, id, displayBySort } = props;
+  const { list, id, displayBySort, ratingsMeta } = props;
   const [limit, setLimit] = useState(2);
   const [sort, setSort] = useState('relevant');
-  let listLength = list.length;
-
-  // console.log('List length-> ', listLength);
-  // console.log('LIMIT-> ', limit);
-  // console.log('LIMIT-> ', listLength > limit);
-  // console.log('Product id-> ', id);
+  const listLength = list.length;
 
   const renderReviewItem = () => {
     let displayReviews = list.filter((item) => {
@@ -35,6 +31,7 @@ const ReviewList = (props) => {
   const handleChange = (e) => {
     setSort(e.target.value);
     displayBySort(id, e.target.value);
+    setLimit(2);
   };
 
   const renderMenu = () => (
@@ -49,11 +46,15 @@ const ReviewList = (props) => {
 
   const renderMoreReviewButton = () => {
     if (listLength > limit && listLength !== 0)
-      return <button onClick={addMoreReviews}>MORE REVIEWS</button>;
+      return (
+        <Button variant='contained' onClick={addMoreReviews}>
+          MORE REVIEWS
+        </Button>
+      );
   };
 
   return (
-    <div>
+    <Grid>
       <h4>
         {listLength} reviews, sorted by {renderMenu()}
       </h4>
@@ -62,10 +63,10 @@ const ReviewList = (props) => {
         <br />
         <Grid container direction='row'>
           {renderMoreReviewButton()}
-          <button>ADD A REVIEW +</button>
+          <AddReview ratingsMeta={ratingsMeta} />
         </Grid>
       </div>
-    </div>
+    </Grid>
   );
 };
 

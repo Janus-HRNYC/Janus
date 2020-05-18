@@ -12,8 +12,7 @@ const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) 
         let obj = { ...question };
         let lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
         let lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
-        // let lowerCaseSearchTermRemoveSpaces = lowerCaseSearchTerm.split(' ').join('')
-        // let lowerCaseQuestionRemoveSpaces = lowerCaseQuestion.split(' ').join('')
+    
         if (lowerCaseQuestion.includes(lowerCaseSearchTerm)) {
           newSearchedQuestions.push(obj);
         }
