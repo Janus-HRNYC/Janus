@@ -8,7 +8,6 @@ const initialState = {
   // productId: 0,
   reviewResults: [],
   relatedProducts: [],
-  outfit: {},
   ratingsMeta: {},
   // selected_id: 0,
   styles: [],
