@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 // import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
 import { Grid, Box } from "@material-ui/core";
+// import OverviewContainer from "../redux/containers/overviewContainer";
 
-const mapStateToProps = (store) => ({});
+const Overview = (props) => {
+  const {
+    id = 27,
+    info,
+    getInfo,
+    styles,
+    getStyles,
+    selected,
+    getSelected,
+  } = props;
 
-const Overview = () => {
+  useEffect(() => {
+    const id = 27;
+    getInfo(id);
+    getStyles(id);
+    getSelected(id);
+  }, []);
+
   return (
     <Grid
       container
@@ -18,14 +33,14 @@ const Overview = () => {
       alignItems="center"
     >
       <Grid item>
-        <Gallery />
+        <Gallery id={id} />
       </Grid>
       <Grid item>
         <Box>
-          <ProductInfo />
+          <ProductInfo info={info} id={id} />
         </Box>
         <Box>
-          <StyleSelector />
+          <StyleSelector styles={styles} selected={selected} />
         </Box>
         {/* <Box><AddToCart /></Box> */}
       </Grid>
@@ -33,4 +48,4 @@ const Overview = () => {
   );
 };
 
-export default connect(mapStateToProps)(Overview);
+export default Overview;

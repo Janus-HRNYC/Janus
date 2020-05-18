@@ -2,21 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
 import { Box, Grid, Avatar } from "@material-ui/core";
+import OverviewContainer from "../../redux/containers/overviewContainer";
 
-const ProductInfo = () => {
-  const [product_id, setProduct_id] = useState(50);
-  const [info, setInfo] = useState({});
-  useEffect(() => {
-    axios
-      .get(`http://18.224.200.47/products/${product_id}`)
-      .then((result) => setInfo(result.data))
-      .catch((err) => console.error(err));
-  }, []);
+const ProductInfo = ({ info, id }) => {
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
     axios
-      .get(`http://18.224.200.47/reviews/${product_id}/list`)
+      .get(`http://18.224.200.47/reviews/${id}/list`)
       .then((result) => {
         const payload = result.data.results;
         let sum = 0;
@@ -77,7 +70,7 @@ const ProductInfo = () => {
         >
           pintrest
         </Avatar>
-      </Grid>
+      </Grid>{" "}
     </Box>
   );
 };

@@ -2,21 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
 
-const StyleSelector = () => {
-  const [product_id, setProduct_id] = useState(50);
-  const [styles, setStyles] = useState([]);
-  const [selected, setSelected] = useState([]);
+const StyleSelector = ({ styles, selected }) => {
+  const [id, setId] = useState(27);
   const [images, setImages] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://18.224.200.47/products/${product_id}/styles`)
+      .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
-        setStyles(result.data.results);
-        setSelected(result.data.results[0]);
         const payload = result.data.results.map(
           (style) => style.photos[0].thumbnail_url
         );
-        console.log(payload);
         setImages(payload);
       })
       .catch((err) => console.error(err));
@@ -25,15 +20,25 @@ const StyleSelector = () => {
   return (
     <Box>
       <Box>
-        <h2>Style > {selected.name}</h2>
+        <h2>Style {selected.name}</h2>
       </Box>
       <Grid container spacing={1}>
         {images.map((style, i = 0) => (
           <Grid item key={i++}>
-            <Avatar
-              src={style}
-              style={{ margin: "10px", width: "80px", height: "80px" }}
-            />
+            <Badge
+              overlap="circle"
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              badgeContent="✔"
+              color="primary"
+            >
+              <Avatar
+                src={style}
+                style={{ margin: "10px", width: "80px", height: "80px" }}
+              />
+            </Badge>
           </Grid>
         ))}
       </Grid>

@@ -4,25 +4,25 @@ import RelatedItems from './redux/containers/RelatedProductsContainer';
 import QuestionsAndAnswersContainer from './redux/containers/QuestionsAndAnswersContainer.js';
 import ReviewContainer from './redux/containers/reviewContainer.js';
 import OutfitContainter from './redux/containers/outfitContainer.js';
-import Overview from './overview/index.jsx';
+import OverviewContainer from './redux/containers/overviewContainer';
 
-const App = ({store}) => {
+const App = () => {
   return (
     <div>
       Display App
       {/* <ReactRouter /> */}
-      <Overview />
+      <OverviewContainer />
       <div>
         <h2>RELATED PRODUCTS</h2>
         <RelatedItems />
         <h2>YOUR OUTFIT</h2>
         <OutfitContainter />
-      </div>
-      <div>
-        <QuestionsAndAnswersContainer store={store}/>
-      </div>
-      <div>
-        <ReviewContainer />
+        <div>
+          <QuestionsAndAnswersContainer />
+        </div>
+        <div>
+          <ReviewContainer />
+        </div>
       </div>
     </div>
   );
