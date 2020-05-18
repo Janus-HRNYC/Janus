@@ -4,7 +4,7 @@ import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
-const QuestionsAndAnswers = ({ props }) => {
+const QuestionsAndAnswers = (props) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [productName, setProductName] = useState([]);
@@ -18,7 +18,8 @@ const QuestionsAndAnswers = ({ props }) => {
 
   const axiosQuestionRequest = (prodId) => {
     Axios.get(`http://18.224.200.47/qa/${prodId}?count=100`)
-    .then((res) => setQuestions(res.data.results))
+    .then((res) => {setQuestions(res.data.results)
+    console.log('these are the props', productId)})
     .catch((err) => console.log(err));
   }
 
