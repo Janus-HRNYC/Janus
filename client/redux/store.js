@@ -4,12 +4,13 @@ import rootReducer from './reducers/rootReducer.js';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const initialState = {
+export const initialState = {
   productId: 0,
   reviewResults: [],
   relatedProducts: [],
-  outfit: {},
   ratingsMeta: {},
+  outfit: [],
+  compareProducts: {},
 };
 
 const logger = (store) => {
