@@ -7,9 +7,8 @@ import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 const QuestionsAndAnswers = ({ props }) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [tempQuestions, setTempQuestions] = useState([]);
   const [productName, setProductName] = useState([]);
-  const productId = 3;
+  const productId = 1;
 
 
   useEffect(() => {
@@ -25,10 +24,7 @@ const QuestionsAndAnswers = ({ props }) => {
 
   const axiosProductInfoRequest = (prodId) => {
       Axios.get(`http://18.224.200.47/products/${prodId}`)
-      .then(res => {
-        setProductName(res.data.name);
-          console.log('productInfo', res.data)
-      })
+      .then(res => setProductName(res.data.name))
       .catch(err => console.log(err))
   }
 
@@ -36,12 +32,9 @@ const QuestionsAndAnswers = ({ props }) => {
     <Box>
         <Container>
       <h3>QUESTIONS AND ANSWERS</h3>
-        
         <SearchForm
          searchTerm={searchTerm} 
          setSearchTerm={setSearchTerm} 
-         questions={questions}
-         setTempQuestions={setTempQuestions} 
         />
        
         <Grid>
@@ -50,7 +43,8 @@ const QuestionsAndAnswers = ({ props }) => {
         productId={productId} 
         axiosQuestionRequest={axiosQuestionRequest} 
         searchTerm={searchTerm} 
-        questions={searchTerm.length > 2 ? tempQuestions : questions} />
+        questions={questions}
+        />
         </Grid>
       
         </Container>
