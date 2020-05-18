@@ -48,10 +48,10 @@ const Overview = (props) => {
       alignItems="center"
     >
       <Grid item xs={2}></Grid>
-      <Grid item sm>
+      <Grid item xs>
         <Gallery id={id} images={images} />
       </Grid>
-      <Grid item sm>
+      <Grid item xs>
         <ProductInfo info={info} id={id} />
         <StyleSelector
           styles={styles}

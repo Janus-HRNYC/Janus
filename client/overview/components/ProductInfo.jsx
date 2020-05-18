@@ -31,12 +31,8 @@ const ProductInfo = ({ info, id }) => {
         <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
       {info.category}
-      {/* <Box></Box> */}
-      {/* <Box> */}
       <h2>{info.name}</h2>
-      {/* </Box> */}
       {info.default_price}
-      {/* <Box></Box> */}
       <div width="50%">{info.description}</div>
       <Grid container direction="row" spacing={1}>
         <Avatar
