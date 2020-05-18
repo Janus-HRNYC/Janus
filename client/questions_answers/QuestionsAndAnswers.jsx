@@ -6,7 +6,7 @@ import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
 // import janus from '../lib/axiosRequests';
 
-const QuestionsAndAnswers = () => {
+const QuestionsAndAnswers = ({ props }) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [tempQuestions, setTempQuestions] = useState([]);
@@ -36,7 +36,7 @@ const QuestionsAndAnswers = () => {
         />
        
         <Grid>
-        <QuestionsAndAnswersList questions={searchTerm.length > 2 ? tempQuestions : questions} />
+        <QuestionsAndAnswersList productId={productId} axiosQuestionRequest={axiosQuestionRequest} searchTerm={searchTerm} questions={searchTerm.length > 2 ? tempQuestions : questions} />
         </Grid>
       
         </Container>
