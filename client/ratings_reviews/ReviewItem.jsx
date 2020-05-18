@@ -31,7 +31,7 @@ const ReviewItem = ({ item }) => {
       </Grid>
       <p>Summary: {item.summary}</p>
       <p>Body: {item.body}</p>
-      <p>Photos: {item.photos.length}</p>
+      {/* <p>Photos: {item.photos.length}</p> */}
       {renderRecommend(item.recommend)}
       <br />
       {renderResponse(item.response)}

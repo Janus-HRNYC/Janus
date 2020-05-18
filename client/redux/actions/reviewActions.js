@@ -60,12 +60,17 @@ export const getRatings = (productId) => {
 };
 
 export const postReview = (productId, form) => {
-  axios
-    .post(`http://18.224.200.47/reviews/${productId}`, form)
-    .then((res) => {
-      console.log('Successful in POST review: ', res);
-    })
-    .catch((err) => {
-      console.log('Error in POST review: ', err);
-    });
+  return (dispatch) => {
+    axios
+      .post(`http://18.224.200.47/reviews/${productId}`, form)
+      .then((res) => {
+        console.log('Successful in POST review: ', res);
+        dispatch(reviewActions.setSuccessDisplay(true));
+        dispatch(getReviews(productId, 'newest'));
+      })
+      .catch((err) => {
+        console.log('Error in POST review: ', err);
+        dispatch(setSuccessDisplay(false));
+      });
+  };
 };

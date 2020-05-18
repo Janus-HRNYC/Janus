@@ -4,7 +4,14 @@ import ReviewItem from './ReviewItem.jsx';
 import AddReview from './AddReview.jsx';
 
 const ReviewList = (props) => {
-  const { list, id, displayBySort, ratingsMeta } = props;
+  const {
+    list,
+    id,
+    displayBySort,
+    ratingsMeta,
+    postReview,
+    successDisplay,
+  } = props;
   const [limit, setLimit] = useState(2);
   const [sort, setSort] = useState('relevant');
   const listLength = list.length;
@@ -63,7 +70,12 @@ const ReviewList = (props) => {
         <br />
         <Grid container direction='row'>
           {renderMoreReviewButton()}
-          <AddReview ratingsMeta={ratingsMeta} />
+          <AddReview
+            ratingsMeta={ratingsMeta}
+            postReview={postReview}
+            successDisplay={successDisplay}
+            id={id}
+          />
         </Grid>
       </div>
     </Grid>

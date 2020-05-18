@@ -15,7 +15,7 @@ const Reviews = (props) => {
   } = props;
 
   useEffect(() => {
-    getReviews(27);
+    getReviews(1);
   }, []);
 
   return (
