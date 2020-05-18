@@ -5,14 +5,14 @@ import outfitReducer from "./outfitReducers";
 import productIdReducer from "./overviewReducer";
 
 const rootReducer = combineReducers({
-  productId: reviewReducer.setProductIdReducer,
+  // productId: reviewReducer.setProductIdReducer,
   reviewResults: reviewReducer.setResultsReducer,
   relatedProducts: relatedReducer.relatedProductsReducer,
   outfit: outfitReducer.changeOutfit,
   ratingsMeta: reviewReducer.setRatingsMeta,
   // selected_id: productIdReducer.setProductId,
   info: productIdReducer.getInfo,
-  selected: productIdReducer.getSelected,
+  selected_id: productIdReducer.getSelected,
   styles: productIdReducer.getStyles,
 });
 

@@ -5,14 +5,14 @@ import rootReducer from "./reducers/rootReducer.js";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
-  productId: 0,
+  // productId: 0,
   reviewResults: [],
   relatedProducts: [],
   outfit: {},
   ratingsMeta: {},
   // selected_id: 0,
   styles: [],
-  selected: {},
+  selected_id: 0,
   info: {},
 };
 

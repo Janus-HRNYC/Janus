@@ -4,7 +4,7 @@ import * as actionType from "../actions/actionsTypes";
 const productIdReducer = {
   // setProductId: (state = [], action) => {
   //   switch (action.type) {
-  //     case actionType.setProductId:
+  //     case actionType.getSelected_id:
   //       return action.results.payload;
   //     default:
   //       return state;
@@ -18,7 +18,7 @@ const productIdReducer = {
         return state;
     }
   },
-  getSelected: (state = [], action) => {
+  getSelected: (state = 0, action) => {
     switch (action.type) {
       case actionType.getSelected:
         return action.results;

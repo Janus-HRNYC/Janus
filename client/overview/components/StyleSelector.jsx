@@ -2,32 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Box, Grid, Badge, Avatar } from "@material-ui/core";
 
-const StyleSelector = ({ styles, selected, id }) => {
-  const [images, setImages] = useState([]);
-  useEffect(() => {
-    axios
-      .get(`http://18.224.200.47/products/${id}/styles`)
-      .then((result) => {
-        const payload = result.data.results.map(
-          (style) => style.photos[0].thumbnail_url
-        );
-        setImages(payload);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  // const holder = () => {
-  //   clicked ?
-  // }
-
+const StyleSelector = ({ thumbnails, styles, selected, id }) => {
   return (
     <Box>
-      <h2>
-        {"Style >"} {selected.name}
-      </h2>
+      <h2>{"Style >"}</h2>
       <Grid container spacing={1}>
-        {images.map((style, i = 0) =>
-          i === 1 ? (
+        {thumbnails.map((style, i = 0) =>
+          styles[i].style_id === selected ? (
             <Grid item key={i++} xs={3}>
               <Badge
                 overlap="circle"

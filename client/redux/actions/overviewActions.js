@@ -1,5 +1,5 @@
 import {
-  setProductId,
+  getSelected_id,
   getStyles,
   getSelected,
   getInfo,
@@ -7,8 +7,8 @@ import {
 import axios from "axios";
 
 export const setOverviewData = {
-  // setProductId: (id) => ({
-  //   type: setProductId,
+  // getSelected_id: (id) => ({
+  //   type: getSelected_id,
   //   results: id,
   // }),
   getStyles: (id) => ({
@@ -26,6 +26,19 @@ export const setOverviewData = {
     },
   }),
 };
+
+// export const getSelectedStyleID = (id) => {
+//   return (dispatch) => {
+//     return axios
+//       .get(`http://18.224.200.47/products/${id}/styles`)
+//       .then((result) => {
+//         return Promise.all([
+//           dispatch(setOverviewData.setProductId(result.data.style_id)),
+//         ]);
+//       })
+//       .catch((err) => console.error(err));
+//   };
+// };
 
 export const getStyleData = (id) => {
   return (dispatch) => {
@@ -47,26 +60,13 @@ export const getSelectedData = (id) => {
     return axios
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
-        return Promise.all([
-          dispatch(setOverviewData.getSelected(result.data.results)),
-        ]);
+        console.log(result.data.results[0].style_id);
+        const payload = result.data.results[0].style_id;
+        return dispatch(setOverviewData.getSelected(payload));
       })
       .catch((err) => console.error(err));
   };
 };
-
-// export const getSelectedStyleID = (id) => {
-//   return (dispatch) => {
-//     return axios
-//       .get(`http://18.224.200.47/products/${id}/styles`)
-//       .then((result) => {
-//         return Promise.all([
-//           dispatch(setOverviewData.setProductId(result.data.style_id)),
-//         ]);
-//       })
-//       .catch((err) => console.error(err));
-//   };
-// };
 
 export const getProductInfo = (id) => {
   return (dispatch) => {
@@ -74,7 +74,7 @@ export const getProductInfo = (id) => {
       .get(`http://18.224.200.47/products/${id}`)
       .then((result) => {
         dispatch(setOverviewData.getInfo(result.data));
-        dispatch(setOverviewData.setProductId(id));
+        // dispatch(setOverviewData.setProductId(id));
       })
       .catch((err) => console.error(err));
   };

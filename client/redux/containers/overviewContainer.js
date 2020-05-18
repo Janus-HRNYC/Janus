@@ -3,14 +3,14 @@ import {
   getStyleData,
   getProductInfo,
   getSelectedData,
-  getSelectedStyleID,
+  // getSelectedStyleID,
 } from "../actions/overviewActions";
 import Overview from "../../overview/index";
 
 const mapStateToProps = (store) => ({
-  // id: store.productIdReducer,
+  // id: store.selected_id,
   styles: store.styles,
-  selected: store.selected,
+  selected: store.selected_id,
   info: store.info,
 });
 

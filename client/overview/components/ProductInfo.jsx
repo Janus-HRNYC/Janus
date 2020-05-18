@@ -46,7 +46,6 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
-          xs={4}
         >
           tweet
         </Avatar>
@@ -57,7 +56,6 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
-          xs={4}
         >
           fb
         </Avatar>
@@ -68,7 +66,6 @@ const ProductInfo = ({ info, id }) => {
             width: "60px",
             height: "60px",
           }}
-          xs={4}
         >
           pintrest
         </Avatar>
