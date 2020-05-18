@@ -6,7 +6,7 @@ import ReviewContainer from './redux/containers/reviewContainer.js';
 import OutfitContainter from './redux/containers/outfitContainer.js';
 import Overview from './overview/index.jsx';
 
-const App = ({store}) => {
+const App = ({ store }) => {
   return (
     <div>
       Display App
@@ -19,7 +19,7 @@ const App = ({store}) => {
         <OutfitContainter />
       </div>
       <div>
-        <QuestionsAndAnswersContainer store={store}/>
+        <QuestionsAndAnswersContainer store={store} />
       </div>
       <div>
         <ReviewContainer />
