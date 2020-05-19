@@ -17,13 +17,13 @@ const Recommend = ({ value, setForm }) => {
     <FormControl component='fieldset'>
       <RadioGroup row name='position' value={value} onChange={handleChange}>
         <FormControlLabel
-          value='true'
+          value='1'
           control={<Radio color='primary' />}
           label='Yes'
           labelPlacement='bottom'
         />
         <FormControlLabel
-          value='false'
+          value='0'
           control={<Radio color='primary' />}
           label='No'
           labelPlacement='bottom'

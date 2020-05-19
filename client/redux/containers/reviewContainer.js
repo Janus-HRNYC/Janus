@@ -1,21 +1,18 @@
 import { connect } from 'react-redux';
 import Review from '../../ratings_reviews/Reviews.jsx';
-import reviewActions from '../actions/reviewActions.js';
+import { getReviews, postReview } from '../actions/reviewActions.js';
 
 const mapStateToProps = (store) => ({
-  productId: store.productId,
+  id: store.id,
   reviewResults: store.reviewResults,
   ratingsMeta: store.ratingsMeta,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getReviews: (productId, sort, count) => {
-      return dispatch(reviewActions.getReviews(productId, sort, count));
-    },
-    displayBySort: (productId, sort) => {
-      return dispatch(reviewActions.getReviews(productId, sort));
-    },
+    getReviews: (id, sort, count) => dispatch(getReviews(id, sort, count)),
+    displayBySort: (id, sort) => dispatch(getReviews(id, sort)),
+    postReview: (id, form) => dispatch(postReview(id, form)),
   };
 };
 

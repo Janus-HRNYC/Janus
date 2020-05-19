@@ -4,11 +4,11 @@ import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
-const QuestionsAndAnswers = (props) => {
+const QuestionsAndAnswers = ({productId}) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [productName, setProductName] = useState([]);
-  const productId = 1;
+  // const productId = 1;
 
 
 
