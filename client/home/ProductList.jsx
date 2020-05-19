@@ -65,7 +65,7 @@ const Home = (props) => {
                               color='primary'
                               onClick={() => showProduct(item.id)}
                             >
-                              View
+                              View Details
                             </Button>
                           </Link>
                         </CardActions>

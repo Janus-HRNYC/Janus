@@ -4,7 +4,6 @@ import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import { makeStyles } from '@material-ui/core/styles';
 import ProductList from './ProductList.jsx';
-import Products from './Products.jsx';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -22,7 +21,6 @@ const Home = (props) => {
   }, []);
 
   const showProduct = (id) => {
-    console.log('Value: ', id);
     setProductId(id);
     setShow(!show);
   };
