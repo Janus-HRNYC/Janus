@@ -7,11 +7,6 @@ export const reviewActions = {
     results: data,
   }),
 
-  setProductID: (id) => ({
-    type: actionTypes.setProductId,
-    results: id,
-  }),
-
   setRatingsMeta: (data) => ({
     type: actionTypes.setRatingsMeta,
     results: data,

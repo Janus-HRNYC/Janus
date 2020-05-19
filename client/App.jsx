@@ -1,11 +1,11 @@
 import React from 'react';
-import Home from './home/Home.jsx';
+import HomeContainer from './redux/containers/homeContainer.js';
 import { Container } from '@material-ui/core';
 
 const App = () => {
   return (
     <Container>
-      <Home />
+      <HomeContainer />
     </Container>
   );
 };

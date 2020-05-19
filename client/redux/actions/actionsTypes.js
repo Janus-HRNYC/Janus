@@ -10,3 +10,4 @@ export const getSelected = 'SET_SELECTED';
 // export const setImages = "SET_IMAGES";
 export const getInfo = 'GET_INFO';
 export const getCompareItem = 'GET_COMPARE_ITEM';
+export const setProducts = 'SET_PRODUCTS';
