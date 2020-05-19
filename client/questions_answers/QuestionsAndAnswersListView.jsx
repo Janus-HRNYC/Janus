@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import AnswerListView from './AnswerListView';
 import AddAnswerModal from './AddAnswerModal';
+import { Grid, Box } from '@material-ui/core';
 
 const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName }) => {
   const [answers, setAnswers] = useState([]);
   const [answerLimit, setAnswerLimit] = useState(2);
   const [seeMoreAnswersClicked, setSeeMoreAnswersClicked] = useState(false);
-  const [numHelpfulClicks, setNumHelpfulClicks] = useState(0);
   
   useEffect(() => {
     getAnswers(question)
@@ -20,11 +20,12 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   }
 
   const handleHelpfulQuestionClick = () => {
-      if (numHelpfulClicks === 0) {
+      let check = localStorage.getItem(`${question.question_id}`)
+    if (!check) {
         Axios.put(`http://18.224.200.47/qa/question/${question.question_id}/helpful`)
         .then((res) => axiosQuestionRequest(productId))
         .catch((err) => console.log(err));
-        setNumHelpfulClicks(numHelpfulClicks + 1)
+        localStorage.setItem(`${question.question_id}`, true)
         }
     };
   
@@ -49,7 +50,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const seeMoreAnswersButton = () => {
     if (answers.length > 2) {
-      return <button onClick={handleSeeMoreAnswersClicked}>{answerButtonTextChange()}</button>;
+      return <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
     }
   };
 
@@ -58,27 +59,41 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     return 'Collapse Answers';
   };
 
+  // const outlineSearchTerms = () => {
+  //   if (question.question_body.toLowerCase().includes(searchTerm.toLowerCase()) {
+  //     let index = question.question_body.toLowerCase().indexOf(searchTerm.toLowerCase())
+  //   }
+  // }
+
   return (
-    <div>
-        <div>
+   
+    <Grid title="QandA" container justify='space-between' direction='row'>
+        <Grid title="QandA" item xs={8}
+         >
         <p>
-            Q:
-            {question.question_body}
+            <b>Q:</b>{' '}
+            <b title="QandA">{question.question_body}</b>
         </p>
-        </div>
-        <div>
-            <p onClick={handleHelpfulQuestionClick} 
+        </Grid >
+        <Grid title="QandA" item xs={2}>
+            <p title="QandA" onClick={handleHelpfulQuestionClick} 
             style={{cursor: 'pointer'}}>
             Helpful? Yes({question.question_helpfulness})
             </p>
+        </Grid >
+          
             <AddAnswerModal 
             getAnswers={getAnswers} 
             question={question} 
             productName={productName}/>
+        
+        
+        
+        <Grid title="QandA">
             {displayAnswersIfAny()}
             {seeMoreAnswersButton()}
-        </div>
-    </div>
+        </Grid>
+    </Grid>
   );
 };
 
