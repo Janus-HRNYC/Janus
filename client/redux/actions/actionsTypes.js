@@ -6,3 +6,7 @@ export const getStyles = "SET_STYLES";
 export const getSelected = "SET_SELECTED";
 // export const setImages = "SET_IMAGES";
 export const getInfo = "GET_INFO";
+export const getCompareItem = 'GET_COMPARE_ITEMS';
+export const deleteCompareItem = 'DELETE_COMPARE_ITEMS';
+export const getCurrentItem = 'GET_CURRENT_ITEM';
+export const getRelatedStyles = 'GET_RELATED_STYLES';

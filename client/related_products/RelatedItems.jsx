@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Grid } from '@material-ui/core';
 import RelatedItemsCard from './RelatedItemsCard'
 import ComparisonModal from './ComparisonModal';
 
 
-const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, compareProducts}) => {
-  console.log(productId);
+const RelatedItems = (props) => {
+  const {
+    productId,
+    relatedProducts,
+    onGetRelated,
+    onGetRelatedStyle,
+    onGetCurrent,
+    relatedStyles,
+  } = props;
   
-  const renderCurrentProduct = () => {  
-    onGetRelated(productId);  
-  }
+  console.log(productId);
+  useEffect(() => {
+    onGetRelated(productId);    
+  }, []);
+
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -21,12 +30,12 @@ const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, 
           container
           direction={'row'}
           justify='space-between'
-          >
-      
-          {relatedProducts.state.map((item, i) => {
-            return (
-              <RelatedItemsCard key={i} item={item} currentItem={compareProducts} compareItem={item} />
-            )
+        >
+
+          {relatedProducts.state.map((item, i) => {        
+              return (
+                <RelatedItemsCard key={i} item={item} getRelatedStyles={onGetRelatedStyle} productId={productId} styles={relatedStyles}/>
+              )
           })}
         </Grid>
       )
@@ -35,9 +44,6 @@ const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, 
 
   return (
     <div>
-
-      {renderCurrentProduct()}
-
       <Grid
         container direction='row'
         justify='space-between'
