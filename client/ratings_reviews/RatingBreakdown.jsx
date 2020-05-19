@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinearProgress, Grid } from '@material-ui/core';
+import { LinearProgress, Grid, Typography } from '@material-ui/core';
 import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 
 const RatingBreakdown = (props) => {
@@ -19,7 +19,7 @@ const RatingBreakdown = (props) => {
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      margin: theme.spacing(1),
+      margin: theme.spacing(1.5),
     },
   }));
 
@@ -27,10 +27,12 @@ const RatingBreakdown = (props) => {
 
   return (
     <Grid container direction='row' className={classes.margin}>
-      <Grid item sm={12} md={2}>
-        {rating} {rating === 1 ? 'star' : 'stars'}:
+      <Grid item sm={12} md={3}>
+        <Typography variant='body2'>
+          {rating} {rating === 1 ? 'star' : 'stars'}:{' '}
+        </Typography>
       </Grid>
-      <Grid item sm={12} md={7}>
+      <Grid item sm={12} md={9}>
         <BorderLinearProgress
           variant='determinate'
           color='primary'

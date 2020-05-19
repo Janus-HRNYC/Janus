@@ -51,8 +51,8 @@ const AddReview = (props) => {
 
   return (
     <>
-      <Button variant='contained' onClick={handleClick}>
-        ADD REVIEW +
+      <Button variant='outlined' onClick={handleClick}>
+        ADD A REVIEW +
       </Button>
       <Dialog
         open={displayDialog}
@@ -84,6 +84,7 @@ const AddReview = (props) => {
             </InputLabel>
             <Recommend value={form.recommend} setForm={setForm} />
           </Grid>
+          <br />
           <Grid>
             <InputLabel
               required={true}

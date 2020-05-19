@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import RatingSummary from './RatingSummary.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
@@ -55,13 +55,16 @@ const Ratings = ({ ratingsMeta }) => {
   };
 
   return (
-    <Box>
-      <RatingSummary ratings={ratings} recommended={recommended} />
-      {renderRatingBreakdown()}
-      <br />
+    <Grid container direction='column'>
+      <Grid item md={10}>
+        <RatingSummary ratings={ratings} recommended={recommended} />
+      </Grid>
+      <Grid item md={10}>
+        {renderRatingBreakdown()}
+      </Grid>
       {renderFit()}
       {renderComfort()}
-    </Box>
+    </Grid>
   );
 };
 
