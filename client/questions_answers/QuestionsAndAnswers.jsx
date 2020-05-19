@@ -4,22 +4,40 @@ import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
-const QuestionsAndAnswers = (props) => {
+const QuestionsAndAnswers = ({ id }) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [productName, setProductName] = useState([]);
-  const productId = 1;
-
 
   useEffect(() => {
-    axiosQuestionRequest(productId)
-    axiosProductInfoRequest(productId)
+    let array = []
+    localStorage.setItem('counterArray', JSON.stringify(array))
+  }, [])
+
+  window.onclick = e => {
+    let counterArray = JSON.parse(localStorage.getItem('counterArray'))
+    let obj = {}
+    obj.widget = e.target.title
+    console.log('e.target', e)
+    let element = e.target.tagName
+    obj.element = element
+    obj.timeOfClick = new Date()
+    counterArray.push(obj)
+    localStorage.setItem('counterArray', JSON.stringify(counterArray))
+    console.log('localStorage', localStorage)
+  }
+
+  useEffect(() => {
+    
+    axiosQuestionRequest(id)
+    axiosProductInfoRequest(id)
   }, []);
 
   const axiosQuestionRequest = (prodId) => {
     Axios.get(`http://18.224.200.47/qa/${prodId}?count=100`)
-    .then((res) => {setQuestions(res.data.results)
-    console.log('these are the props', productId)})
+    .then((res) => {
+      console.log('productId', id)
+      setQuestions(res.data.results)})
     .catch((err) => console.log(err));
   }
 
@@ -30,26 +48,27 @@ const QuestionsAndAnswers = (props) => {
   }
 
   return (
-    <Box>
-        <Container>
-      <h3>QUESTIONS AND ANSWERS</h3>
-        <SearchForm
-         searchTerm={searchTerm} 
-         setSearchTerm={setSearchTerm} 
-        />
-       
-        <Grid>
-        <QuestionsAndAnswersList 
-        productName={productName} 
-        productId={productId} 
-        axiosQuestionRequest={axiosQuestionRequest} 
-        searchTerm={searchTerm} 
-        questions={questions}
-        />
-        </Grid>
-      
-        </Container>
-    </Box>
+     <div title="QandA">
+        <Box title="QandA">
+            <Container >
+            <h3 title="QandA">QUESTIONS AND ANSWERS</h3>
+            
+            <SearchForm
+            searchTerm={searchTerm} 
+            setSearchTerm={setSearchTerm} 
+            />
+        
+            <QuestionsAndAnswersList 
+            productName={productName} 
+            productId={id} 
+            axiosQuestionRequest={axiosQuestionRequest} 
+            searchTerm={searchTerm} 
+            questions={questions}
+            />
+            
+            </Container>
+        </Box>
+     </div> 
   );
 };
 

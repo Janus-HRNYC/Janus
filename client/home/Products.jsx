@@ -23,7 +23,7 @@ const Products = ({ setProductId }) => {
         <RelatedItems />
         <h2>YOUR OUTFIT</h2>
         <OutfitContainter />
-        <div>
+        <div title="QandA">
           <QuestionsAndAnswersContainer />
         </div>
         <div>
