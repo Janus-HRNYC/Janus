@@ -10,7 +10,7 @@ import Overview from "../../overview/index";
 const mapStateToProps = (store) => ({
   // id: store.selected_id,
   styles: store.styles,
-  selected: store.selected_id,
+  selected_id: store.selected_id,
   info: store.info,
 });
 

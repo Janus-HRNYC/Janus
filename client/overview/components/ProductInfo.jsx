@@ -3,7 +3,7 @@ import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
 import { Box, Grid, Avatar } from "@material-ui/core";
 
-const ProductInfo = ({ info, id }) => {
+const ProductInfo = ({ info, id, styles, selected_id }) => {
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
@@ -12,8 +12,8 @@ const ProductInfo = ({ info, id }) => {
       .then((result) => {
         const payload = result.data.results;
         let sum = 0;
-        for (const rating of payload) {
-          sum += rating.rating;
+        for (const review of payload) {
+          sum += review.rating;
         }
         const avg = sum / payload.length;
         setRating(avg);
@@ -30,42 +30,36 @@ const ProductInfo = ({ info, id }) => {
         </Grid>
         <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
-      {info.category}
+      <h3>{info.category}</h3>
       <h2>{info.name}</h2>
-      {info.default_price}
+      <div>
+        {(() => {
+          for (let i = 0; i < styles.length; i++) {
+            if (styles[i].style_id === selected_id && styles[i].sale_price) {
+              return (
+                <div>
+                  <Box color="red">{styles[i].sale_price}</Box>
+                  <Box
+                    style={{
+                      textDecorationLine: "line-through",
+                      textDecorationStyle: "solid",
+                    }}
+                  >
+                    {styles[i].original_price}
+                  </Box>
+                </div>
+              );
+            } else if (styles[i].style_id === selected_id) {
+              return (
+                <div>
+                  <Box>{styles[i].original_price}</Box>
+                </div>
+              );
+            }
+          }
+        })()}
+      </div>
       <div width="50%">{info.description}</div>
-      <Grid container direction="row" spacing={1}>
-        <Avatar
-          style={{
-            backgroundColor: "blue",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          tweet
-        </Avatar>
-        <Avatar
-          style={{
-            backgroundColor: "blue",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          fb
-        </Avatar>
-        <Avatar
-          style={{
-            backgroundColor: "red",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          pintrest
-        </Avatar>
-      </Grid>{" "}
     </Box>
   );
 };
@@ -87,3 +81,19 @@ export default ProductInfo;
 // display this free form text field if it exists for item
 //SOCIAL MEDIA
 // adds buttons for social media for sharing
+
+/* {styles.map((style, i = 0) =>
+  style.style_id === selected_id && style.sale_price ? (
+    <div key={i++}>
+      <Box color="red">{style.sale_price}</Box>
+      <Box
+        style={{
+          textDecorationLine: "line-through",
+          textDecorationStyle: "solid",
+        }}
+      >
+        {style.original_price}
+      </Box>
+    </div>
+  ) : null
+)} */

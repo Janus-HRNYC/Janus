@@ -3,7 +3,7 @@ import axios from "axios";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 import StyleSelector from "./components/StyleSelector";
-// import AddToCart from "./components/AddToCart";
+import AddToCart from "./components/AddToCart";
 import { Grid } from "@material-ui/core";
 
 const Overview = (props) => {
@@ -13,7 +13,7 @@ const Overview = (props) => {
     getInfo,
     styles,
     getStyles,
-    selected,
+    selected_id,
     getSelected,
   } = props;
 
@@ -27,11 +27,11 @@ const Overview = (props) => {
     axios
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
-        const payload1 = result.data.results.map(
-          (style) => style.photos[0].url
+        const payload1 = result.data.results.map((style) =>
+          style.photos.map((item) => item.url)
         );
-        const payload2 = result.data.results.map(
-          (style) => style.photos[0].thumbnail_url
+        const payload2 = result.data.results.map((style) =>
+          style.photos.map((item) => item.thumbnail_url)
         );
         setImages(payload1);
         setThumbnails(payload2);
@@ -47,21 +47,27 @@ const Overview = (props) => {
       justify="center"
       alignItems="center"
     >
-      <Grid item xs={2}></Grid>
+      <Grid item xs={1}></Grid>
       <Grid item xs>
-        <Gallery id={id} images={images} />
+        <Gallery id={id} selected_id={selected_id} images={images} />
       </Grid>
       <Grid item xs>
-        <ProductInfo info={info} id={id} />
+        <ProductInfo
+          info={info}
+          styles={styles}
+          id={id}
+          selected_id={selected_id}
+        />
         <StyleSelector
           styles={styles}
-          selected={selected}
+          selected_id={selected_id}
           id={id}
+          getSelected={getSelected}
           thumbnails={thumbnails}
         />
-        {/* <Box><AddToCart /></Box> */}
+        <AddToCart />
       </Grid>
-      <Grid item xs={2}></Grid>
+      <Grid item xs={1}></Grid>
     </Grid>
   );
 };
