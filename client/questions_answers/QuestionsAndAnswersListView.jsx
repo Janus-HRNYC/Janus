@@ -50,7 +50,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const seeMoreAnswersButton = () => {
     if (answers.length > 2) {
-      return <p style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
+      return <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
     }
   };
 
@@ -67,20 +67,20 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   return (
    
-    <Grid id="g and a" container justify='space-between' direction='row'>
-        <Grid item xs={8}
+    <Grid title="QandA" container justify='space-between' direction='row'>
+        <Grid title="QandA" item xs={8}
          >
         <p>
             <b>Q:</b>{' '}
-            <b id="Q and A">{question.question_body}</b>
+            <b title="QandA">{question.question_body}</b>
         </p>
         </Grid >
-        <Grid item xs={2}>
-            <p onClick={handleHelpfulQuestionClick} 
+        <Grid title="QandA" item xs={2}>
+            <p title="QandA" onClick={handleHelpfulQuestionClick} 
             style={{cursor: 'pointer'}}>
             Helpful? Yes({question.question_helpfulness})
             </p>
-        </Grid>
+        </Grid >
           
             <AddAnswerModal 
             getAnswers={getAnswers} 
@@ -89,7 +89,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
         
         
         
-        <Grid>
+        <Grid title="QandA">
             {displayAnswersIfAny()}
             {seeMoreAnswersButton()}
         </Grid>

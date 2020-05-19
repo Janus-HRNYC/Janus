@@ -24,7 +24,7 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
   };
 
   const moreQuestionsButton = () => {
-        if (questions.length > questionLimit) return <button onClick={handleMoreQuestionsClick}>More Answered Questions</button>;
+        if (questions.length > questionLimit) return <button title="QandA" onClick={handleMoreQuestionsClick}>More Answered Questions</button>;
   };
 
   const searchFilter = () => {
@@ -42,7 +42,7 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
   };
 
   return (
-    <Box>
+    <Box title="QandA">
       
         {searchFilter().sort((a, b) => (b.question_helpfulness - a.question_helpfulness))
           .map((question, i) => renderQuestions(question, i))}

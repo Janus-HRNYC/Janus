@@ -23,12 +23,6 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
         .catch(err => console.log(err));
     }
 
-    
-    
-
-    
-
-
     const useStyles = makeStyles((theme) => ({
         root: {
           flexGrow: 1,
@@ -40,57 +34,45 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
 
       const classes = useStyles();
 
-      const displayPhotosIfAny = () => {
-        if (answer.photos.length > 0) {
-          console.log('photos', answer.photos)
-          answer.photos.map((photo, i) => {
-            console.log('url', photo.url)
-            return (<img src={photo.url} />)
-          })
-        }
-      }
-  
     return (
-        <Box >
-            <p>
-                <b>A:</b>{' '}
+        <Box title="QandA">
+            <p title="QandA">
+                <b title="QandA">A:</b>{' '}
                 {answer.body}
             </p>
-            <Grid container>
+            <Grid container
+            >
             {answer.photos.length > 0 ?
             answer.photos.map((photo, i) => {
-              return <Grid key={i} item xs={12 / answer.photos.length}><img width="150px" height="150px" src={photo.url} /></Grid>
+              return <Grid  title="QandA" key={i} item xs={12 / answer.photos.length}><img title="QandA" className="QAthumnails" src={photo.url} /></Grid>
             })
             : null
             }
-            
             </Grid>
            
             <Grid 
             container
             direction='row'
-            
+            title="QandA"
             spacing={2}
             >
-            <Grid item xs={6}>
+            <Grid title="QandA" item xs={6}>
             by{' '}
             {
             answer.answerer_name === "Seller" ?
-            <b>{answer.answerer_name}</b>
+            <b title="QandA">{answer.answerer_name}</b>
             :
             answer.answerer_name}
             ,
             {' '}{moment(answer.date).format('MMMM DD, YYYY')}{'  '}
             </Grid>
-            <Grid item xs={4} onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
+            <Grid title="QandA" item xs={4} onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
             Helpful? Yes({answer.helpfulness}) |  
             </Grid>
-            <Grid item xs={2} onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</Grid>
+            <Grid title="QandA" item xs={2} onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</Grid>
             </Grid>
-            
         </Box>
   )
-
 };
 
 export default AnswerListView;
