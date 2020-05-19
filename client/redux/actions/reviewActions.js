@@ -16,11 +16,6 @@ export const reviewActions = {
     type: actionTypes.setRatingsMeta,
     results: data,
   }),
-
-  setSuccessDisplay: (bool) => ({
-    type: actionTypes.setSuccessDisplay,
-    results: bool,
-  }),
 };
 
 export const getReviews = (productId, sort = 'relevant', count = 100) => {

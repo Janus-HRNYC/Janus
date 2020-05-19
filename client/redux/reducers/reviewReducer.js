@@ -28,15 +28,6 @@ const reviewReducer = {
         return state;
     }
   },
-
-  setSuccessDisplay: (state = false, action) => {
-    switch (action.type) {
-      case actionTypes.setSuccessDisplay:
-        return action.results;
-      default:
-        return state;
-    }
-  },
 };
 
 export default reviewReducer;

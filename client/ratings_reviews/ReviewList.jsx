@@ -22,14 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ReviewList = (props) => {
   const classes = useStyles();
-  const {
-    list,
-    id,
-    displayBySort,
-    ratingsMeta,
-    postReview,
-    successDisplay,
-  } = props;
+  const { list, id, displayBySort, ratingsMeta, postReview } = props;
   const [limit, setLimit] = useState(2);
   const [sort, setSort] = useState('relevant');
   const listLength = list.length;
@@ -92,7 +85,6 @@ const ReviewList = (props) => {
           <AddReview
             ratingsMeta={ratingsMeta}
             postReview={postReview}
-            successDisplay={successDisplay}
             id={id}
           />
         </Grid>

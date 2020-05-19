@@ -5,12 +5,14 @@ import rootReducer from './reducers/rootReducer.js';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
-  productId: 0,
+  // productId: 0,
   reviewResults: [],
   relatedProducts: [],
-  outfit: {},
   ratingsMeta: {},
-  successDisplay: false,
+  // selected_id: 0,
+  styles: [],
+  selected_id: 0,
+  info: {},
 };
 
 const logger = (store) => {
@@ -27,7 +29,7 @@ const logger = (store) => {
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(logger, thunk))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;

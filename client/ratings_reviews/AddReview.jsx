@@ -19,7 +19,7 @@ import REFERENCES from './references.js';
 const formDefault = REFERENCES.ADDREVIEW.formDefault;
 
 const AddReview = (props) => {
-  const { ratingsMeta, postReview, successDisplay, id } = props;
+  const { ratingsMeta, postReview, id } = props;
   const [char, setChar] = useState({});
   const [form, setForm] = useState(formDefault);
   const [errors, setErrors] = useState(false);

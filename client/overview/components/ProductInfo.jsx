@@ -3,20 +3,12 @@ import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
 import { Box, Grid, Avatar } from "@material-ui/core";
 
-const ProductInfo = () => {
-  const [product_id, setProduct_id] = useState(50);
-  const [info, setInfo] = useState({});
-  useEffect(() => {
-    axios
-      .get(`http://18.224.200.47/products/${product_id}`)
-      .then((result) => setInfo(result.data))
-      .catch((err) => console.error(err));
-  }, []);
+const ProductInfo = ({ info, id }) => {
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
     axios
-      .get(`http://18.224.200.47/reviews/${product_id}/list`)
+      .get(`http://18.224.200.47/reviews/${id}/list`)
       .then((result) => {
         const payload = result.data.results;
         let sum = 0;
@@ -36,16 +28,12 @@ const ProductInfo = () => {
         <Grid item>
           <StarRating star={rating} />
         </Grid>
-        <Grid item>
-          <Box>{`Read all ${ratingCount} reviews`}</Box>
-        </Grid>
+        <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
-      <Box>{info.category}</Box>
-      <Box>
-        <h2>{info.name}</h2>
-      </Box>
-      <Box>{info.default_price}</Box>
-      <Box width="50%">{info.description}</Box>
+      {info.category}
+      <h2>{info.name}</h2>
+      {info.default_price}
+      <div width="50%">{info.description}</div>
       <Grid container direction="row" spacing={1}>
         <Avatar
           style={{
@@ -77,7 +65,7 @@ const ProductInfo = () => {
         >
           pintrest
         </Avatar>
-      </Grid>
+      </Grid>{" "}
     </Box>
   );
 };
