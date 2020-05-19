@@ -7,6 +7,13 @@ import OutfitContainter from "./redux/containers/outfitContainer.js";
 import OverviewContainer from "./redux/containers/overviewContainer";
 
 const App = () => {
+
+  window.onclick = e => {
+    console.log('e.target', e.target);
+    console.log('e.target.value', e.target.value);
+    console.log('e.target.parentNode', e.target.parentNode)
+    console.log('e.target.parentElement', e.target.parentElement)
+} 
   return (
     <div>
       Display App

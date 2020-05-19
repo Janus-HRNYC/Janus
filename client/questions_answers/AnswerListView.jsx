@@ -6,15 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const AnswerListView = ({ answer, question, getAnswers }) => {
-  
-    const [numHelpfulAnswerClicks, setNumHelpfulAnswerClicks] = useState(0)
 
     const handleHelpFullAnswerClick = () => {
-        if (numHelpfulAnswerClicks === 0) {
+        let check = localStorage.getItem(`${answer.answer_id}`)
+        if (!check) {
         Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id}/helpful`)
         .then(res => getAnswers(question))
         .catch(err => console.log(err));
-        setNumHelpfulAnswerClicks(numHelpfulAnswerClicks + 1)
+        localStorage.setItem(`${answer.answer_id}`, true)
         }
     }
 
@@ -23,6 +22,12 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
         .then(res => getAnswers(question))
         .catch(err => console.log(err));
     }
+
+    
+    
+
+    
+
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -34,20 +39,40 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
       }));
 
       const classes = useStyles();
+
+      const displayPhotosIfAny = () => {
+        if (answer.photos.length > 0) {
+          console.log('photos', answer.photos)
+          answer.photos.map((photo, i) => {
+            console.log('url', photo.url)
+            return (<img src={photo.url} />)
+          })
+        }
+      }
   
     return (
-        <Grid >
-            <Grid >
-            <b>A:</b>{' '}
-            {answer.body}
+        <Box >
+            <p>
+                <b>A:</b>{' '}
+                {answer.body}
+            </p>
+            <Grid container>
+            {answer.photos.length > 0 ?
+            answer.photos.map((photo, i) => {
+              return <Grid key={i} item xs={12 / answer.photos.length}><img width="150px" height="150px" src={photo.url} /></Grid>
+            })
+            : null
+            }
+            
             </Grid>
+           
             <Grid 
             container
             direction='row'
-            justify='flex-start'
-            className={classes.root} spacing={2}
+            
+            spacing={2}
             >
-            <Grid item xs={4}>
+            <Grid item xs={6}>
             by{' '}
             {
             answer.answerer_name === "Seller" ?
@@ -58,13 +83,12 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
             {' '}{moment(answer.date).format('MMMM DD, YYYY')}{'  '}
             </Grid>
             <Grid item xs={4} onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
-            Helpful? Yes({answer.helpfulness}){' | '}
+            Helpful? Yes({answer.helpfulness}) |  
             </Grid>
-            <Grid item xs={4} onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>
-                Report
+            <Grid item xs={2} onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</Grid>
             </Grid>
-            </Grid>
-        </Grid>
+            
+        </Box>
   )
 
 };

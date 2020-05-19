@@ -18,7 +18,8 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
     axiosQuestionRequest={axiosQuestionRequest} 
     question={question} 
     key={i}
-    productName={productName} />)
+    productName={productName}
+    searchTerm={searchTerm} />)
     }
   };
 

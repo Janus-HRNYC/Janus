@@ -8,7 +8,6 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   const [answers, setAnswers] = useState([]);
   const [answerLimit, setAnswerLimit] = useState(2);
   const [seeMoreAnswersClicked, setSeeMoreAnswersClicked] = useState(false);
-  const [numHelpfulClicks, setNumHelpfulClicks] = useState(0);
   
   useEffect(() => {
     getAnswers(question)
@@ -21,11 +20,12 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   }
 
   const handleHelpfulQuestionClick = () => {
-      if (numHelpfulClicks === 0) {
+      let check = localStorage.getItem(`${question.question_id}`)
+    if (!check) {
         Axios.put(`http://18.224.200.47/qa/question/${question.question_id}/helpful`)
         .then((res) => axiosQuestionRequest(productId))
         .catch((err) => console.log(err));
-        setNumHelpfulClicks(numHelpfulClicks + 1)
+        localStorage.setItem(`${question.question_id}`, true)
         }
     };
   
@@ -50,7 +50,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const seeMoreAnswersButton = () => {
     if (answers.length > 2) {
-      return <p onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
+      return <p style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
     }
   };
 
@@ -59,14 +59,20 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     return 'Collapse Answers';
   };
 
+  // const outlineSearchTerms = () => {
+  //   if (question.question_body.toLowerCase().includes(searchTerm.toLowerCase()) {
+  //     let index = question.question_body.toLowerCase().indexOf(searchTerm.toLowerCase())
+  //   }
+  // }
+
   return (
    
-    <Grid container justify='space-between' direction='row'>
+    <Grid id="g and a" container justify='space-between' direction='row'>
         <Grid item xs={8}
          >
         <p>
-            <b>Q:</b>
-            <b>{question.question_body}</b>
+            <b>Q:</b>{' '}
+            <b id="Q and A">{question.question_body}</b>
         </p>
         </Grid >
         <Grid item xs={2}>
