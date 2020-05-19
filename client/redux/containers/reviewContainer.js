@@ -3,17 +3,16 @@ import Review from '../../ratings_reviews/Reviews.jsx';
 import { getReviews, postReview } from '../actions/reviewActions.js';
 
 const mapStateToProps = (store) => ({
-  productId: store.productId,
+  id: store.id,
   reviewResults: store.reviewResults,
   ratingsMeta: store.ratingsMeta,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getReviews: (productId, sort, count) =>
-      dispatch(getReviews(productId, sort, count)),
-    displayBySort: (productId, sort) => dispatch(getReviews(productId, sort)),
-    postReview: (productId, form) => dispatch(postReview(productId, form)),
+    getReviews: (id, sort, count) => dispatch(getReviews(id, sort, count)),
+    displayBySort: (id, sort) => dispatch(getReviews(id, sort)),
+    postReview: (id, form) => dispatch(postReview(id, form)),
   };
 };
 

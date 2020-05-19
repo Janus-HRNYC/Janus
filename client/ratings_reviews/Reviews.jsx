@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 const Reviews = (props) => {
   const classes = useStyles();
   const {
-    productId,
+    id,
     reviewResults,
     getReviews,
     displayBySort,
@@ -23,7 +23,7 @@ const Reviews = (props) => {
   } = props;
 
   useEffect(() => {
-    getReviews(28);
+    getReviews(id);
   }, []);
 
   console.log('Displaying Review Results; ', reviewResults);
@@ -33,7 +33,7 @@ const Reviews = (props) => {
     let filterByRatings = reviewResults.filter((review) => {
       return review.rating === rating;
     });
-    displayBySort(productId);
+    displayBySort(id);
   };
 
   // let displayList = !filterByRatings ? reviewResults : filterByRatings;
@@ -53,7 +53,7 @@ const Reviews = (props) => {
           <Grid item md={8}>
             <ReviewList
               list={reviewResults}
-              id={productId}
+              id={id}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
               postReview={postReview}
