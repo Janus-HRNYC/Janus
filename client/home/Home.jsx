@@ -1,42 +1,56 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Products from './Products.jsx';
+import { AppBar, CssBaseline, Toolbar, Typography } from '@material-ui/core';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import { makeStyles } from '@material-ui/core/styles';
+import ProductList from './ProductList.jsx';
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    marginRight: theme.spacing(2),
+  },
+}));
 
 const Home = (props) => {
-  const { products, productId, getProducts, setProductId } = props;
-  // const [products, setProducts] = useState([]);
+  const classes = useStyles();
+  const { products, getProducts, setProductId } = props;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     getProducts();
   }, []);
 
-  const handleClick = (id) => {
-    console.log('Value: ', id);
+  const showProduct = (id) => {
     setProductId(id);
     setShow(!show);
   };
 
+  const AppBarContainer = () => (
+    <AppBar position='fixed'>
+      <Toolbar onClick={() => setShow(false)}>
+        <StorefrontIcon className={classes.icon} />
+        <Typography variant='h6' color='inherit' noWrap>
+          Janus Online
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
+
   return (
     <>
       <Router>
-        {!show ? (
-          <div>
-            <ul>
-              {products.map((item) => {
-                let loc = '/products/' + item.id;
-                return (
-                  <li key={item.id} onClick={() => handleClick(item.id)}>
-                    <Link to={loc}>{item.name}</Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null}
+        <CssBaseline />
+        <Link to='/'>
+          <AppBarContainer />
+        </Link>
         <Switch>
-          <Route exact path='/products/:id' component={Products}></Route>
+          <Route exact path='/'>
+            <ProductList
+              products={products}
+              showProduct={showProduct}
+              show={show}
+            />
+          </Route>
         </Switch>
       </Router>
     </>

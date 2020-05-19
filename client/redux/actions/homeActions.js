@@ -18,7 +18,7 @@ export const getProducts = () => {
     return axios
       .get('http://18.224.200.47/products/list?count=100')
       .then((results) => {
-        // console.log('Successful in GET: ', results.data);
+        console.log('Successful in GET: ', results.data);
         dispatch(homeActions.setProducts(results.data));
       })
       .catch((err) => console.log('Error in GET products: ', err));
