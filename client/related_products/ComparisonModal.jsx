@@ -57,7 +57,7 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 const ComparisonModal = ({ currentItem, compareItem }) => {
 //---------------------------------------------------------------------------------------------------//
-console.log(compareItem);
+// console.log(compareItem);
   
 
   const [open, setOpen] = React.useState(false);

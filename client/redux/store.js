@@ -13,21 +13,21 @@ export const initialState = {
   compareProducts: {},
 };
 
-const logger = (store) => {
-  return (next) => {
-    return (action) => {
-      console.log(`|Middleware| Dispatching:`, action);
-      const results = next(action);
-      console.log('|Middleware| next state', store.getState());
-      return results;
-    };
-  };
-};
+// const logger = (store) => {
+//   return (next) => {
+//     return (action) => {
+//       console.log(`|Middleware| Dispatching:`, action);
+//       const results = next(action);
+//       console.log('|Middleware| next state', store.getState());
+//       return results;
+//     };
+//   };
+// };
 
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(logger, thunk))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;

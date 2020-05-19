@@ -53,6 +53,9 @@ const relatedItemsCard = (props) => {
       title={props.item.name}
     />
   )
+
+
+  console.log(photoSrc);
 }
   }
 

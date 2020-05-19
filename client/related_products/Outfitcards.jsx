@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Outfitcards = (props) => {
+  console.log(props)
    const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
@@ -62,34 +63,3 @@ const Outfitcards = (props) => {
 }
 
 export default Outfitcards
-
-const displayItems = () => {
-  return (
-    <Card>
-      <CardHeader
-        action={
-          <IconButton aria-label="settings" onClick={() => { props.removeOutfit(props.item.id) }}>
-            <HighlightOffIcon />
-          </IconButton>
-        }
-
-      />
-      <CardContent>
-        <Typography variant="h5" component="h2">
-
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {props.item.category}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {props.item.name}
-          <br />
-          {`$${props.item.price}`}
-        </Typography>
-        <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Rating name='read-only' value={5} readOnly />
-        </Box>
-      </CardContent>
-    </Card>
-  );
-}

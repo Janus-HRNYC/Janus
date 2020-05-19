@@ -12,6 +12,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import AddIcon from '@material-ui/icons/Add';
+import { Hidden } from '@material-ui/core';
 
 const useStyles = makeStyles({
 
@@ -28,18 +29,17 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = (props) => {
+const AddOutFitCard = ({ addOutfit, productId }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card>
       <CardHeader
         action={
-          <IconButton aria-label="settings" onClick={() => { props.removeOutfit}}>
-            <HighlightOffIcon />
+          <IconButton aria-label="settings" onClick={() => { addOutfit(productId) }}>
+            <AddIcon />
           </IconButton>
         }
-
       />
       <CardContent>
         <Typography variant="h5" component="h2">
@@ -48,10 +48,13 @@ const AddOutFitCard = (props) => {
         <Typography className={classes.pos} color="textSecondary">
           Add to Outfit
         </Typography>
-        <Typography variant="body2" component="p">         
-          <br />          
+        <Typography variant="body2" component="p">
+          <br />
         </Typography>
-        <Box component='fieldset' mb={3} borderColor='transparent'>
+        <Box component='fieldset' mb={3} borderColor='transparent' visibility='hidden'>
+          <Hidden>
+            <Rating readOnly />
+          </Hidden>
         </Box>
       </CardContent>
     </Card>

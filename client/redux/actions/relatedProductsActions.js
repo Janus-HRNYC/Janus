@@ -15,7 +15,6 @@ export const fetchRelatedProducts = (id) => {
       .then((results) => {
         results.data.forEach((ele) => {
           let relatedProducts = {};
-          // spacing for readablity
           promise.push(
             axios.get(`http://18.224.200.47/products/${ele}`)
               .then((results) => {

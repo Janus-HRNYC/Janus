@@ -15,7 +15,7 @@ const mapDispatcchToProps = (dispatch) => {
   return {
     onGetRelated: (productId) => dispatch(actionCreator.fetchRelatedProducts(productId)),
     onGetCurrent: () => dispatch(currentActionCreator.fetchItemToCompare()),
-    onAddOutfit: (outfit) => dispatch(outfitActionCreator.addOutfitAction(outfit)),
+    onAddOutfit: () => dispatch(outfitActionCreator.addOutfitAction()),
   }
 }
 

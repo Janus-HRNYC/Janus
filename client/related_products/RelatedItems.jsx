@@ -4,19 +4,12 @@ import RelatedItemsCard from './RelatedItemsCard'
 import ComparisonModal from './ComparisonModal';
 
 
-const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, compareProducts,  onAddOutfit}) => {
+const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, compareProducts}) => {
   console.log(productId);
   
-  
-  // let previousState;
-  // console.log('previousState', previousState4);
-  // const renderCurrentProduct = () => {
-  //   if (previousState !== productId) {  
-  //   console.log('should render');
-  //   onGetRelated(productId);
-  //   previousState = productId;
-  //   }
-  // }
+  const renderCurrentProduct = () => {  
+    onGetRelated(productId);  
+  }
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -32,7 +25,7 @@ const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, 
       
           {relatedProducts.state.map((item, i) => {
             return (
-              <RelatedItemsCard key={i} item={item} addOutfit={onAddOutfit} currentItem={compareProducts} compareItem={item} />
+              <RelatedItemsCard key={i} item={item} currentItem={compareProducts} compareItem={item} />
             )
           })}
         </Grid>
@@ -43,7 +36,7 @@ const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, 
   return (
     <div>
 
-      {/* {renderCurrentProduct()} */}
+      {renderCurrentProduct()}
 
       <Grid
         container direction='row'

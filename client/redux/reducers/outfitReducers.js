@@ -3,7 +3,7 @@ import * as actionType from '../actions/actionsTypes'
 
 
 const outfitReducer = {
-  changeOutfit: (state = {}, action) => {
+  changeOutfit: (state = [], action) => {
     switch (action.type) {
       case actionType.addOutfit: {
       // return Object.assign({}, state, action.outfit);
