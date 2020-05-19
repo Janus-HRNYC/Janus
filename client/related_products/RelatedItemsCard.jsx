@@ -53,6 +53,9 @@ const relatedItemsCard = (props) => {
       title={props.item.name}
     />
   )
+
+
+  console.log(photoSrc);
 }
   }
 
@@ -73,12 +76,12 @@ return (
   <Card>
     <CardHeader
       action={
-        <IconButton aria-label="settings" onClick={() => console.log('clicked')}>
-          <StarBorderIcon value={props.item}/>
-          {displayComparison()}
+        <IconButton aria-label="settings">
+          {displayComparison()}          
         </IconButton>
-      }      
-    />
+      }
+      
+      />
     {displayPhoto()}
     <CardContent>
       <Typography variant="h5" component="h2">

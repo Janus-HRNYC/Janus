@@ -29,7 +29,7 @@ const logger = (store) => {
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(applyMiddleware(logger, thunk))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;

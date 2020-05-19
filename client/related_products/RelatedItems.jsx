@@ -3,8 +3,13 @@ import { Grid } from '@material-ui/core';
 import RelatedItemsCard from './RelatedItemsCard'
 import ComparisonModal from './ComparisonModal';
 
-const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent, compareProducts }) => {
-  console.log(compareProducts);
+
+const RelatedItems = ({ relatedProducts, onGetRelated, productId, onGetCurrent, compareProducts}) => {
+  console.log(productId);
+  
+  const renderCurrentProduct = () => {  
+    onGetRelated(productId);  
+  }
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -16,10 +21,11 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
           container
           direction={'row'}
           justify='space-between'
-        >
+          >
+      
           {relatedProducts.state.map((item, i) => {
             return (
-              <RelatedItemsCard key={i} item={item} addOutfit={onAddOutfit} currentItem={compareProducts} compareItem={item} />
+              <RelatedItemsCard key={i} item={item} currentItem={compareProducts} compareItem={item} />
             )
           })}
         </Grid>
@@ -29,7 +35,9 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
 
   return (
     <div>
-      <button onClick={onGetRelated}>TEST_Display_Related_Items_ID_2</button>      
+
+      {renderCurrentProduct()}
+
       <Grid
         container direction='row'
         justify='space-between'
@@ -41,3 +49,4 @@ const RelatedItems = ({ relatedProducts, onGetRelated, onAddOutfit, onGetCurrent
   )
 }
 export default RelatedItems;
+

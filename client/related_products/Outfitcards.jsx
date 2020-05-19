@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles({
 
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const Outfitcards = (props) => {
+  console.log(props)
    const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
