@@ -4,39 +4,48 @@ import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
 
-// import janus from '../lib/axiosRequests';
-
-const QuestionsAndAnswers = ({ props }) => {
+const QuestionsAndAnswers = (props) => {
   const [questions, setQuestions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [tempQuestions, setTempQuestions] = useState([]);
+  const [productName, setProductName] = useState([]);
   const productId = 1;
 
 
   useEffect(() => {
     axiosQuestionRequest(productId)
+    axiosProductInfoRequest(productId)
   }, []);
 
   const axiosQuestionRequest = (prodId) => {
     Axios.get(`http://18.224.200.47/qa/${prodId}?count=100`)
-    .then((res) => setQuestions(res.data.results))
+    .then((res) => {setQuestions(res.data.results)
+    console.log('these are the props', productId)})
     .catch((err) => console.log(err));
+  }
+
+  const axiosProductInfoRequest = (prodId) => {
+      Axios.get(`http://18.224.200.47/products/${prodId}`)
+      .then(res => setProductName(res.data.name))
+      .catch(err => console.log(err))
   }
 
   return (
     <Box>
         <Container>
       <h3>QUESTIONS AND ANSWERS</h3>
-        
         <SearchForm
          searchTerm={searchTerm} 
          setSearchTerm={setSearchTerm} 
-         questions={questions}
-         setTempQuestions={setTempQuestions} 
         />
        
         <Grid>
-        <QuestionsAndAnswersList productId={productId} axiosQuestionRequest={axiosQuestionRequest} searchTerm={searchTerm} questions={searchTerm.length > 2 ? tempQuestions : questions} />
+        <QuestionsAndAnswersList 
+        productName={productName} 
+        productId={productId} 
+        axiosQuestionRequest={axiosQuestionRequest} 
+        searchTerm={searchTerm} 
+        questions={questions}
+        />
         </Grid>
       
         </Container>

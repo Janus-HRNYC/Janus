@@ -2,34 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 
 
-const SearchForm = ({ searchTerm, setSearchTerm, questions, setTempQuestions }) => {
-  
-
-  const searchThroughQuestions = () => {
-    let newSearchedQuestions = [];
-    if (searchTerm.length > 2) {
-      questions.map((question) => {
-        let obj = { ...question };
-        let lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
-        let lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
-        // let lowerCaseSearchTermRemoveSpaces = lowerCaseSearchTerm.split(' ').join('')
-        // let lowerCaseQuestionRemoveSpaces = lowerCaseQuestion.split(' ').join('')
-        if (lowerCaseQuestion.includes(lowerCaseSearchTerm)) {
-          newSearchedQuestions.push(obj);
-        }
-      });
-      setTempQuestions(newSearchedQuestions);
-    }
-  };
+const SearchForm = ({ searchTerm, setSearchTerm }) => {
 
   const handleSearchChange = (e) => {
-    e.preventDefault();
     setSearchTerm(e.target.value);
   };
-
-  useEffect(() => {
-    searchThroughQuestions();
-  }, [searchTerm]);
 
   return (
     <div>

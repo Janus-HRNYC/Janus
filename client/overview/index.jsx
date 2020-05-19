@@ -1,36 +1,69 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import axios from "axios";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
-// import AddToCart from "./components/AddToCart";
 import StyleSelector from "./components/StyleSelector";
-import { Grid, Box } from "@material-ui/core";
+// import AddToCart from "./components/AddToCart";
+import { Grid } from "@material-ui/core";
 
-const mapStateToProps = (store) => ({});
+const Overview = (props) => {
+  const {
+    id = 5,
+    info,
+    getInfo,
+    styles,
+    getStyles,
+    selected,
+    getSelected,
+  } = props;
 
-const Overview = () => {
+  const [images, setImages] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
+
+  useEffect(() => {
+    getInfo(id);
+    getStyles(id);
+    getSelected(id);
+    axios
+      .get(`http://18.224.200.47/products/${id}/styles`)
+      .then((result) => {
+        const payload1 = result.data.results.map(
+          (style) => style.photos[0].url
+        );
+        const payload2 = result.data.results.map(
+          (style) => style.photos[0].thumbnail_url
+        );
+        setImages(payload1);
+        setThumbnails(payload2);
+      })
+      .catch((err) => console.error(err));
+  }, [id]);
+
   return (
     <Grid
       container
       direction="row"
-      spacing={3}
+      spacing={2}
       justify="center"
       alignItems="center"
     >
-      <Grid item>
-        <Gallery />
+      <Grid item xs={2}></Grid>
+      <Grid item xs>
+        <Gallery id={id} images={images} />
       </Grid>
-      <Grid item>
-        <Box>
-          <ProductInfo />
-        </Box>
-        <Box>
-          <StyleSelector />
-        </Box>
+      <Grid item xs>
+        <ProductInfo info={info} id={id} />
+        <StyleSelector
+          styles={styles}
+          selected={selected}
+          id={id}
+          thumbnails={thumbnails}
+        />
         {/* <Box><AddToCart /></Box> */}
       </Grid>
+      <Grid item xs={2}></Grid>
     </Grid>
   );
 };
 
-export default connect(mapStateToProps)(Overview);
+export default Overview;
