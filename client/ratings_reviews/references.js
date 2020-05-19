@@ -8,7 +8,7 @@ const REFERENCES = {
       body: '',
       email: '',
       name: '',
-      phots: [],
+      photos: [],
     },
   },
   CHARACTERISTICS: {
@@ -68,7 +68,7 @@ const REFERENCES = {
       required: true,
       maxLength: 1000,
       placeholder: `Why did you like the product or not?`,
-      helperText: ``,
+      helperText: `Minimum required characters: 50`,
     },
     name: {
       multiline: false,

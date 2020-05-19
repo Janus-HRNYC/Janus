@@ -1,35 +1,62 @@
-import React, { useEffect } from 'react';
-import { Box, Grid, Container } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Box, Grid, Container, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ReviewList from './ReviewList.jsx';
 import Ratings from './Ratings.jsx';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    margin: 'auto',
+    maxWidth: '1100px',
+  },
+}));
+
 const Reviews = (props) => {
+  const classes = useStyles();
   const {
-    productId,
+    id,
     reviewResults,
     getReviews,
     displayBySort,
     ratingsMeta,
+    postReview,
   } = props;
 
   useEffect(() => {
-    getReviews(1);
+    getReviews(id);
   }, []);
 
+  console.log('Displaying Review Results; ', reviewResults);
+
+  const clickStarRating = (rating) => {
+    console.log('This has been clicked: ', rating);
+    let filterByRatings = reviewResults.filter((review) => {
+      return review.rating === rating;
+    });
+    displayBySort(id);
+  };
+
+  // let displayList = !filterByRatings ? reviewResults : filterByRatings;
+  // console.log('Filter Review Results; ', displayList);
+
   return (
-    <Box>
+    <Box className={classes.root}>
       <Container>
-        <h2>RATINGS & REVIEWS</h2>
+        <Typography variant='h5'>RATINGS & REVIEWS</Typography>
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
-            <Ratings ratingsMeta={ratingsMeta} />
+            <Ratings
+              ratingsMeta={ratingsMeta}
+              clickStarRating={clickStarRating}
+            />
           </Grid>
           <Grid item md={8}>
             <ReviewList
               list={reviewResults}
-              id={productId}
+              id={id}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
+              postReview={postReview}
             />
           </Grid>
         </Grid>
