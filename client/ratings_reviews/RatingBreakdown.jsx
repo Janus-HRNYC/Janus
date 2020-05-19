@@ -3,7 +3,7 @@ import { LinearProgress, Grid, Typography } from '@material-ui/core';
 import { lighten, withStyles, makeStyles } from '@material-ui/core/styles';
 
 const RatingBreakdown = (props) => {
-  const { rating, ratingValue } = props;
+  const { rating, ratingValue, clickStarRating } = props;
 
   const BorderLinearProgress = withStyles({
     root: {
@@ -12,7 +12,7 @@ const RatingBreakdown = (props) => {
       marginTop: '8px',
     },
     bar: {
-      borderRadius: 10,
+      // borderRadius: 10,
       backgroundColor: '#ff6c5c',
     },
   })(LinearProgress);
@@ -28,9 +28,11 @@ const RatingBreakdown = (props) => {
   return (
     <Grid container direction='row' className={classes.margin}>
       <Grid item sm={12} md={3}>
-        <Typography variant='body2'>
-          {rating} {rating === 1 ? 'star' : 'stars'}:{' '}
-        </Typography>
+        <a href='#' onClick={() => clickStarRating(rating)}>
+          <Typography variant='body2'>
+            {rating} {rating === 1 ? 'star' : 'stars'}:{' '}
+          </Typography>
+        </a>
       </Grid>
       <Grid item sm={12} md={9}>
         <BorderLinearProgress
