@@ -77,9 +77,11 @@ const Home = (props) => {
             </Container>
           </main>
         ) : null}
-        <Switch>
-          <Route path='/products/:id' component={Products}></Route>
-        </Switch>
+        {!show ? null : (
+          <Switch>
+            <Route path='/products/:id' component={Products}></Route>
+          </Switch>
+        )}
       </Router>
     </>
   );
