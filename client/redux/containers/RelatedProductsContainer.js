@@ -9,14 +9,14 @@ const mapStateToProps = (store) => ({
   relatedProducts: store.relatedProducts, 
   outfit: store.outfit,
   compareProducts: store.compareProducts,
-  productId: store.productId,
+  id: store.id,
   relatedStyles: store.relatedStyles,
 });
 
 const mapDispatcchToProps = (dispatch) => {
   return {
-    onGetRelated: (productId) => dispatch(actionCreator.fetchRelatedProducts(productId)),
-    onGetCurrent: (productId) => dispatch(currentActionCreator.fetchItemToCompare(productId)),
+    onGetRelated: (id) => dispatch(actionCreator.fetchRelatedProducts(id)),
+    onGetCurrent: (id) => dispatch(currentActionCreator.fetchItemToCompare(id)),
     onAddOutfit: () => dispatch(outfitActionCreator.addOutfitAction()),
     onGetRelatedStyle: (id) => dispatch(RelatedStyleActionCreator.fetchStyle(id)),
   }

@@ -28,14 +28,14 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = ({ addOutfit, productId }) => {
+const AddOutFitCard = ({ addOutfit, id }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card>
       <CardHeader
         action={
-          <IconButton aria-label="settings" onClick={() => { addOutfit(productId) }}>
+          <IconButton aria-label="settings" onClick={() => { addOutfit(id) }}>
             <AddIcon />
           </IconButton>
         }

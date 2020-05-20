@@ -4,7 +4,7 @@ import OutfitItems from '../../related_products/OutfitItems.jsx';
 
 const mapStateToProps = (store) => ({
   outfit: store.outfit,
-  productId: store.productId,
+  id: store.id,
 });
 
 const mapDispatcchToProps = (dispatch) => {

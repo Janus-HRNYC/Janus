@@ -6,7 +6,7 @@ import ComparisonModal from './ComparisonModal';
 
 const RelatedItems = (props) => {
   const {
-    productId,
+    id,
     relatedProducts,
     onGetRelated,
     onGetRelatedStyle,
@@ -14,9 +14,9 @@ const RelatedItems = (props) => {
     relatedStyles,
   } = props;
   
-  console.log(productId);
+  console.log(id);
   useEffect(() => {
-    onGetRelated(productId);    
+    onGetRelated(id);    
   }, []);
 
 
@@ -34,7 +34,7 @@ const RelatedItems = (props) => {
 
           {relatedProducts.state.map((item, i) => {        
               return (
-                <RelatedItemsCard key={i} item={item} getRelatedStyles={onGetRelatedStyle} productId={productId} styles={relatedStyles}/>
+                <RelatedItemsCard key={Math.random()} item={item} getRelatedStyles={onGetRelatedStyle} id={id} styles={relatedStyles}/>
               )
           })}
         </Grid>

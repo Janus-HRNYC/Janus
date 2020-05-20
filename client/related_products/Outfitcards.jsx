@@ -28,15 +28,14 @@ const useStyles = makeStyles({
   },
 });
 
-const Outfitcards = (props) => {
-  console.log(props)
+const Outfitcards = ({ item, id, removeOutfit}) => {
    const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card>
       <CardHeader        
         action={
-          <IconButton aria-label="settings" onClick={() => { props.removeOutfit(props.item.id)}}>
+          <IconButton aria-label="settings" onClick={() => { removeOutfit(item.id)}}>
             <HighlightOffIcon />
           </IconButton>
         }        
@@ -47,12 +46,12 @@ const Outfitcards = (props) => {
           
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          {props.item.category}
+          {item.category}
         </Typography>
         <Typography variant="body2" component="p">
-          {props.item.name}
+          {item.name}
           <br />
-          {`$${props.item.price}`}
+          {`$${item.price}`}
         </Typography>
         <Box component='fieldset' mb={3} borderColor='transparent'>
           <Rating name='read-only' value={5} readOnly />

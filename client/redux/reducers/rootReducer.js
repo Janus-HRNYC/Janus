@@ -10,7 +10,7 @@ import relatedStylesReducer from './relatedStylesReducer'
 const rootReducer = combineReducers({
   products: homeReducer.setProductsReducer,
   id: homeReducer.setProductIdReducer,
-  productId: reviewReducer.setProductIdReducer,
+  // productId: reviewReducer.setProductIdReducer,
   reviewResults: reviewReducer.setResultsReducer,
   relatedProducts: relatedReducer.relatedProductsReducer,
   outfit: outfitReducer.changeOutfit,

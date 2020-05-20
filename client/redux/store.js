@@ -11,7 +11,7 @@ const initialState = {
   relatedProducts: [],
   ratingsMeta: {},
   styles: [],
-  productId: 2,
+  // productId: 2,
   selected_id: 0,
   styles: [],
   outfit: [],
