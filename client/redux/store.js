@@ -6,7 +6,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
   products: [],
-  id: 0,
+  id: 28,
   reviewResults: [],
   relatedProducts: [],
   ratingsMeta: {},

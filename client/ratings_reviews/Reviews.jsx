@@ -22,23 +22,23 @@ const Reviews = (props) => {
     ratingsMeta,
     postReview,
   } = props;
+  const [filterList, setFilterList] = useState([]);
+  let displayList = filterList.length === 0 ? reviewResults : filterList;
 
   useEffect(() => {
     getReviews(id);
   }, []);
 
-  console.log('Displaying Review Results; ', reviewResults);
+  console.log('Displaying Review Results; ', filterList);
 
   const clickStarRating = (rating) => {
     console.log('This has been clicked: ', rating);
     let filterByRatings = reviewResults.filter((review) => {
       return review.rating === rating;
     });
-    displayBySort(id);
+    console.log('Filter Review Results; ', filterByRatings);
+    setFilterList(filterByRatings);
   };
-
-  // let displayList = !filterByRatings ? reviewResults : filterByRatings;
-  // console.log('Filter Review Results; ', displayList);
 
   return (
     <Box className={classes.root}>
@@ -53,7 +53,7 @@ const Reviews = (props) => {
           </Grid>
           <Grid item md={8}>
             <ReviewList
-              list={reviewResults}
+              list={displayList}
               id={id}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
