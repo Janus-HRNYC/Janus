@@ -12,12 +12,24 @@ import ReviewItem from './ReviewItem.jsx';
 import AddReview from './AddReview.jsx';
 
 const useStyles = makeStyles((theme) => ({
+  list: {
+    maxHeight: '700px',
+    overflow: 'auto',
+    paddingBottom: theme.spacing(2),
+  },
+
   selected: {
     fontWeight: 'bold',
     letterSpacing: '0.0075em',
     fontSize: '1.2rem',
   },
-  sort: {},
+  sort: {
+    marginRight: theme.spacing(1),
+  },
+  more: {
+    padding: theme.spacing(2),
+    marginRight: theme.spacing(2),
+  },
 }));
 
 const ReviewList = (props) => {
@@ -74,7 +86,11 @@ const ReviewList = (props) => {
   const renderMoreReviewButton = () => {
     if (listLength > limit && listLength !== 0)
       return (
-        <Button variant='outlined' onClick={addMoreReviews}>
+        <Button
+          variant='outlined'
+          className={classes.more}
+          onClick={addMoreReviews}
+        >
           MORE REVIEWS
         </Button>
       );
@@ -83,21 +99,16 @@ const ReviewList = (props) => {
   return (
     <>
       <Grid container direction='row'>
-        <Typography variant='h6'>{listLength} reviews, sorted by</Typography>
+        <Typography variant='h6' className={classes.sort}>
+          {listLength} reviews, sorted by
+        </Typography>
         {renderMenu()}
       </Grid>
-      {renderReviewItem()}
-      <div>
-        <br />
-        <Grid container direction='row'>
-          {renderMoreReviewButton()}
-          <AddReview
-            ratingsMeta={ratingsMeta}
-            postReview={postReview}
-            id={id}
-          />
-        </Grid>
-      </div>
+      <Grid className={classes.list}>{renderReviewItem()}</Grid>
+      <Grid container direction='row'>
+        {renderMoreReviewButton()}
+        <AddReview ratingsMeta={ratingsMeta} postReview={postReview} id={id} />
+      </Grid>
     </>
   );
 };
