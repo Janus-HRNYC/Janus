@@ -10,7 +10,7 @@ import OverviewContainer from '../redux/containers/overviewContainer';
 const Products = () => {
   return (
     <div>
-      {/* <OverviewContainer />
+      <OverviewContainer />
       <div>
         <h2>RELATED PRODUCTS</h2>
         <RelatedItems />
@@ -19,7 +19,7 @@ const Products = () => {
       </div>
       <div title='QandA'>
         <QuestionsAndAnswersContainer />
-      </div> */}
+      </div>
       <div>
         <ReviewContainer />
       </div>
