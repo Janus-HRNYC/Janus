@@ -4,28 +4,28 @@ import Outfitcards from './Outfitcards'
 import AddOutFitCard from './AddOutFitCard';
 
 
-const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, productId }) => {
-  console.log(outfit);
+const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, id }) => {
+  console.log(id);
   const getOutfits = () => {
     // TODO: REFACTOR
     if (!outfit.length) {
       return (
-        <AddOutFitCard addOutfit={onAddOutfit} productId={productId} />
+        <AddOutFitCard addOutfit={onAddOutfit} id={id} />
       );
     } else {
       return (
-      <Grid
-        container
-        direction={'row'}
-        justify='space-between'
-      >
-        <AddOutFitCard addOutfit={onAddOutfit} productId={productId} />
-        {outfit.map((item, i) => {
-          return (            
-            <Outfitcards key={i} item={item} removeOutfit={onDeleteOutfit} />
-          )
-        })}
-      </Grid>
+        <Grid
+          container
+          direction={'row'}
+          justify='space-between'
+        >
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} />
+          {outfit.map((item, i) => {
+            return (
+              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} />
+            )
+          })}
+        </Grid>
       )
     }
   }
@@ -37,7 +37,7 @@ const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, product
         justify='space-between'
       >
         {getOutfits()}
-        
+
 
       </Grid>
     </div>

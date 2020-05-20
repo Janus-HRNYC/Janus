@@ -8,7 +8,7 @@ export const saveItemToCompare = (results) => {
   }
 }
 
-export const fetchItemToCompare = (id = 2) => {
+export const fetchItemToCompare = (id) => {
   return dispatch => {
     let compareItems = {};
     let promise = [];
@@ -16,22 +16,19 @@ export const fetchItemToCompare = (id = 2) => {
       .get(`http://18.224.200.47/products/${id}`)
       .then((results) => {
         promise.push(
-        compareItems = {
-          id: results.data.id,
-          name: results.data.name,
-          description: results.data.description,
-          category: results.data.category,
-          description: results.data.description,
-          features: results.data.features,
-          show: false,
-        }
+          compareItems = {
+            id: results.data.id,
+            name: results.data.name,
+            description: results.data.description,
+            category: results.data.category,
+            description: results.data.description,
+            features: results.data.features,
+          }
         )
         return Promise.all(promise)
       })
-      .catch((err) => console.log(err))
       .then((obj) => {
-        dispatch(saveItemToCompare(obj[0]));        
+        dispatch(saveItemToCompare(obj[0]));
       })
-
   }
 }

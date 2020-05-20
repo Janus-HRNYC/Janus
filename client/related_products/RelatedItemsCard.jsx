@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -37,69 +37,79 @@ const useStyles = makeStyles({
 });
 
 const relatedItemsCard = (props) => {
+  const {
+    item,
+    key,
+    getRelatedStyles,
+    productId,
+  } = props;
+  console.log(item);
+  // useEffect(() => {
+  //   getRelatedStyles(item.id)
+  // }, [])
+  
+
+
   const displayPhoto = () => {
-    if (!props.item) {
+    console.log(item);
+    if (!item.styles) {
       return (
         null
       )
     } else {
-
-  let photoSrc = '';
-  photoSrc = getDefaultImg(props.item.styles);
+      console.log(item.styles);
+      let photoSrc = '';
+      photoSrc = getDefaultImg(item.styles);
+      return (
+        <CardMedia
+           className={classes.media}
+           image={photoSrc}
+           title={item.name}
+        />
+      )
+    }
+  }
+  // const displayComparison = () => {
+  //   if (!props.item && !props.currentItem) {
+  //     return (
+  //       null
+  //     )
+  //   } else {
+  //     return (
+  //       < ComparisonModal />
+  //     )
+  //   }
+  // }
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
   return (
-    <CardMedia
-      className={classes.media}
-      image={photoSrc}
-      title={props.item.name}
-    />
-  )
+    <Card>
+      <CardHeader
+        action={
+          <IconButton aria-label="settings">
+            {/* {displayComparison()}           */}
+          </IconButton>
+        }
 
-
-  console.log(photoSrc);
-}
-  }
-
-const displayComparison = () => {
-  if (!props.item && !props.currentItem) {
-    return (
-      null
-    )
-  } else {
-    return (
-      < ComparisonModal currentItem={props.currentItem} compareItem={props.item} />
-    )
-  }
-}
-const classes = useStyles();
-const bull = <span className={classes.bullet}>•</span>;
-return (
-  <Card>
-    <CardHeader
-      action={
-        <IconButton aria-label="settings">
-          {displayComparison()}          
-        </IconButton>
-      }
-      
       />
-    {displayPhoto()}
-    <CardContent>
-      <Typography variant="h5" component="h2">
-      </Typography>
-      <Typography className={classes.pos} color="textSecondary">
-        {props.item.category}
-      </Typography>
-      <Typography variant="body2" component="p">
-        {props.item.name}
-        <br />
-        {`$${props.item.price}`}
-      </Typography>
-      <Box component='fieldset' mb={3} borderColor='transparent'>
-        <Rating name='read-only' value={5} readOnly />
-      </Box>
-    </CardContent>
-  </Card>
-);
+      {displayPhoto()}
+      <CardContent>
+        <Typography variant="h5" component="h2">
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          {item.category}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {item.name}
+          <br />
+          {`$${props.item.price}`}
+        </Typography>
+        <Box component='fieldset' mb={3} borderColor='transparent'>
+          <Rating name='read-only' value={5} readOnly />
+        </Box>
+      </CardContent>
+    </Card>
+  );
 }
 export default relatedItemsCard;
 
