@@ -8,14 +8,13 @@ export const saveRelatedProducts = (results) => {
   }
 }
 // default is id is being used for testing purposes
-export const fetchRelatedProducts = (id = 2) => {
+export const fetchRelatedProducts = (id) => {
   return dispatch => {
     let promise = [];
     axios.get(`http://18.224.200.47/products/${id}/related`)
       .then((results) => {
         results.data.forEach((ele) => {
           let relatedProducts = {};
-          // spacing for readablity
           promise.push(
             axios.get(`http://18.224.200.47/products/${ele}`)
               .then((results) => {
@@ -24,15 +23,15 @@ export const fetchRelatedProducts = (id = 2) => {
                   name: results.data.name,
                   category: results.data.category,
                   price: results.data.default_price,
-                  outfit: false,
                   description: results.data.description,
-                  slogan: results.data.slogan
+                  slogan: results.data.slogan,
+                  features: results.data.features,
                 }
                 return relatedProducts;
               })
               .then(() => {
                 return axios.get(`http://18.224.200.47/products/${ele}/styles`)
-              })
+              }) 
               .then((results) => {
                 relatedProducts.styles = results.data.results;
                 return relatedProducts;

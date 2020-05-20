@@ -1,18 +1,10 @@
 import Redux from 'redux';
+import * as actionTypes from '../actions/actionsTypes.js';
 
 const reviewReducer = {
   setResultsReducer: (state = [], action) => {
     switch (action.type) {
-      case 'SET_REVIEW_RESULTS':
-        return action.results;
-      default:
-        return state;
-    }
-  },
-
-  setProductIdReducer: (state = 0, action) => {
-    switch (action.type) {
-      case 'SET_PRODUCT_ID':
+      case actionTypes.setReviewResults:
         return action.results;
       default:
         return state;
@@ -21,7 +13,7 @@ const reviewReducer = {
 
   setRatingsMeta: (state = {}, action) => {
     switch (action.type) {
-      case 'SET_RATINGS_META':
+      case actionTypes.setRatingsMeta:
         return action.results;
       default:
         return state;
@@ -30,4 +22,3 @@ const reviewReducer = {
 };
 
 export default reviewReducer;
- 

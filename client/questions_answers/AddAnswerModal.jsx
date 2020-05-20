@@ -71,11 +71,12 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
   }
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id='simple-modal-title'>Submit your Answer</h2>
-      <h3>{productName}: {question.question_body}</h3>
-      <Box component="div" display="block" >
+    <div title="QandA" style={modalStyle} className={classes.paper}>
+      <h2 title="QandA" id='simple-modal-title'>Submit your Answer</h2>
+      <h3 title="QandA">{productName}: {question.question_body}</h3>
+      <Box title="QandA" component="div" display="block" >
         <TextField
+        title="QandA"
         fullWidth
         id="outlined-basic"
         multiline={true}
@@ -96,8 +97,9 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
         />
         </Box>
         
-        <Box component="div" display="inline">
-            <TextField 
+        <Box title="QandA" component="div" display="inline">
+            <TextField
+            title="QandA" 
             mt={2}
             required
             label='What is your nickname'
@@ -111,15 +113,15 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
             />
             <p>For privacy reasons, do not use your full name or email address</p>
         </Box>
-        <Box display="inline">
+        <Box title="QandA" display="inline">
         {
           improperSubmission ?
-          <div>
-            <p>You must enter the following:</p>
-            <p>Your Answer</p>
-            <p>Your Nickname</p>
-            <p>Your Email in the proper format</p>
-            <p>Images must be valid and able to be uploaded</p>
+          <div title="QandA">
+            <p title="QandA">You must enter the following:</p>
+            <p title="QandA">Your Answer</p>
+            <p title="QandA">Your Nickname</p>
+            <p title="QandA">Your Email in the proper format</p>
+            <p title="QandA">Images must be valid and able to be uploaded</p>
           </div>
       :
       null
@@ -127,6 +129,7 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
 
         </Box>
         <TextField
+        title="QandA"
         display="block"
         required
         label="Your email"
@@ -135,8 +138,8 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         />
-        <p>For authentication reasons, you will not be emailed</p>
-      <Button variant='contained' onClick={() => {handleClick()}}>
+        <p title="QandA">For authentication reasons, you will not be emailed</p>
+      <Button title="QandA" variant='contained' onClick={() => {handleClick()}}>
         Submit
       </Button>
       
@@ -144,9 +147,10 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
   );
 
   return (
-    <div>
-      <p onClick={handleClick} style={{cursor: 'pointer'}}>Add Answer</p>
+    <div title="QandA">
+      <p title="QandA" onClick={handleClick} style={{cursor: 'pointer'}}>Add Answer</p>
       <Modal
+        title="QandA"
         open={displayModal}
         onClose={handleOtherClick}
         aria-labelledby='simple-modal-title'

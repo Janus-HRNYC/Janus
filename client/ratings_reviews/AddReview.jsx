@@ -13,12 +13,13 @@ import StarRating from './StarRating.jsx';
 import Recommend from './form_components/Recommend.jsx';
 import TextFieldForm from './form_components/TextFieldForm.jsx';
 import Characteristics from './form_components/Characteristics.jsx';
-import validation from './form_components/validation.js';
+import { validation, isFormComplete } from './form_components/validation.js';
 import REFERENCES from './references.js';
 
 const formDefault = REFERENCES.ADDREVIEW.formDefault;
 
-const AddReview = ({ ratingsMeta }) => {
+const AddReview = (props) => {
+  const { ratingsMeta, postReview, id } = props;
   const [char, setChar] = useState({});
   const [form, setForm] = useState(formDefault);
   const [errors, setErrors] = useState(false);
@@ -38,16 +39,20 @@ const AddReview = ({ ratingsMeta }) => {
 
   const handleSubmit = () => {
     const listOfErrors = validation(form, char);
+    const completeForm = isFormComplete(form, char);
+
     setErrors(listOfErrors);
 
-    if (!errors) {
-      console.log('Form Submitted: ', form);
+    if (completeForm) {
+      postReview(id, form);
+      handleClick();
     }
   };
+
   return (
     <>
-      <Button variant='contained' onClick={handleClick}>
-        ADD REVIEW +
+      <Button variant='outlined' onClick={handleClick}>
+        ADD A REVIEW +
       </Button>
       <Dialog
         open={displayDialog}
@@ -58,6 +63,7 @@ const AddReview = ({ ratingsMeta }) => {
         <DialogTitle id='form-dialog-title'>Write Your Review</DialogTitle>
         <DialogContent>
           <DialogContentText>About the Product Name</DialogContentText>
+          <br />
           <Grid>
             <InputLabel required={true} error={errors.hasOwnProperty('rating')}>
               Overall Rating
@@ -78,6 +84,7 @@ const AddReview = ({ ratingsMeta }) => {
             </InputLabel>
             <Recommend value={form.recommend} setForm={setForm} />
           </Grid>
+          <br />
           <Grid>
             <InputLabel
               required={true}
@@ -103,6 +110,9 @@ const AddReview = ({ ratingsMeta }) => {
               value={form.summary}
               setForm={setForm}
               error={errors.hasOwnProperty('summary')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
           <Grid>
@@ -114,11 +124,14 @@ const AddReview = ({ ratingsMeta }) => {
               value={form.body}
               setForm={setForm}
               error={errors.hasOwnProperty('body')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
-          <Grid>
+          {/* <Grid>
             <InputLabel>Upload Your Photos</InputLabel>
-          </Grid>
+          </Grid> */}
           <Grid>
             <InputLabel required={true} error={errors.hasOwnProperty('name')}>
               What is your nickname
@@ -128,6 +141,9 @@ const AddReview = ({ ratingsMeta }) => {
               value={form.name}
               setForm={setForm}
               error={errors.hasOwnProperty('name')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
           <Grid>
@@ -139,6 +155,9 @@ const AddReview = ({ ratingsMeta }) => {
               value={form.email}
               setForm={setForm}
               error={errors.hasOwnProperty('email')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
         </DialogContent>

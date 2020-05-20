@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -15,6 +15,8 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getDefaultImg } from '../utility/relatedUtility.js';
 import ComparisonModal from './ComparisonModal';
+import { salePrice } from './../utility/relatedUtility.js';
+
 
 const useStyles = makeStyles({
 
@@ -37,66 +39,103 @@ const useStyles = makeStyles({
 });
 
 const relatedItemsCard = (props) => {
+  const {
+    item,
+    id,
+    info,
+    onGetCurrent,
+  } = props;
+
+  useEffect(() => {
+    displayComparison()
+  
+  }, []) 
+
   const displayPhoto = () => {
-    if (!props.item) {
+    console.log(item);
+    if (!item.styles) {
       return (
         null
       )
     } else {
-
-  let photoSrc = '';
-  photoSrc = getDefaultImg(props.item.styles);
+      console.log(item.styles);
+      let photoSrc = '';
+      photoSrc = getDefaultImg(item.styles);
+      return (
+        <CardMedia
+           className={classes.media}
+           image={photoSrc}
+           title={item.name}
+        />
+      )
+    }
+  }
+  let results = salePrice(item.styles);
+  console.log('item', results);
+  const stylePrice = () => {
+    if (!results) {
+      return (
+        <Typography variant="body2" component="p">
+          {item.name}
+          <br />
+          {`$${item.price}`}
+        </Typography>
+      )
+    } else if (results[0] !== 'S' ) {
+      return (
+        <Typography variant="body2" component="p">
+          {item.name}
+          <br />
+          {`$${results}`}
+        </Typography>
+      )
+    } else {
+      return (
+        <Typography variant="body2" component="p" color='red'>
+          {item.name}
+          <br />
+          {`$${results}`}
+        </Typography>
+      )
+    }
+  }
+  const displayComparison = () => {
+    if (!info && !item) {
+      return (
+        null
+      )
+    } else {
+      return (
+        < ComparisonModal currentItem={item} info={info} />
+      )
+    }
+  }
+  const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
   return (
-    <CardMedia
-      className={classes.media}
-      image={photoSrc}
-      title={props.item.name}
-    />
-  )
-}
-  }
+    <Card>
+      <CardHeader
+        action={
+          <IconButton aria-label="settings">
+            {displayComparison()}          
+          </IconButton>
+        }
 
-const displayComparison = () => {
-  if (!props.item && !props.currentItem) {
-    return (
-      null
-    )
-  } else {
-    return (
-      < ComparisonModal currentItem={props.currentItem} compareItem={props.item} />
-    )
-  }
-}
-const classes = useStyles();
-const bull = <span className={classes.bullet}>•</span>;
-return (
-  <Card>
-    <CardHeader
-      action={
-        <IconButton aria-label="settings" onClick={() => console.log('clicked')}>
-          <StarBorderIcon value={props.item}/>
-          {displayComparison()}
-        </IconButton>
-      }      
-    />
-    {displayPhoto()}
-    <CardContent>
-      <Typography variant="h5" component="h2">
-      </Typography>
-      <Typography className={classes.pos} color="textSecondary">
-        {props.item.category}
-      </Typography>
-      <Typography variant="body2" component="p">
-        {props.item.name}
-        <br />
-        {`$${props.item.price}`}
-      </Typography>
-      <Box component='fieldset' mb={3} borderColor='transparent'>
-        <Rating name='read-only' value={5} readOnly />
-      </Box>
-    </CardContent>
-  </Card>
-);
+      />
+      {displayPhoto()}
+      <CardContent>
+        <Typography variant="h5" component="h2">
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          {item.category}
+        </Typography>
+        {stylePrice()}
+        <Box component='fieldset' mb={3} borderColor='transparent'>
+          <Rating name='read-only' value={5} readOnly />
+        </Box>
+      </CardContent>
+    </Card>
+  );
 }
 export default relatedItemsCard;
 

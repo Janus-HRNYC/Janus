@@ -4,34 +4,16 @@ import * as actionType from './actionsTypes';
 export const saveItemToCompare = (results) => {
   return {
     type: actionType.getCompareItem,
-    compare: results,
+    results: results,
   }
 }
 
-export const fetchItemToCompare = (id = 2) => {
-  return dispatch => {
-    let compareItems = {};
-    let promise = [];
+export const fetchItemToCompare = (id) => {
+  return dispatch => {   
     return axios
       .get(`http://18.224.200.47/products/${id}`)
-      .then((results) => {
-        promise.push(
-        compareItems = {
-          id: results.data.id,
-          name: results.data.name,
-          description: results.data.description,
-          category: results.data.category,
-          description: results.data.description,
-          features: results.data.features,
-          show: false,
-        }
-        )
-        return Promise.all(promise)
+      .then((results) => {    
+        dispatch(saveItemToCompare(results.data));
       })
-      .catch((err) => console.log(err))
-      .then((obj) => {
-        dispatch(saveItemToCompare(obj[0]));        
-      })
-
   }
 }

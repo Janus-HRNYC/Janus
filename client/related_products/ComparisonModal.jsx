@@ -1,94 +1,103 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import MuiDialogTitle from '@material-ui/core/DialogTitle';
-import MuiDialogContent from '@material-ui/core/DialogContent';
-import MuiDialogActions from '@material-ui/core/DialogActions';
+import React, { useState } from 'react';
+import { 
+  Modal, Button, TextField, Box, makeStyles, List, ListItem,
+ListItemIcon,
+ListItemSecondaryAction,
+ListItemText,
+} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import { comparisonBuilder } from './../utility/relatedUtility.js';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
+import Checkbox from '@material-ui/core/Checkbox';
+import CommentIcon from '@material-ui/icons/Comment';
 
-const styles = (theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(2),
-  },
-  closeButton: {
+const getModalStyle = () => {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+};
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
     position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    width: 500,
+    height: 500,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    overflow: 'scroll'
   },
-});
+}));
 
-const DialogTitle = withStyles(styles)((props) => {
-  const { children, classes, onClose, ...other } = props;
-  return (
-    <MuiDialogTitle disableTypography className={classes.root} {...other}>
-      <Typography variant="h6">{children}</Typography>
-      {onClose ? (
-        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-          <CloseIcon />
-        </IconButton>
-      ) : null}
-    </MuiDialogTitle>
+const ComparisonModal = ({ currentItem, info}) => {
+  console.log(currentItem);
+  console.log(info);
+  const classes = useStyles();
+  // getModalStyle is not a pure function, we roll the style only on the first render
+  const [modalStyle] = useState(getModalStyle);
+  const [displayModal, setDisplayModal] = useState(false); 
+   
+  const handleClick = () => {
+    if (!displayModal) {
+      setDisplayModal(true)
+    } else {   
+      setDisplayModal(!displayModal);
+    }
+  };
+
+  const handleOtherClick = () => {
+    setDisplayModal(!displayModal)
+  }
+
+  const body = () => (    
+    <List className={classes.paper}>
+      <ListItem >
+        <ListItemIcon>
+
+        </ListItemIcon>
+        <ListItemText primary={currentItem.name} />
+
+      </ListItem>
+    </List>
   );
-});
-
-const DialogContent = withStyles((theme) => ({
-  root: {
-    padding: theme.spacing(2),
-  },
-}))(MuiDialogContent);
-
-const DialogActions = withStyles((theme) => ({
-  root: {
-    margin: 0,
-    padding: theme.spacing(1),
-  },
-}))(MuiDialogActions);
-const ComparisonModal = ({ currentItem, compareItem }) => {
-//---------------------------------------------------------------------------------------------------//
-console.log(compareItem);
-  
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Will Map this button to Star
-      </Button>
-      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Comparison
-        </DialogTitle>
-        <List>
-          <ListItem divider={true}/>
-          <ListItemText style={{ textAlign: "left" }}>{currentItem.name}</ListItemText>
-          <ListItemText></ListItemText>
-          <ListItemText style={{ textAlign: 'right' }} primaryTypographyProps={{ align: "right" }}>placeholder</ListItemText>
-        </List>
-        {/* <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            Save changes
-          </Button>
-        </DialogActions> */}
-      </Dialog>
+      <IconButton aria-label="settings" color="secondary" onClick={handleClick}>
+        <StarBorderIcon />
+      </IconButton>
+      <Modal
+        open={displayModal}
+        onClose={handleOtherClick}
+        aria-labelledby='simple-modal-title'
+        aria-describedby='simple-modal-description'
+      >
+        {body()}
+      </Modal>
     </div>
   );
-}
+
+};
+
 export default ComparisonModal;
+
+    
+{/* <Box component="div" display="block" >
+
+      
+        {currentItem.features.map((feat) => {
+          return ({feat})
+        })}
+
+      </Box>
+      <Box component="div" display="inline">    
+      
+
+      </Box>       */}

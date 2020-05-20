@@ -1,15 +1,15 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import OutfitCard from './Outfitcards'
+import Outfitcards from './Outfitcards'
+import AddOutFitCard from './AddOutFitCard';
 
-const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta }) => {
-  console.log(outfit);
+
+const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => {
   const getOutfits = () => {
     // TODO: REFACTOR
-    const len = outfit.length || 0;
-    if (!len) {
+    if (!outfit.length) {
       return (
-        <p>NO ITEMS IN YOUR OUTFIT</p>
+        <AddOutFitCard addOutfit={onAddOutfit} id={id} />
       );
     } else {
       return (
@@ -18,9 +18,10 @@ const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta }) => {
           direction={'row'}
           justify='space-between'
         >
-          {Object.values(outfit).map((item, i) => {
+          <AddOutFitCard addOutfit={onAddOutfit} id={id}/>
+          {outfit.map((item, i) => {
             return (
-              <OutfitCard key={i} item={item} removeOutfit={onDeleteOutfit} />
+              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info}/>
             )
           })}
         </Grid>
@@ -29,7 +30,15 @@ const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta }) => {
   }
   return (
     <div>
-      {getOutfits()}
+      <Grid
+        container
+        direction={'row'}
+        justify='space-between'
+      >
+        {getOutfits()}
+
+
+      </Grid>
     </div>
   )
 }

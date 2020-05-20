@@ -1,11 +1,37 @@
 import React, { useState } from 'react';
-import { FormControl, Select, MenuItem, Grid, Button } from '@material-ui/core';
+import {
+  FormControl,
+  Select,
+  MenuItem,
+  Grid,
+  Button,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import ReviewItem from './ReviewItem.jsx';
 import AddReview from './AddReview.jsx';
 
+const useStyles = makeStyles((theme) => ({
+  selected: {
+    fontWeight: 'bold',
+    letterSpacing: '0.0075em',
+    fontSize: '1.2rem',
+  },
+  sort: {},
+}));
+
 const ReviewList = (props) => {
-  const { list, id, displayBySort, ratingsMeta } = props;
-  const [limit, setLimit] = useState(2);
+  const classes = useStyles();
+  const {
+    list,
+    id,
+    displayBySort,
+    ratingsMeta,
+    postReview,
+    limit,
+    setLimit,
+    setFilterList,
+  } = props;
   const [sort, setSort] = useState('relevant');
   const listLength = list.length;
 
@@ -32,11 +58,12 @@ const ReviewList = (props) => {
     setSort(e.target.value);
     displayBySort(id, e.target.value);
     setLimit(2);
+    setFilterList([]);
   };
 
   const renderMenu = () => (
     <FormControl>
-      <Select value={sort} onChange={handleChange}>
+      <Select value={sort} onChange={handleChange} className={classes.selected}>
         <MenuItem value={'relevant'}>Relevant</MenuItem>
         <MenuItem value={'helpful'}>Helpful</MenuItem>
         <MenuItem value={'newest'}>Newest</MenuItem>
@@ -47,26 +74,31 @@ const ReviewList = (props) => {
   const renderMoreReviewButton = () => {
     if (listLength > limit && listLength !== 0)
       return (
-        <Button variant='contained' onClick={addMoreReviews}>
+        <Button variant='outlined' onClick={addMoreReviews}>
           MORE REVIEWS
         </Button>
       );
   };
 
   return (
-    <Grid>
-      <h4>
-        {listLength} reviews, sorted by {renderMenu()}
-      </h4>
+    <>
+      <Grid container direction='row'>
+        <Typography variant='h6'>{listLength} reviews, sorted by</Typography>
+        {renderMenu()}
+      </Grid>
       {renderReviewItem()}
       <div>
         <br />
         <Grid container direction='row'>
           {renderMoreReviewButton()}
-          <AddReview ratingsMeta={ratingsMeta} />
+          <AddReview
+            ratingsMeta={ratingsMeta}
+            postReview={postReview}
+            id={id}
+          />
         </Grid>
       </div>
-    </Grid>
+    </>
   );
 };
 
