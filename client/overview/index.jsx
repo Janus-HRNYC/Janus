@@ -17,9 +17,12 @@ const Overview = (props) => {
     getSelected,
   } = props;
 
-  const [images, setImages] = useState([]);
-  const [thumbnails, setThumbnails] = useState([]);
+  const [style_id, setStyle_id] = useState(0);
+  useEffect(() => {
+    setStyle_id(selected_id);
+  }, [selected_id]);
 
+  const [images, setImages] = useState([]);
   useEffect(() => {
     getInfo(id);
     getStyles(id);
@@ -30,11 +33,7 @@ const Overview = (props) => {
         const payload1 = result.data.results.map((style) =>
           style.photos.map((item) => item.url)
         );
-        const payload2 = result.data.results.map((style) =>
-          style.photos.map((item) => item.thumbnail_url)
-        );
         setImages(payload1);
-        setThumbnails(payload2);
       })
       .catch((err) => console.error(err));
   }, [id]);
@@ -49,23 +48,17 @@ const Overview = (props) => {
     >
       <Grid item xs={1}></Grid>
       <Grid item xs>
-        <Gallery id={id} selected_id={selected_id} images={images} />
+        <Gallery id={id} style_id={style_id} images={images} />
       </Grid>
       <Grid item xs>
-        <ProductInfo
-          info={info}
-          styles={styles}
-          id={id}
-          selected_id={selected_id}
-        />
+        <ProductInfo info={info} styles={styles} id={id} style_id={style_id} />
         <StyleSelector
           styles={styles}
-          selected_id={selected_id}
+          style_id={style_id}
           id={id}
-          getSelected={getSelected}
-          thumbnails={thumbnails}
+          setStyle_id={setStyle_id}
         />
-        <AddToCart />
+        <AddToCart styles={styles} id={id} style_id={style_id} />
       </Grid>
       <Grid item xs={1}></Grid>
     </Grid>

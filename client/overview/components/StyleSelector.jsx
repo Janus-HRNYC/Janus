@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Box, Grid, Badge, Avatar } from "@material-ui/core";
 
-const StyleSelector = ({
-  thumbnails,
-  styles,
-  selected_id,
-  getSelected,
-  id,
-}) => {
+const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
   // const clickHandler = (e) => {
-  //   if (styles[i].style_id !== selected_id) {
-  //     getSelected(id, e.target.value);
-  //   }
+  //   event.preventDefault();
+  //   setStyle_id(e.target.value);
   // };
-  // console.log(style.photos.thumbnail_url)
+
+  // useCallback(() => (e) => setStyle_id(e.target.value));
+  // useEffect(() => {
+  //   setStyle_id(style_id);
+  // }, [style_id]);
+
   return (
     <Box>
       {(() => {
         for (let i = 0; i < styles.length; i++) {
-          if (styles[i].style_id === selected_id) {
+          if (styles[i].style_id === style_id) {
             return (
               <div>
                 <h2>{styles[i].name}</h2>
@@ -31,7 +29,7 @@ const StyleSelector = ({
       })()}
       <Grid container spacing={1}>
         {styles.map((style, i = 0) =>
-          style.style_id === selected_id ? (
+          style.style_id === style_id ? (
             <Grid item key={i++} xs>
               <Badge
                 overlap="circle"
@@ -44,8 +42,6 @@ const StyleSelector = ({
               >
                 <Avatar
                   src={style.photos[0]["thumbnail_url"]}
-                  // value={styles[i].style_id}
-                  // onClick={clickHandler()}
                   style={{ margin: "10px", width: "80px", height: "80px" }}
                 />
               </Badge>
@@ -62,62 +58,14 @@ const StyleSelector = ({
               >
                 <Avatar
                   src={style.photos[0]["thumbnail_url"]}
-                  // value={styles[i].style_id}
-                  // onClick={(e) => {
-                  //   if (styles[i].style_id !== selected_id) {
-                  //     getSelected(id, e.target.value);
-                  //   }
-                  // }}
                   style={{ margin: "10px", width: "80px", height: "80px" }}
+                  // value={style.style_id}
+                  // onClick={(e) => clickHandler(e)}
                 />
               </Badge>
             </Grid>
           )
         )}
-        {/* {thumbnails.map((thumbnail, i = 0) =>
-          styles[i].style_id === selected_id ? (
-            <Grid item key={i++} xs>
-              <Badge
-                overlap="circle"
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                badgeContent="✔"
-                color="primary"
-              >
-                <Avatar
-                  src={thumbnail}
-                  // value={styles[i].style_id}
-                  // onClick={clickHandler()}
-                  style={{ margin: "10px", width: "80px", height: "80px" }}
-                />
-              </Badge>
-            </Grid>
-          ) : (
-            <Grid item key={i++} xs>
-              <Badge
-                overlap="circle"
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                color="primary"
-              >
-                <Avatar
-                  src={thumbnail}
-                  // value={styles[i].style_id}
-                  // onClick={(e) => {
-                  //   if (styles[i].style_id !== selected_id) {
-                  //     getSelected(id, e.target.value);
-                  //   }
-                  // }}
-                  style={{ margin: "10px", width: "80px", height: "80px" }}
-                />
-              </Badge>
-            </Grid>
-          )
-        )} */}
       </Grid>
     </Box>
   );

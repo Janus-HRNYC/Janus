@@ -3,7 +3,7 @@ import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
 import { Box, Grid, Avatar } from "@material-ui/core";
 
-const ProductInfo = ({ info, id, styles, selected_id }) => {
+const ProductInfo = ({ info, id, styles, style_id }) => {
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
   useEffect(() => {
@@ -35,7 +35,7 @@ const ProductInfo = ({ info, id, styles, selected_id }) => {
       <div>
         {(() => {
           for (let i = 0; i < styles.length; i++) {
-            if (styles[i].style_id === selected_id && styles[i].sale_price) {
+            if (styles[i].style_id === style_id && styles[i].sale_price > 0) {
               return (
                 <div>
                   <Box color="red">{styles[i].sale_price}</Box>
@@ -49,13 +49,12 @@ const ProductInfo = ({ info, id, styles, selected_id }) => {
                   </Box>
                 </div>
               );
-            } else if (styles[i].style_id === selected_id) {
-              return (
-                <div>
-                  <Box>{styles[i].original_price}</Box>
-                </div>
-              );
             }
+            return (
+              <div>
+                <Box>{styles[i].original_price}</Box>
+              </div>
+            );
           }
         })()}
       </div>
@@ -83,7 +82,7 @@ export default ProductInfo;
 // adds buttons for social media for sharing
 
 /* {styles.map((style, i = 0) =>
-  style.style_id === selected_id && style.sale_price ? (
+  style.style_id === style_id && style.sale_price ? (
     <div key={i++}>
       <Box color="red">{style.sale_price}</Box>
       <Box

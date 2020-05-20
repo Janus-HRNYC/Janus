@@ -1,5 +1,5 @@
 import {
-  getSelected_id,
+  // getSelected_id,
   getStyles,
   getSelected,
   getInfo,
@@ -27,14 +27,13 @@ export const setOverviewData = {
   }),
 };
 
-// export const getSelectedStyleID = (id) => {
+// export const getID = (id) => {
 //   return (dispatch) => {
 //     return axios
-//       .get(`http://18.224.200.47/products/${id}/styles`)
+//       .get(`http://18.224.200.47/products/${id}`)
 //       .then((result) => {
-//         return Promise.all([
-//           dispatch(setOverviewData.setProductId(result.data.style_id)),
-//         ]);
+//         return dispatch(setOverviewData.setProductId(result.data.style_id)),
+
 //       })
 //       .catch((err) => console.error(err));
 //   };
@@ -63,8 +62,9 @@ export const getSelectedData = (id) => {
       .then((result) => {
         for (let i = 0; i < result.data.results.length; i++) {
           if (result.data.results[i]["default?"] === 1) {
-            const payload = result.data.results[i].style_id;
-            return dispatch(setOverviewData.getSelected(payload));
+            return dispatch(
+              setOverviewData.getSelected(result.data.results[i].style_id)
+            );
           }
         }
       })
