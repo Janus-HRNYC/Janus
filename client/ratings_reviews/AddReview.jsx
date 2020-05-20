@@ -110,6 +110,9 @@ const AddReview = (props) => {
               value={form.summary}
               setForm={setForm}
               error={errors.hasOwnProperty('summary')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
           <Grid>
@@ -121,6 +124,9 @@ const AddReview = (props) => {
               value={form.body}
               setForm={setForm}
               error={errors.hasOwnProperty('body')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
           {/* <Grid>
@@ -135,6 +141,9 @@ const AddReview = (props) => {
               value={form.name}
               setForm={setForm}
               error={errors.hasOwnProperty('name')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
           <Grid>
@@ -146,6 +155,9 @@ const AddReview = (props) => {
               value={form.email}
               setForm={setForm}
               error={errors.hasOwnProperty('email')}
+              form={form}
+              setErrors={setErrors}
+              char={char}
             />
           </Grid>
         </DialogContent>

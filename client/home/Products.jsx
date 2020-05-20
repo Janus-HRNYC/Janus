@@ -7,14 +7,7 @@ import ReviewContainer from '../redux/containers/reviewContainer.js';
 import OutfitContainter from '../redux/containers/outfitContainer.js';
 import OverviewContainer from '../redux/containers/overviewContainer';
 
-const Products = ({ setProductId }) => {
-  let { id } = useParams();
-  console.log('Call the app with id:', id);
-
-  // useEffect(() => {
-  //   setProductId(id);
-  // });
-
+const Products = () => {
   return (
     <div>
       <OverviewContainer />
@@ -23,12 +16,12 @@ const Products = ({ setProductId }) => {
         <RelatedItems />
         <h2>YOUR OUTFIT</h2>
         <OutfitContainter />
-        <div title="QandA">
-          <QuestionsAndAnswersContainer />
-        </div>
-        <div>
-          <ReviewContainer />
-        </div>
+      </div>
+      <div title='QandA'>
+        <QuestionsAndAnswersContainer />
+      </div>
+      <div>
+        <ReviewContainer />
       </div>
     </div>
   );

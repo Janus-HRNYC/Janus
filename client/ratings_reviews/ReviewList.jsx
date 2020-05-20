@@ -22,8 +22,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ReviewList = (props) => {
   const classes = useStyles();
-  const { list, id, displayBySort, ratingsMeta, postReview } = props;
-  const [limit, setLimit] = useState(2);
+  const {
+    list,
+    id,
+    displayBySort,
+    ratingsMeta,
+    postReview,
+    limit,
+    setLimit,
+    setFilterList,
+  } = props;
   const [sort, setSort] = useState('relevant');
   const listLength = list.length;
 
@@ -50,6 +58,7 @@ const ReviewList = (props) => {
     setSort(e.target.value);
     displayBySort(id, e.target.value);
     setLimit(2);
+    setFilterList([]);
   };
 
   const renderMenu = () => (
