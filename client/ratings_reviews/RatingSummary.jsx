@@ -1,8 +1,19 @@
 import React from 'react';
 import { Box, Grid, Typography } from '@material-ui/core';
 import StarRating from './StarRating.jsx';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  percent: {
+    paddingBottom: theme.spacing(2),
+  },
+  rating: {
+    paddingBottom: theme.spacing(1),
+  },
+}));
 
 const RatingSummary = ({ ratings, recommended }) => {
+  const classes = useStyles();
   const renderStarRating = () => {
     let totalStars = 0,
       totalReviews = 0,
@@ -19,7 +30,7 @@ const RatingSummary = ({ ratings, recommended }) => {
     }
 
     return (
-      <Grid container direction='row'>
+      <Grid container direction='row' className={classes.rating}>
         <Typography variant='h3'>{averageRating}</Typography>
         <StarRating star={averageRating} size={'small'} />
       </Grid>
@@ -39,8 +50,8 @@ const RatingSummary = ({ ratings, recommended }) => {
       averageRecommend = Number(averageRecommend.toFixed(1));
     }
     return (
-      <Grid>
-        <Typography variant='body1'>
+      <Grid className={classes.percent}>
+        <Typography variant='subtitle2'>
           {averageRecommend}% of reviews recommend this product
         </Typography>
       </Grid>

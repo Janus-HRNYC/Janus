@@ -15,10 +15,18 @@ import TextFieldForm from './form_components/TextFieldForm.jsx';
 import Characteristics from './form_components/Characteristics.jsx';
 import { validation, isFormComplete } from './form_components/validation.js';
 import REFERENCES from './references.js';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  addButton: {
+    padding: theme.spacing(2),
+  },
+}));
 
 const formDefault = REFERENCES.ADDREVIEW.formDefault;
 
 const AddReview = (props) => {
+  const classes = useStyles();
   const { ratingsMeta, postReview, id } = props;
   const [char, setChar] = useState({});
   const [form, setForm] = useState(formDefault);
@@ -51,7 +59,11 @@ const AddReview = (props) => {
 
   return (
     <>
-      <Button variant='outlined' onClick={handleClick}>
+      <Button
+        variant='outlined'
+        className={classes.addButton}
+        onClick={handleClick}
+      >
         ADD A REVIEW +
       </Button>
       <Dialog
