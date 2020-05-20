@@ -36,8 +36,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ComparisonModal = ({ currentItem }) => {
+const ComparisonModal = ({ currentItem, info}) => {
   console.log(currentItem);
+  console.log(info);
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);

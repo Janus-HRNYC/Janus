@@ -9,9 +9,10 @@ const RelatedItems = (props) => {
     id,
     onGetRelated,  
     onGetCurrent,
+    info
   } = props;
   
-  console.log(id);
+  console.log(info);
   useEffect(() => {
     onGetRelated(id); 
   }, []);
@@ -30,7 +31,7 @@ const RelatedItems = (props) => {
 
           {relatedProducts.state.map((item, i) => {        
               return (
-                <RelatedItemsCard key={Math.random()} item={item} id={id} onGetCurrent={onGetCurrent} compare={compareProducts}/>
+                <RelatedItemsCard key={Math.random()} item={item} id={id} onGetCurrent={onGetCurrent} info={info}/>
               )
           })}
         </Grid>

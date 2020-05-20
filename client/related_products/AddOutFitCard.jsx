@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = ({ addOutfit, id }) => {
+const AddOutFitCard = ({ addOutfit, id, info }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (

@@ -42,7 +42,7 @@ const relatedItemsCard = (props) => {
   const {
     item,
     id,
-    compare,
+    info,
     onGetCurrent,
   } = props;
 
@@ -100,13 +100,13 @@ const relatedItemsCard = (props) => {
     }
   }
   const displayComparison = () => {
-    if (!compare && !item) {
+    if (!info && !item) {
       return (
         null
       )
     } else {
       return (
-        < ComparisonModal currentItem={item} onGetCurrent={onGetCurrent} compareItem={compare} id={id}/>
+        < ComparisonModal currentItem={item} info={info} />
       )
     }
   }

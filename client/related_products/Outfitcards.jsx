@@ -1,17 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton'
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
-import AddIcon from '@material-ui/icons/Add';
+
 
 const useStyles = makeStyles({
 
@@ -28,7 +25,8 @@ const useStyles = makeStyles({
   },
 });
 
-const Outfitcards = ({ item, id, removeOutfit}) => {
+const Outfitcards = ({ item, info, removeOutfit}) => {
+  console.log(info)
    const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return ( 
@@ -42,16 +40,15 @@ const Outfitcards = ({ item, id, removeOutfit}) => {
        
       />
       <CardContent>        
-        <Typography variant="h5" component="h2">
-          
+        <Typography variant="h5" component="h2">          
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          {item.category}
+          {info.category}
         </Typography>
         <Typography variant="body2" component="p">
           {item.name}
           <br />
-          {`$${item.price}`}
+          {`$${info.default_price}`}
         </Typography>
         <Box component='fieldset' mb={3} borderColor='transparent'>
           <Rating name='read-only' value={5} readOnly />
