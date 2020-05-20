@@ -15,6 +15,8 @@ import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getDefaultImg } from '../utility/relatedUtility.js';
 import ComparisonModal from './ComparisonModal';
+import { salePrice } from './../utility/relatedUtility.js';
+
 
 const useStyles = makeStyles({
 
@@ -39,16 +41,15 @@ const useStyles = makeStyles({
 const relatedItemsCard = (props) => {
   const {
     item,
-    key,
-    getRelatedStyles,
-    productId,
+    id,
+    compare,
+    onGetCurrent,
   } = props;
-  console.log(item);
-  // useEffect(() => {
-  //   getRelatedStyles(item.id)
-  // }, [])
-  
 
+  useEffect(() => {
+    displayComparison()
+  
+  }, []) 
 
   const displayPhoto = () => {
     console.log(item);
@@ -69,17 +70,46 @@ const relatedItemsCard = (props) => {
       )
     }
   }
-  // const displayComparison = () => {
-  //   if (!props.item && !props.currentItem) {
-  //     return (
-  //       null
-  //     )
-  //   } else {
-  //     return (
-  //       < ComparisonModal />
-  //     )
-  //   }
-  // }
+  let results = salePrice(item.styles);
+  console.log('item', results);
+  const stylePrice = () => {
+    if (!results) {
+      return (
+        <Typography variant="body2" component="p">
+          {item.name}
+          <br />
+          {`$${item.price}`}
+        </Typography>
+      )
+    } else if (results[0] !== 'S' ) {
+      return (
+        <Typography variant="body2" component="p">
+          {item.name}
+          <br />
+          {`$${results}`}
+        </Typography>
+      )
+    } else {
+      return (
+        <Typography variant="body2" component="p" color='red'>
+          {item.name}
+          <br />
+          {`$${results}`}
+        </Typography>
+      )
+    }
+  }
+  const displayComparison = () => {
+    if (!compare && !item) {
+      return (
+        null
+      )
+    } else {
+      return (
+        < ComparisonModal currentItem={item} onGetCurrent={onGetCurrent} compareItem={compare} id={id}/>
+      )
+    }
+  }
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
@@ -87,7 +117,7 @@ const relatedItemsCard = (props) => {
       <CardHeader
         action={
           <IconButton aria-label="settings">
-            {/* {displayComparison()}           */}
+            {displayComparison()}          
           </IconButton>
         }
 
@@ -99,11 +129,7 @@ const relatedItemsCard = (props) => {
         <Typography className={classes.pos} color="textSecondary">
           {item.category}
         </Typography>
-        <Typography variant="body2" component="p">
-          {item.name}
-          <br />
-          {`$${props.item.price}`}
-        </Typography>
+        {stylePrice()}
         <Box component='fieldset' mb={3} borderColor='transparent'>
           <Rating name='read-only' value={5} readOnly />
         </Box>

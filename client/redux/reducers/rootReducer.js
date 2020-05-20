@@ -4,7 +4,7 @@ import relatedReducer from './/relatedProductsReducer.js';
 import outfitReducer from './outfitReducers';
 import productIdReducer from './overviewReducer';
 import homeReducer from './homeReducer.js';
-import comparisonReducer from './ComparisonReducer';
+import comparisonReducer from './comparisonReducer';
 import relatedStylesReducer from './relatedStylesReducer'
 
 const rootReducer = combineReducers({

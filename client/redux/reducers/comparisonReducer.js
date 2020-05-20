@@ -5,11 +5,7 @@ const comparisonReducer = {
   updateReducer: (state = {}, action) => {
     switch (action.type) {
       case actionType.getCompareItem:
-        return Object.assign({}, state, action.compare);
-      case actionType.deleteCompareItem:
-        let newState = Object.assign({}, state);
-        delete newState[action.id];
-        return Object.assign({}, state, newState);
+        return Object.assign({}, state, action.results);     
       default:
         return state || {}
     }

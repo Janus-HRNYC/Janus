@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 const Outfitcards = ({ item, id, removeOutfit}) => {
    const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
-  return (
+  return ( 
     <Card>
       <CardHeader        
         action={
