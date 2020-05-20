@@ -10,7 +10,7 @@ const mapStateToProps = (store) => ({
   outfit: store.outfit,
   compareProducts: store.compareProducts,
   id: store.id,
-  relatedStyles: store.relatedStyles,
+  info: store.info,
 });
 
 const mapDispatcchToProps = (dispatch) => {
