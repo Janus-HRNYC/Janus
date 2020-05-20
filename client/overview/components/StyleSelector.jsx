@@ -20,7 +20,7 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
           if (styles[i].style_id === style_id) {
             return (
               <div>
-                <h2>{styles[i].name}</h2>
+                <h2>{`STYLE > ${styles[i].name}`}</h2>
               </div>
             );
           }

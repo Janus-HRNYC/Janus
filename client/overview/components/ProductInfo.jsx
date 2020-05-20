@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
-import { Box, Grid, Avatar } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 
 const ProductInfo = ({ info, id, styles, style_id }) => {
   const [rating, setRating] = useState(0);
@@ -24,40 +24,48 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
 
   return (
     <Box>
-      <Grid container direction="row" spacing={1}>
+      <Grid
+        container
+        direction="row"
+        spacing={1}
+        alignItems="baseline"
+        alignContent="center"
+      >
         <Grid item>
           <StarRating star={rating} />
         </Grid>
         <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
-      <h3>{info.category}</h3>
+      <div>{info.category}</div>
       <h2>{info.name}</h2>
+      {/* <br /> */}
       <div>
         {(() => {
           for (let i = 0; i < styles.length; i++) {
             if (styles[i].style_id === style_id && styles[i].sale_price > 0) {
               return (
                 <div>
-                  <Box color="red">{styles[i].sale_price}</Box>
+                  <Box color="red">{`$ ${styles[i].sale_price}`}</Box>
                   <Box
                     style={{
                       textDecorationLine: "line-through",
                       textDecorationStyle: "solid",
                     }}
                   >
-                    {styles[i].original_price}
+                    {`$ ${styles[i].original_price}`}
                   </Box>
                 </div>
               );
             }
             return (
               <div>
-                <Box>{styles[i].original_price}</Box>
+                <Box> {`$ ${styles[i].original_price}`}</Box>
               </div>
             );
           }
         })()}
       </div>
+      <br />
       <div width="50%">{info.description}</div>
     </Box>
   );

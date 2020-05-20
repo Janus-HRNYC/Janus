@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Avatar, Grid, Box, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
 const AddToCart = ({ styles, style_id }) => {
   const [selectedSize, setSelectedSize] = useState(null);
+  const [inventory, setInventory] = useState(0);
 
   const count = (val) => {
     let result = [];
@@ -35,6 +35,7 @@ const AddToCart = ({ styles, style_id }) => {
                 value={selectedSize}
                 onChange={(event, newSize) => {
                   setSelectedSize(newSize);
+                  setInventory(style.skus[newSize]);
                 }}
                 id="select-size"
                 autoComplete={true}
@@ -44,7 +45,7 @@ const AddToCart = ({ styles, style_id }) => {
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Select Size"
+                    label="SELECT SIZE"
                     margin="normal"
                     variant="outlined"
                     InputProps={{ ...params.InputProps, type: "search" }}
@@ -54,51 +55,51 @@ const AddToCart = ({ styles, style_id }) => {
             </Grid>
           ) : null
         )}
-        <Grid item xs={3}>
-          {
-            // styles.map((style, i = 0) =>
-            //  (
+        {selectedSize ? (
+          <Grid item xs={3}>
             <Autocomplete
-              id="select-quantity"
               autoComplete={true}
-              options={styles.forEach((style) =>
-                selectedSize ? count(style.skus[selectedSize]) : ["1"]
-              )}
+              options={count(inventory)}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="Quantity"
+                  label="QUANTITY"
                   margin="normal"
                   variant="outlined"
                   InputProps={{ ...params.InputProps, type: "search" }}
                 />
               )}
             />
-            //   ) : (
-            //     <Autocomplete
-            //       id="select-quantity"
-            //       autoComplete={true}
-            //       options={["1"]}
-            //       renderInput={(params) => (
-            //         <TextField
-            //           {...params}
-            //           label="Quantity"
-            //           margin="normal"
-            //           variant="outlined"
-            //           InputProps={{ ...params.InputProps, type: "search" }}
-            //         />
-            //       )}
-            //     />
-            //   )
-          }
-        </Grid>
+          </Grid>
+        ) : (
+          <Grid item xs={3}>
+            <Autocomplete
+              autoComplete={true}
+              options={["1"]}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  color="black"
+                  label="QUANTITY"
+                  margin="normal"
+                  variant="outlined"
+                  InputProps={{ ...params.InputProps, type: "search" }}
+                />
+              )}
+            />
+          </Grid>
+        )}
       </Grid>
       <br />
       <Grid container direction="row" spacing={1}>
-        <Grid item>
-          <Button>Add to Cart</Button>
+        <Grid item xs={8}>
+          <Button variant="outlined" fullWidth="true">
+            ADD TO BAG
+          </Button>
         </Grid>
-        <Grid item></Grid>
+        <Grid item xs>
+          <Button variant="outlined">❤</Button>
+        </Grid>
       </Grid>
       <br />
       <Grid container direction="row" spacing={1}>
@@ -166,3 +167,19 @@ export default AddToCart;
 //             </Grid>
 //           ) : null
 //         )
+//   ) : (
+//     <Autocomplete
+//       id="select-quantity"
+//       autoComplete={true}
+//       options={["1"]}
+//       renderInput={(params) => (
+//         <TextField
+//           {...params}
+//           label="Quantity"
+//           margin="normal"
+//           variant="outlined"
+//           InputProps={{ ...params.InputProps, type: "search" }}
+//         />
+//       )}
+//     />
+//   )
