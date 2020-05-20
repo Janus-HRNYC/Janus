@@ -59,7 +59,6 @@ const ReviewItem = ({ item }) => {
       </Grid>
       <Typography variant='h6'>{item.summary}</Typography>
       <Typography variant='body1'>{item.body}</Typography>
-      {/* <p>Photos: {item.photos.length}</p> */}
       <Grid className={classes.image}>
         {item.photos.length > 0
           ? item.photos.map((photo, i) => {

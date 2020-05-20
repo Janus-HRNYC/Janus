@@ -23,6 +23,7 @@ const Reviews = (props) => {
     postReview,
   } = props;
   const [filterList, setFilterList] = useState([]);
+  const [limit, setLimit] = useState(2);
   let displayList = filterList.length === 0 ? reviewResults : filterList;
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const Reviews = (props) => {
     });
     console.log('Filter Review Results; ', filterByRatings);
     setFilterList(filterByRatings);
+    setLimit(2);
   };
 
   return (
@@ -58,6 +60,9 @@ const Reviews = (props) => {
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
               postReview={postReview}
+              limit={limit}
+              setLimit={setLimit}
+              setFilterList={setFilterList}
             />
           </Grid>
         </Grid>
