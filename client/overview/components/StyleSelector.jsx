@@ -17,15 +17,6 @@ const useStyles = makeStyles((theme) => ({
 
 const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
   const classes = useStyles();
-  const clickHandler = (e) => {
-    event.preventDefault();
-    setStyle_id(e.target.value);
-  };
-
-  // useCallback(() => (e) => setStyle_id(e.target.value));
-  // useEffect(() => {
-  //   setStyle_id(style_id);
-  // }, [style_id]);
 
   return (
     <div>
@@ -76,7 +67,6 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
                   className={classes.large}
                   src={style.photos[0]["thumbnail_url"]}
                   style={{ margin: "10px", width: "80px", height: "80px" }}
-                  // value={}
                   onClick={(e) => setStyle_id(style.style_id)}
                 />
               </Badge>

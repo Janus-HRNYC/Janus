@@ -63,7 +63,7 @@ const AddToCart = ({ styles, style_id }) => {
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="QUANTITY"
+                  label="1"
                   margin="normal"
                   variant="outlined"
                   InputProps={{ ...params.InputProps, type: "search" }}
@@ -75,11 +75,11 @@ const AddToCart = ({ styles, style_id }) => {
           <Grid item xs={4}>
             <Autocomplete
               autoComplete={true}
-              options={["1"]}
+              options={["-"]}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  label="QUANTITY"
+                  label="-"
                   margin="normal"
                   variant="outlined"
                   InputProps={{ ...params.InputProps, type: "search" }}
