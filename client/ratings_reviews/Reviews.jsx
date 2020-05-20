@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(12),
     margin: 'auto',
     maxWidth: '1100px',
+    paddingBottom: theme.spacing(12),
   },
 }));
 
