@@ -13,7 +13,7 @@ export const fetchCurrentItem = (id) => {
     axios.get(`http://18.224.200.47/products/${id}`)
       .then((results) => {
         console.log('Here ', results.data);
-        return dispatch(addOutfitAction(results.data))
+        return dispatch(addCurrentAction(results.data))
       })      
       .catch((err) => console.error(err));
   }

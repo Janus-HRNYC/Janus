@@ -1,24 +1,21 @@
 import React, {useEffect} from 'react';
 import { Grid } from '@material-ui/core';
 import RelatedItemsCard from './RelatedItemsCard'
-import ComparisonModal from './ComparisonModal';
-
 
 const RelatedItems = (props) => {
   const {
-    id,
     relatedProducts,
-    onGetRelated,
-    onGetRelatedStyle,
+    compareProducts,
+    id,
+    onGetRelated,  
     onGetCurrent,
-    relatedStyles,
+    info
   } = props;
   
-  console.log(id);
+  console.log(info);
   useEffect(() => {
-    onGetRelated(id);    
+    onGetRelated(id); 
   }, []);
-
 
   const getReleatedItems = () => {
     // TODO: REFACTOR
@@ -34,7 +31,7 @@ const RelatedItems = (props) => {
 
           {relatedProducts.state.map((item, i) => {        
               return (
-                <RelatedItemsCard key={Math.random()} item={item} getRelatedStyles={onGetRelatedStyle} id={id} styles={relatedStyles}/>
+                <RelatedItemsCard key={Math.random()} item={item} id={id} onGetCurrent={onGetCurrent} info={info}/>
               )
           })}
         </Grid>
