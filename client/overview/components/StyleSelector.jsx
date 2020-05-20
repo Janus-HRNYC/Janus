@@ -1,12 +1,26 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Box, Grid, Badge, Avatar } from "@material-ui/core";
+import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
 
 const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
-  // const clickHandler = (e) => {
-  //   event.preventDefault();
-  //   setStyle_id(e.target.value);
-  // };
+  const classes = useStyles();
+  const clickHandler = (e) => {
+    event.preventDefault();
+    setStyle_id(e.target.value);
+  };
 
   // useCallback(() => (e) => setStyle_id(e.target.value));
   // useEffect(() => {
@@ -14,7 +28,7 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
   // }, [style_id]);
 
   return (
-    <Box>
+    <div>
       {(() => {
         for (let i = 0; i < styles.length; i++) {
           if (styles[i].style_id === style_id) {
@@ -24,13 +38,13 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
               </div>
             );
           }
-          return <h2>{"loading"}</h2>;
         }
+        return <h2>{"loading..."}</h2>;
       })()}
-      <Grid container spacing={1}>
+      <Grid container spacing={1} className={classes.root} xs={"auto"}>
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (
-            <Grid item key={i++} xs>
+            <Grid item key={i++}>
               <Badge
                 overlap="circle"
                 anchorOrigin={{
@@ -41,13 +55,15 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
                 color="primary"
               >
                 <Avatar
+                  sizes={"large"}
+                  variant={"circle"}
                   src={style.photos[0]["thumbnail_url"]}
                   style={{ margin: "10px", width: "80px", height: "80px" }}
                 />
               </Badge>
             </Grid>
           ) : (
-            <Grid item key={i++} xs>
+            <Grid item key={i++}>
               <Badge
                 overlap="circle"
                 anchorOrigin={{
@@ -57,17 +73,18 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
                 color="primary"
               >
                 <Avatar
+                  className={classes.large}
                   src={style.photos[0]["thumbnail_url"]}
                   style={{ margin: "10px", width: "80px", height: "80px" }}
-                  // value={style.style_id}
-                  // onClick={(e) => clickHandler(e)}
+                  // value={}
+                  onClick={(e) => setStyle_id(style.style_id)}
                 />
               </Badge>
             </Grid>
           )
         )}
       </Grid>
-    </Box>
+    </div>
   );
 };
 

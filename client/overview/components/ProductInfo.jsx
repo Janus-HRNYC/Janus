@@ -37,8 +37,7 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
         <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
       </Grid>
       <div>{info.category}</div>
-      <h2>{info.name}</h2>
-      {/* <br /> */}
+      <div>{info.name}</div>
       <div>
         {(() => {
           for (let i = 0; i < styles.length; i++) {
@@ -56,16 +55,16 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
                   </Box>
                 </div>
               );
+            } else if (styles[i].style_id === style_id) {
+              return (
+                <div>
+                  <Box> {`$ ${styles[i].original_price}`}</Box>
+                </div>
+              );
             }
-            return (
-              <div>
-                <Box> {`$ ${styles[i].original_price}`}</Box>
-              </div>
-            );
           }
         })()}
       </div>
-      <br />
       <div width="50%">{info.description}</div>
     </Box>
   );

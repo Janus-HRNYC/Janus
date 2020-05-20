@@ -56,7 +56,7 @@ const AddToCart = ({ styles, style_id }) => {
           ) : null
         )}
         {selectedSize ? (
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Autocomplete
               autoComplete={true}
               options={count(inventory)}
@@ -72,14 +72,13 @@ const AddToCart = ({ styles, style_id }) => {
             />
           </Grid>
         ) : (
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Autocomplete
               autoComplete={true}
               options={["1"]}
               renderInput={(params) => (
                 <TextField
                   {...params}
-                  color="black"
                   label="QUANTITY"
                   margin="normal"
                   variant="outlined"
@@ -93,7 +92,7 @@ const AddToCart = ({ styles, style_id }) => {
       <br />
       <Grid container direction="row" spacing={1}>
         <Grid item xs={8}>
-          <Button variant="outlined" fullWidth="true">
+          <Button variant="outlined" fullWidth={true}>
             ADD TO BAG
           </Button>
         </Grid>
@@ -139,47 +138,3 @@ const AddToCart = ({ styles, style_id }) => {
 };
 
 export default AddToCart;
-// style.skus[size] > 0 && style.skus[size] <= 15
-//                   //   ? "5"
-//                   //   : style.skus[size] > 0 && style.skus[size] > 15
-//                   //   ? `${[...Array(14).keys()]}`
-//                   //   : null
-
-// styles.map((style, i = 0) =>
-//           style.style_id === style_id ? (
-//             <Grid item key={i++} xs={3}>
-//               <Autocomplete
-//                 id="test"
-//                 autoComplete={true}
-//                 options={Object.keys(style.skus).map((size) =>
-
-//                 )}
-//                 renderInput={(params) => (
-//                   <TextField
-//                     {...params}
-//                     label="Quantity"
-//                     margin="normal"
-//                     variant="outlined"
-//                     InputProps={{ ...params.InputProps, type: "search" }}
-//                   />
-//                 )}
-//               />
-//             </Grid>
-//           ) : null
-//         )
-//   ) : (
-//     <Autocomplete
-//       id="select-quantity"
-//       autoComplete={true}
-//       options={["1"]}
-//       renderInput={(params) => (
-//         <TextField
-//           {...params}
-//           label="Quantity"
-//           margin="normal"
-//           variant="outlined"
-//           InputProps={{ ...params.InputProps, type: "search" }}
-//         />
-//       )}
-//     />
-//   )
