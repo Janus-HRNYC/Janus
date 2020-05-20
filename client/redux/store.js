@@ -11,8 +11,14 @@ const initialState = {
   relatedProducts: [],
   ratingsMeta: {},
   styles: [],
+  // productId: 2,
   selected_id: 0,
+  styles: [],
+  outfit: [],
+  // selected_id: 0,
   info: {},
+  compareProducts: {},
+  relatedStyles: [],
 };
 
 const logger = (store) => {
