@@ -3,7 +3,7 @@ const isEmailValid = (email) => {
   return check.test(String(email).toLowerCase());
 };
 
-const validation = (form, types) => {
+export const validation = (form, types) => {
   let errors = {};
 
   if (!form.rating) errors.rating = 'ratings validated';
@@ -18,4 +18,20 @@ const validation = (form, types) => {
   return Object.keys(errors).length ? errors : false;
 };
 
-export default validation;
+export const isFormComplete = (form, types) => {
+  let keys = Object.keys(form);
+  for (let el of keys) {
+    if (el === 'rating' && !form[el]) return false;
+    if (el === 'recommend' && !form[el]) return false;
+    if (el === 'summary' && !form[el]) return false;
+    if (el === 'body' && form[el].length < 50) return false;
+    if (el === 'name' && !form[el]) return false;
+    if (el === 'email' && !isEmailValid(form[el])) return false;
+    if (
+      el === 'characteristics' &&
+      Object.values(form[el]).length !== Object.keys(types).length
+    )
+      return false;
+  }
+  return true;
+};

@@ -9,14 +9,16 @@ const SearchForm = ({ searchTerm, setSearchTerm }) => {
   };
 
   return (
-    <div>
-      <form onSubmit={(e) => {e.preventDefault()}}>
+    <div title="QandA">
+      <form  title="QandA" onSubmit={(e) => {e.preventDefault()}}>
         <TextField id="outlined-basic" 
         fullWidth
+        title="QandA"
         variant="outlined" 
         value={searchTerm} 
         placeholder="Have a question? Search for answers..." 
         onChange={handleSearchChange}/>
+        
         </form>
     </div>
   );

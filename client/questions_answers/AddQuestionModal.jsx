@@ -68,12 +68,13 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
 }
 
   const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id='simple-modal-title'>Ask Your Question</h2>
-      <h3>About the {productName}</h3>
-      <form>
-        <Box component="div" display="block">
-        <TextField 
+    <div title="QandA" style={modalStyle} className={classes.paper}>
+      <h2 title="QandA" id='simple-modal-title'>Ask Your Question</h2>
+      <h3 title="QandA">About the {productName}</h3>
+      <form title="QandA">
+        <Box title="QandA" component="div" display="block">
+        <TextField
+        title="QandA" 
         id="outlined-basic"
         fullWidth
         id="outlined-basic"
@@ -94,6 +95,7 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
         />
         </Box>
         <TextField
+            title="QandA"
             required
             label='What is your nickname'
             variant="outlined"
@@ -106,21 +108,22 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
             />
             <p>For privacy reasons, do not use your full name or email address</p>
 
-        <Box display="inline">
+        <Box title="QandA" display="inline">
         {
           improperSubmission ?
-          <div>
-            <p>You must enter the following:</p>
-            <p>Your Answer</p>
-            <p>Your Nickname</p>
-            <p>Your Email in the proper format</p>
-            <p>Images must be valid and able to be uploaded</p>
+          <div title="QandA">
+            <p title="QandA">You must enter the following:</p>
+            <p title="QandA">Your Answer</p>
+            <p title="QandA">Your Nickname</p>
+            <p title="QandA">Your Email in the proper format</p>
+            <p title="QandA">Images must be valid and able to be uploaded</p>
           </div>
       :
       null
       }
         </Box>
         <TextField
+        title="QandA"
         display="block"
         required
         label="Your email"
@@ -131,18 +134,19 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
         />
         <p>For authentication reasons, you will not be emailed</p>
       </form>
-      <Button variant='contained' onClick={handleClick}>
+      <Button title="QandA" variant='contained' onClick={handleClick}>
         Submit
       </Button>
     </div>
   );
 
   return (
-    <div>
-      <Button variant='contained' onClick={handleClick}>
+    <div title="QandA">
+      <Button title="QandA" variant='contained' onClick={handleClick}>
         ADD QUESTION +
       </Button>
       <Modal
+        title="QandA"
         open={displayModal}
         onClose={handleOtherClick}
         aria-labelledby='simple-modal-title'

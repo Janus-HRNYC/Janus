@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import StarRating from './StarRating.jsx';
 
 const RatingSummary = ({ ratings, recommended }) => {
@@ -20,8 +20,8 @@ const RatingSummary = ({ ratings, recommended }) => {
 
     return (
       <Grid container direction='row'>
-        <h3>Ave: {averageRating}</h3>
-        <StarRating star={averageRating} size={'large'} />
+        <Typography variant='h3'>{averageRating}</Typography>
+        <StarRating star={averageRating} size={'small'} />
       </Grid>
     );
   };
@@ -40,7 +40,9 @@ const RatingSummary = ({ ratings, recommended }) => {
     }
     return (
       <Grid>
-        <h4>{averageRecommend}% of reviews recommend this product</h4>
+        <Typography variant='body1'>
+          {averageRecommend}% of reviews recommend this product
+        </Typography>
       </Grid>
     );
   };
