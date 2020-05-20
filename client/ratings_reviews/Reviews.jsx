@@ -6,6 +6,7 @@ import Ratings from './Ratings.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    paddingTop: theme.spacing(12),
     margin: 'auto',
     maxWidth: '1100px',
   },
@@ -42,7 +43,7 @@ const Reviews = (props) => {
   return (
     <Box className={classes.root}>
       <Container>
-        <Typography variant='h5'>RATINGS & REVIEWS</Typography>
+        <Typography variant='subtitle1'>RATINGS & REVIEWS</Typography>
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
             <Ratings
