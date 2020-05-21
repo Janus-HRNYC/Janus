@@ -1,8 +1,17 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
 import REFERENCES from '../references.js';
+import { validation } from './validation.js';
 
-const TextFieldForm = ({ type, value, setForm, error }) => {
+const TextFieldForm = ({
+  type,
+  value,
+  setForm,
+  error,
+  form,
+  setErrors,
+  char,
+}) => {
   let attributes;
   if (type === 'summary') {
     attributes = REFERENCES.TEXTFIELDFORM.summary;
@@ -16,6 +25,14 @@ const TextFieldForm = ({ type, value, setForm, error }) => {
 
   const handleChange = (e) => {
     e.persist();
+    if (error) {
+      const listOfErrors = validation(form, char);
+      setErrors(listOfErrors);
+      setForm((oldState) => {
+        return { ...oldState, [type]: e.target.value };
+      });
+    }
+
     setForm((oldState) => {
       return { ...oldState, [type]: e.target.value };
     });

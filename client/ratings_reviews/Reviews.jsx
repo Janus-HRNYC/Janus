@@ -6,8 +6,10 @@ import Ratings from './Ratings.jsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    paddingTop: theme.spacing(12),
     margin: 'auto',
     maxWidth: '1100px',
+    paddingBottom: theme.spacing(12),
   },
 }));
 
@@ -21,28 +23,30 @@ const Reviews = (props) => {
     ratingsMeta,
     postReview,
   } = props;
+  const [filterList, setFilterList] = useState([]);
+  const [limit, setLimit] = useState(2);
+  let displayList = filterList.length === 0 ? reviewResults : filterList;
 
   useEffect(() => {
     getReviews(id);
   }, []);
 
-  console.log('Displaying Review Results; ', reviewResults);
+  console.log('Displaying Review Results; ', filterList);
 
   const clickStarRating = (rating) => {
     console.log('This has been clicked: ', rating);
     let filterByRatings = reviewResults.filter((review) => {
       return review.rating === rating;
     });
-    displayBySort(id);
+    console.log('Filter Review Results; ', filterByRatings);
+    setFilterList(filterByRatings);
+    setLimit(2);
   };
-
-  // let displayList = !filterByRatings ? reviewResults : filterByRatings;
-  // console.log('Filter Review Results; ', displayList);
 
   return (
     <Box className={classes.root}>
       <Container>
-        <Typography variant='h5'>RATINGS & REVIEWS</Typography>
+        <Typography variant='subtitle1'>RATINGS & REVIEWS</Typography>
         <Grid container direction='row' justify='space-between'>
           <Grid item md={4}>
             <Ratings
@@ -52,11 +56,14 @@ const Reviews = (props) => {
           </Grid>
           <Grid item md={8}>
             <ReviewList
-              list={reviewResults}
+              list={displayList}
               id={id}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
               postReview={postReview}
+              limit={limit}
+              setLimit={setLimit}
+              setFilterList={setFilterList}
             />
           </Grid>
         </Grid>
