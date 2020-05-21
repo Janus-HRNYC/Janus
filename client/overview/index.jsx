@@ -1,67 +1,74 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 import StyleSelector from "./components/StyleSelector";
-// import AddToCart from "./components/AddToCart";
+import AddToCart from "./components/AddToCart";
+import SocialMedia from "./components/SocialMedia";
 import { Grid } from "@material-ui/core";
+
+// useStyle
+// makeStyle
 
 const Overview = (props) => {
   const {
-    id = 5,
+    id,
     info,
-    getInfo,
     styles,
+    getInfo,
     getStyles,
-    selected,
+    selected_id,
     getSelected,
   } = props;
-
-  const [images, setImages] = useState([]);
-  const [thumbnails, setThumbnails] = useState([]);
-
   useEffect(() => {
     getInfo(id);
     getStyles(id);
     getSelected(id);
-    axios
-      .get(`http://18.224.200.47/products/${id}/styles`)
-      .then((result) => {
-        const payload1 = result.data.results.map(
-          (style) => style.photos[0].url
-        );
-        const payload2 = result.data.results.map(
-          (style) => style.photos[0].thumbnail_url
-        );
-        setImages(payload1);
-        setThumbnails(payload2);
-      })
-      .catch((err) => console.error(err));
-  }, [id]);
+  }, []);
+
+  const [style_id, setStyle_id] = useState(0);
+  useEffect(() => {
+    setStyle_id(selected_id);
+  }, [selected_id]);
+
+  const [index, setIndex] = useState(0);
 
   return (
     <Grid
       container
       direction="row"
-      spacing={2}
+      spacing={3}
       justify="center"
       alignItems="center"
     >
-      <Grid item xs={2}></Grid>
       <Grid item xs>
-        <Gallery id={id} images={images} />
+        <Gallery
+          id={id}
+          index={index}
+          setIndex={setIndex}
+          style_id={style_id}
+          styles={styles}
+        />
       </Grid>
-      <Grid item xs>
-        <ProductInfo info={info} id={id} />
+      <Grid
+        item
+        xs
+        style={{
+          marginTop: "150px",
+          paddingRight: "50px",
+        }}
+      >
+        <ProductInfo info={info} styles={styles} id={id} style_id={style_id} />
         <StyleSelector
           styles={styles}
-          selected={selected}
+          style_id={style_id}
           id={id}
-          thumbnails={thumbnails}
+          setStyle_id={setStyle_id}
+          index={index}
+          setIndex={setIndex}
         />
-        {/* <Box><AddToCart /></Box> */}
+        <AddToCart styles={styles} style_id={style_id} info={info} />
+        <SocialMedia />
       </Grid>
-      <Grid item xs={2}></Grid>
     </Grid>
   );
 };
