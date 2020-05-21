@@ -33,7 +33,7 @@ const StarRating = ({ star, size, update, setForm }) => {
   } else {
     return (
       <Box
-        component='fieldset'
+        // component='fieldset'
         borderColor='transparent'
         className={classes.root}
       >
