@@ -7,14 +7,14 @@ const outfitReducer = {
     switch (action.type) {
       case actionType.addOutfit: {
       // return Object.assign({}, state, action.outfit);
-        return [...state, (action.outfit)];
+        return [(action.outfit)];
       }
       case actionType.removeOutfit:
         // newState = Object.assign({}, state);
         // delete newState[action.id];
         // return Object.assign({}, state, newState);
         // returns a new array without the element to be removed
-        const newState = state.filter((ele) => ele.id !== action.id)
+        const newState = state.filter((ele) => ele.id !== action.results)
         return newState;
       default:
         return state;
