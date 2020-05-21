@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   ratingReviewer: {
     display: 'flex',
     marginTop: theme.spacing(2),
-    paddingBottom: theme.spacing(0),
+    marginBottom: theme.spacing(1),
   },
   reviewer: {
     display: 'flex',

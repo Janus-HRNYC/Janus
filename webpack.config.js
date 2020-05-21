@@ -1,20 +1,24 @@
-const webpack = require("webpack");
-const path = require("path");
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const path = require('path');
 
 const config = {
-  entry: "./client/index.jsx",
-  output: { path: path.resolve(__dirname, "./public"), filename: "bundle.js" },
+  entry: './client/index.jsx',
+  output: { path: path.resolve(__dirname, './public'), filename: 'bundle.js' },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: "babel-loader",
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx'],
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   },
 };
 

@@ -6,6 +6,7 @@ const mapStateToProps = (store) => ({
   id: store.id,
   reviewResults: store.reviewResults,
   ratingsMeta: store.ratingsMeta,
+  info: store.info,
 });
 
 const mapDispatchToProps = (dispatch) => {

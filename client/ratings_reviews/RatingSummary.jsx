@@ -32,7 +32,7 @@ const RatingSummary = ({ ratings, recommended }) => {
     return (
       <Grid container direction='row' className={classes.rating}>
         <Typography variant='h3'>{averageRating}</Typography>
-        <StarRating star={averageRating} size={'small'} />
+        <StarRating star={averageRating} size={'small'} update={false} />
       </Grid>
     );
   };
