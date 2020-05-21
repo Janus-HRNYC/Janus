@@ -5,9 +5,9 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
   InputLabel,
+  Typography,
 } from '@material-ui/core';
 import StarRating from './StarRating.jsx';
 import Recommend from './form_components/Recommend.jsx';
@@ -18,12 +18,15 @@ import REFERENCES from './references.js';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-  addButton: {
+  addPadding: {
     padding: theme.spacing(2),
   },
   topBottomSpace: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
+  },
+  bottomSpace: {
+    marginBottom: theme.spacing(3),
   },
 }));
 
@@ -31,7 +34,7 @@ const formDefault = REFERENCES.ADDREVIEW.formDefault;
 
 const AddReview = (props) => {
   const classes = useStyles();
-  const { ratingsMeta, postReview, id } = props;
+  const { ratingsMeta, postReview, info } = props;
   const [char, setChar] = useState({});
   const [form, setForm] = useState(formDefault);
   const [errors, setErrors] = useState(false);
@@ -56,7 +59,7 @@ const AddReview = (props) => {
     setErrors(listOfErrors);
 
     if (completeForm) {
-      postReview(id, form);
+      postReview(info.id, form);
       handleClick();
     }
   };
@@ -65,7 +68,7 @@ const AddReview = (props) => {
     <>
       <Button
         variant='outlined'
-        className={classes.addButton}
+        className={classes.addPadding}
         onClick={handleClick}
       >
         ADD A REVIEW +
@@ -76,10 +79,15 @@ const AddReview = (props) => {
         aria-labelledby='form-dialog-title'
         fullWidth
       >
-        <DialogTitle id='form-dialog-title'>Write Your Review</DialogTitle>
+        <DialogTitle>
+          <Typography variant='h4' color='primary'>
+            Write Your Review
+          </Typography>
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>About the Product Name</DialogContentText>
-          <br />
+          <Grid className={classes.bottomSpace}>
+            <Typography variant='h6'>About the {info.name}</Typography>
+          </Grid>
           <Grid>
             <InputLabel required={true} error={errors.hasOwnProperty('rating')}>
               Overall Rating

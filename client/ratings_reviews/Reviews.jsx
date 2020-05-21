@@ -22,6 +22,7 @@ const Reviews = (props) => {
     displayBySort,
     ratingsMeta,
     postReview,
+    info,
   } = props;
   const [filterList, setFilterList] = useState([]);
   const [limit, setLimit] = useState(2);
@@ -32,6 +33,7 @@ const Reviews = (props) => {
   }, []);
 
   console.log('Displaying Review Results; ', filterList);
+  console.log('Displaying Product info; ', info);
 
   const clickStarRating = (rating) => {
     console.log('This has been clicked: ', rating);
@@ -57,13 +59,13 @@ const Reviews = (props) => {
           <Grid item md={8}>
             <ReviewList
               list={displayList}
-              id={id}
               displayBySort={displayBySort}
               ratingsMeta={ratingsMeta}
               postReview={postReview}
               limit={limit}
               setLimit={setLimit}
               setFilterList={setFilterList}
+              info={info}
             />
           </Grid>
         </Grid>
