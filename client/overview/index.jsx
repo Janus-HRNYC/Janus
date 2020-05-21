@@ -65,6 +65,7 @@ const Overview = (props) => {
           setStyle_id={setStyle_id}
           index={index}
           setIndex={setIndex}
+          info={info}
         />
         <AddToCart styles={styles} style_id={style_id} info={info} />
         <SocialMedia />

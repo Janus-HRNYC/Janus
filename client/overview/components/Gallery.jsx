@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Button } from "@material-ui/core";
-import { KeyboardArrowRight, KeyboardArrowLeft } from "@material-ui/icons";
+import { makeStyles, Fab } from "@material-ui/core";
+import { ArrowBack, ArrowForward } from "@material-ui/icons";
 
 const Gallery = ({ id, style_id, styles, index, setIndex }) => {
   const [images, setImages] = useState([]);
@@ -18,56 +18,63 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
   }, [style_id]);
 
   const rightClick = () => {
-    if (index + 1 === images.length) {
-      setIndex(0);
-    } else {
-      setIndex(index + 1);
-    }
+    setIndex(index + 1);
   };
 
   const leftClick = () => {
-    if (index - 1 === -1) {
-      setIndex(images.length - 1);
-    } else {
-      setIndex(index - 1);
-    }
+    setIndex(index - 1);
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "block",
+        position: "relative",
+        zIndex: 2,
+      }}
+    >
       <img
         src={images[index]}
         style={{
           objectFit: "cover",
           position: "relative",
           width: "750px",
-          height: "650px",
+          height: "600px",
+          zIndex: 10,
         }}
       />
-      <Button
-        onClick={() => leftClick()}
-        style={{
-          borderRadius: "300px",
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          left: 0,
-        }}
-      >
-        <KeyboardArrowLeft />
-      </Button>
-      <Button
-        onClick={() => rightClick()}
-        style={{
-          borderRadius: "50%",
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          right: 0,
-        }}
-      >
-        <KeyboardArrowRight />
-      </Button>
+      {index === 0 ? null : (
+        <Fab
+          onClick={leftClick}
+          style={{
+            // borderRadius: "300px",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            left: 5,
+            zIndex: 12,
+            opacity: "33%",
+          }}
+        >
+          <ArrowBack style={{ color: "primary", fontSize: "32px" }} />
+        </Fab>
+      )}
+      {index === images.length - 1 ? null : (
+        <Fab
+          onClick={rightClick}
+          style={{
+            // borderRadius: "50%",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            right: 5,
+            zIndex: 12,
+            opacity: "33%",
+          }}
+        >
+          <ArrowForward style={{ fontSize: "32px" }} />
+        </Fab>
+      )}
     </div>
   );
 };

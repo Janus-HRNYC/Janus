@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
+import { StarBorder } from "@material-ui/icons";
 
 const AddToCart = ({ styles, style_id, info }) => {
   const [selectedSize, setSelectedSize] = useState(null);
@@ -36,7 +37,7 @@ const AddToCart = ({ styles, style_id, info }) => {
             fullWidth={true}
             onClick={() => setBag({ info, style_id, selectedSize, quantity })}
           >
-            ADD TO BAG
+            ADD TO CART
           </Button>
         </Grid>
       );
@@ -47,7 +48,7 @@ const AddToCart = ({ styles, style_id, info }) => {
   };
 
   return (
-    <div>
+    <>
       {selectedSize === null ? <p>Please select size</p> : null}
       <Grid container direction="row" spacing={1}>
         {styles.map((style, i = 0) =>
@@ -123,10 +124,12 @@ const AddToCart = ({ styles, style_id, info }) => {
       <Grid container direction="row" spacing={1}>
         {(() => addToBagButton())()}
         <Grid item xs>
-          <Button variant="outlined">❤</Button>
+          <Button variant="outlined">
+            <StarBorder />
+          </Button>
         </Grid>
       </Grid>
-    </div>
+    </>
   );
 };
 

@@ -22,6 +22,7 @@ const StyleSelector = ({
   setStyle_id,
   index,
   setIndex,
+  info,
 }) => {
   // const classes = useStyles();
 
@@ -31,13 +32,13 @@ const StyleSelector = ({
         for (let i = 0; i < styles.length; i++) {
           if (styles[i].style_id === style_id) {
             return (
-              <div>
-                <h2>{`STYLE > ${styles[i].name}`}</h2>
-              </div>
+              <Box
+                style={{ fontWeight: "bold" }}
+              >{`STYLE > ${styles[i].name}`}</Box>
             );
           }
         }
-        return <h2>{"loading..."}</h2>;
+        return <Box style={{ fontWeight: "bold" }}>{"Loading..."}</Box>;
       })()}
       <Grid
         container
