@@ -3,6 +3,8 @@ import Axios from 'axios';
 import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
 import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const QuestionsAndAnswers = ({ id }) => {
   const [questions, setQuestions] = useState([]);
@@ -47,9 +49,19 @@ const QuestionsAndAnswers = ({ id }) => {
       .catch(err => console.log(err))
   }
 
+ 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      margin: 'auto',
+      maxWidth: '1100px'
+    },
+  }));
+
+  const classes = useStyles();
+
   return (
      <div title="QandA">
-        <Box title="QandA">
+        <Box title="QandA" className={classes.root} id='QAbottomMargin'>
             <Container >
             <h3 title="QandA">QUESTIONS AND ANSWERS</h3>
             
