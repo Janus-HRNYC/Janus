@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   list: {
     maxHeight: '700px',
     overflow: 'auto',
-    paddingBottom: theme.spacing(2),
+    padding: theme.spacing(2),
   },
 
   selected: {
