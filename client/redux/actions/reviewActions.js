@@ -54,12 +54,10 @@ export const postReview = (id, form) => {
       .post(`http://18.224.200.47/reviews/${id}`, form)
       .then((res) => {
         console.log('Successful in POST review: ', res);
-        dispatch(reviewActions.setSuccessDisplay(true));
         dispatch(getReviews(id, 'newest'));
       })
       .catch((err) => {
         console.log('Error in POST review: ', err);
-        dispatch(setSuccessDisplay(false));
       });
   };
 };

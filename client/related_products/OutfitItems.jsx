@@ -4,8 +4,7 @@ import Outfitcards from './Outfitcards'
 import AddOutFitCard from './AddOutFitCard';
 
 
-const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, id }) => {
-  console.log(id);
+const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => {
   const getOutfits = () => {
     // TODO: REFACTOR
     if (!outfit.length) {
@@ -19,10 +18,10 @@ const OutfitItems = ({ outfit, onDeleteOutfit, ratingsMeta, onAddOutfit, id }) =
           direction={'row'}
           justify='space-between'
         >
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} />
+          <AddOutFitCard addOutfit={onAddOutfit} id={id}/>
           {outfit.map((item, i) => {
             return (
-              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} />
+              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info}/>
             )
           })}
         </Grid>

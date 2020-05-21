@@ -11,18 +11,31 @@ module.exports = {
     // if no default value will return a placeholder img of photo not available.
     return results === '' ? '../../public/No_Default.jpg' : results;
   },
-  comparisonBuilder: (currentItem) => {
-    let results = [];   
-    currentItem.features.forEach((feat) => {      
-      results.push(`${feat.feature}: ${feat.value}`);
-    });   
-    return results;
+  comparisonBuilder: (current, compare) => {
+    let results = {};
+    let array = [];
+    for (key in current) {
+      array.push(key, current[key]);
+    }
+    console.log(array);
+    return array;
   },
-  salePrice: (prices) => {
+
+
+  salePrice: (styleArr) => {
     let results = '';
-
-
+    styleArr.forEach((ele) => {
+      if (ele['default?'] === 1) {
+        if (parseInt(ele.sale_price) === 0 || !ele.sale_price) {
+          results = `${parseInt(ele.original_price)}`;
+        } else {
+          results = `SALE ${parseInt(ele.sale_price)}`;
+        }         
+      }
+    })
+    return results;
   }
 }
 
 //feature: "UV Protection", value: "null"}
+// sale_price: "0"

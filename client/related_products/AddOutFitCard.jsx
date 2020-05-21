@@ -10,8 +10,7 @@ import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import AddIcon from '@material-ui/icons/Add';
-import { Hidden } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+
 
 const useStyles = makeStyles({
 
@@ -28,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = ({ addOutfit, id }) => {
+const AddOutFitCard = ({ addOutfit, id, info }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
