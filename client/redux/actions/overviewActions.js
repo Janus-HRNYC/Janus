@@ -1,5 +1,5 @@
 import {
-  getSelected_id,
+  // getSelected_id,
   getStyles,
   getSelected,
   getInfo,
@@ -27,14 +27,13 @@ export const setOverviewData = {
   }),
 };
 
-// export const getSelectedStyleID = (id) => {
+// export const getID = (id) => {
 //   return (dispatch) => {
 //     return axios
-//       .get(`http://18.224.200.47/products/${id}/styles`)
+//       .get(`http://18.224.200.47/products/${id}`)
 //       .then((result) => {
-//         return Promise.all([
-//           dispatch(setOverviewData.setProductId(result.data.style_id)),
-//         ]);
+//         return dispatch(setOverviewData.setProductId(result.data.style_id)),
+
 //       })
 //       .catch((err) => console.error(err));
 //   };
@@ -45,6 +44,7 @@ export const getStyleData = (id) => {
     return axios
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
+        console.log(result.data.results);
         return Promise.all([
           // dispatch(setOverviewData.setProductId(result.data.product_id)),
           dispatch(setOverviewData.getStyles(result.data.results)),
@@ -60,9 +60,13 @@ export const getSelectedData = (id) => {
     return axios
       .get(`http://18.224.200.47/products/${id}/styles`)
       .then((result) => {
-        console.log(result.data.results[0].style_id);
-        const payload = result.data.results[0].style_id;
-        return dispatch(setOverviewData.getSelected(payload));
+        for (let i = 0; i < result.data.results.length; i++) {
+          if (result.data.results[i]["default?"] === 1) {
+            return dispatch(
+              setOverviewData.getSelected(result.data.results[i].style_id)
+            );
+          }
+        }
       })
       .catch((err) => console.error(err));
   };
@@ -74,7 +78,6 @@ export const getProductInfo = (id) => {
       .get(`http://18.224.200.47/products/${id}`)
       .then((result) => {
         dispatch(setOverviewData.getInfo(result.data));
-        // dispatch(setOverviewData.setProductId(id));
       })
       .catch((err) => console.error(err));
   };
