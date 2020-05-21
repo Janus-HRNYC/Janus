@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button, TextField, Box } from '@material-ui/core';
+import { Modal, Button, TextField, Box, Grid } from '@material-ui/core';
 import Axios from 'axios';
 
 const getModalStyle = () => {
@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 4, 3),
     overflow:'scroll'
   },
+  inputMargin: {
+    marginTop: theme.spacing(2)
+  },
+  warnings: {
+    marginLeft: theme.spacing(3),
+  }
 }));
 
 const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
@@ -65,75 +71,84 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
 
   const handleOtherClick = () => {
     setDisplayModal(!displayModal)
+    setImproperSubmission(false)
 }
 
   const body = (
     <div title="QandA" style={modalStyle} className={classes.paper}>
       <h2 title="QandA" id='simple-modal-title'>Ask Your Question</h2>
       <h3 title="QandA">About the {productName}</h3>
-      <form title="QandA">
-        <Box title="QandA" component="div" display="block">
-        <TextField
-        title="QandA" 
-        id="outlined-basic"
-        fullWidth
-        id="outlined-basic"
-        multiline={true}
-        rows={6}
-        id="standard-required"
-        required
-        inputProps={{
-            maxLength: 1000,
-            minLength: 1,
-            classes: {
-                height: 300
-          }}}
-        label="Your Question"
-        variant="outlined"
-        value={questionAsked}
-        onChange={(e) => setQuestionAsked(e.target.value)}
-        />
-        </Box>
-        <TextField
-            title="QandA"
+        <Grid container>
+          <Grid item>
+            <Box title="QandA" component="div" display="block">
+            <TextField
+            title="QandA" 
+            id="outlined-basic"
+            fullWidth
+            id="outlined-basic"
+            multiline={true}
+            rows={6}
+            id="standard-required"
             required
-            label='What is your nickname'
-            variant="outlined"
             inputProps={{
-                maxLength: 60
-            }}
-            value={userDisplayName}
-            placeholder="Example: jackson11!"
-            onChange={(e) => setUserDisplayName(e.target.value)}
+                maxLength: 1000,
+                minLength: 1,
+                classes: {
+                    height: 300
+              }}}
+            label="Your Question"
+            variant="outlined"
+            value={questionAsked}
+            onChange={(e) => setQuestionAsked(e.target.value)}
             />
-            <p>For privacy reasons, do not use your full name or email address</p>
-
-        <Box title="QandA" display="inline">
-        {
-          improperSubmission ?
-          <div title="QandA">
-            <p title="QandA">You must enter the following:</p>
-            <p title="QandA">Your Answer</p>
-            <p title="QandA">Your Nickname</p>
-            <p title="QandA">Your Email in the proper format</p>
-            <p title="QandA">Images must be valid and able to be uploaded</p>
-          </div>
-      :
-      null
-      }
-        </Box>
-        <TextField
-        title="QandA"
-        display="block"
-        required
-        label="Your email"
-        variant="outlined"
-        placeholder="Example: jack@email.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        />
-        <p>For authentication reasons, you will not be emailed</p>
-      </form>
+            </Box>
+            <Box className={classes.inputMargin} title="QandA" >
+              <TextField
+                  title="QandA"
+                  required
+                  label='What is your nickname'
+                  variant="outlined"
+                  inputProps={{
+                      maxLength: 60
+                  }}
+                  value={userDisplayName}
+                  placeholder="Example: jackson11!"
+                  onChange={(e) => setUserDisplayName(e.target.value)}
+                  />
+                  <p>For privacy reasons, do not use your full name or email address</p>
+            </Box>
+            <Box>
+              <TextField
+              title="QandA"
+              display="block"
+              required
+              label="Your email"
+              variant="outlined"
+              placeholder="Example: jack@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              />
+              <p>For authentication reasons, you will not be emailed</p>
+            </Box>
+            </Grid>
+            
+            <Grid item title="QandA" className={classes.warnings} id="warningText">
+            {
+              improperSubmission ?
+              <div title="QandA">
+                <p title="QandA" id="warningTextBold">You must enter the following:</p>
+                <p title="QandA">Your Answer</p>
+                <p title="QandA">Your Nickname</p>
+                <p title="QandA">Your Email in the proper format</p>
+              </div>
+          :
+          null
+          }
+          </Grid>
+        </Grid>
+        
+      
+     
       <Button title="QandA" variant='contained' onClick={handleClick}>
         Submit
       </Button>
