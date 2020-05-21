@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
 import AddQuestionModal from './AddQuestionModal';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Button } from '@material-ui/core';
 
 const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, productName, searchTerm }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
@@ -24,7 +24,9 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
   };
 
   const moreQuestionsButton = () => {
-        if (questions.length > questionLimit) return <button title="QandA" onClick={handleMoreQuestionsClick}>More Answered Questions</button>;
+        if (questions.length > questionLimit) return <Button title="QandA" variant='contained' onClick={handleMoreQuestionsClick}>
+        MORE ANSWERED QUESTIONS
+      </Button>
   };
 
   const searchFilter = () => {
@@ -46,12 +48,17 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
       
         {searchFilter().sort((a, b) => (b.question_helpfulness - a.question_helpfulness))
           .map((question, i) => renderQuestions(question, i))}
-      
-      {moreQuestionsButton()}
-      <AddQuestionModal 
-      productName={productName} 
-      productId={productId} 
-      axiosQuestionRequest={axiosQuestionRequest} />
+      <Grid container>
+        <Grid item>
+          {moreQuestionsButton()}
+        </Grid>
+        <Grid item>
+          <AddQuestionModal 
+          productName={productName} 
+          productId={productId} 
+          axiosQuestionRequest={axiosQuestionRequest} />
+        </Grid>
+      </Grid>
     </Box>
   );
 };
