@@ -3,12 +3,13 @@ import { Rating } from '@material-ui/lab';
 import { Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
   },
-});
+  space: { marginTop: theme.spacing(1) },
+}));
 
 const StarRating = ({ star, size, update, setForm }) => {
   const classes = useStyles();
@@ -20,7 +21,7 @@ const StarRating = ({ star, size, update, setForm }) => {
 
   if (update) {
     return (
-      <Box component='fieldset' mb={3} borderColor='transparent'>
+      <Box mb={3} borderColor='transparent' className={classes.space}>
         <Rating
           name='update-rating'
           value={star}
@@ -30,13 +31,25 @@ const StarRating = ({ star, size, update, setForm }) => {
         />
       </Box>
     );
-  } else {
+  } else if (update === false) {
     return (
       <Box
-        // component='fieldset'
+        component='fieldset'
         borderColor='transparent'
         className={classes.root}
       >
+        <Rating
+          name='rating'
+          value={star}
+          precision={0.25}
+          size={size}
+          readOnly
+        />
+      </Box>
+    );
+  } else {
+    return (
+      <Box borderColor='transparent' className={classes.root}>
         <Rating
           name='rating'
           value={star}

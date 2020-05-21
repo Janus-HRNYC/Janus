@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     padding: theme.spacing(2),
   },
+  topBottomSpace: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 const formDefault = REFERENCES.ADDREVIEW.formDefault;
@@ -110,7 +114,7 @@ const AddReview = (props) => {
               char={char}
             />
           </Grid>
-          <Grid>
+          <Grid className={classes.topBottomSpace}>
             <InputLabel
               required={true}
               error={errors.hasOwnProperty('summary')}
@@ -127,7 +131,7 @@ const AddReview = (props) => {
               char={char}
             />
           </Grid>
-          <Grid>
+          <Grid className={classes.topBottomSpace}>
             <InputLabel required={true} error={errors.hasOwnProperty('body')}>
               Review Body
             </InputLabel>
@@ -144,7 +148,7 @@ const AddReview = (props) => {
           {/* <Grid>
             <InputLabel>Upload Your Photos</InputLabel>
           </Grid> */}
-          <Grid>
+          <Grid className={classes.topBottomSpace}>
             <InputLabel required={true} error={errors.hasOwnProperty('name')}>
               What is your nickname
             </InputLabel>
@@ -158,7 +162,7 @@ const AddReview = (props) => {
               char={char}
             />
           </Grid>
-          <Grid>
+          <Grid className={classes.topBottomSpace}>
             <InputLabel required={true} error={errors.hasOwnProperty('email')}>
               Your email
             </InputLabel>
