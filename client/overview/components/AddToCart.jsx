@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Grid, Box, TextField, Button } from "@material-ui/core";
+import { Grid, Box, TextField, Button } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 
-const AddToCart = ({ styles, style_id }) => {
+const AddToCart = ({ styles, style_id, info }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [inventory, setInventory] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [bag, setBag] = useState({});
 
   const count = (val) => {
     let result = [];
@@ -25,8 +27,28 @@ const AddToCart = ({ styles, style_id }) => {
     return result;
   };
 
+  const addToBagButton = () => {
+    if (selectedSize !== null && inventory > 0) {
+      return (
+        <Grid item xs={8}>
+          <Button
+            variant="outlined"
+            fullWidth={true}
+            onClick={() => setBag({ info, style_id, selectedSize, quantity })}
+          >
+            ADD TO BAG
+          </Button>
+        </Grid>
+      );
+    }
+    if (inventory === 0) {
+      return;
+    }
+  };
+
   return (
-    <Box>
+    <div>
+      {selectedSize === null ? <p>Please select size</p> : null}
       <Grid container direction="row" spacing={1}>
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (
@@ -39,9 +61,13 @@ const AddToCart = ({ styles, style_id }) => {
                 }}
                 id="select-size"
                 autoComplete={true}
-                options={Object.keys(style.skus)
-                  .sort((a, b) => a - b)
-                  .map((size) => (style.skus[size] > 0 ? size : null))}
+                options={
+                  Object.values(style.skus).reduce((acc, val) => acc + val) < 1
+                    ? ["OUT OF STOCK"]
+                    : Object.keys(style.skus)
+                        .sort((a, b) => a - b)
+                        .map((size) => (style.skus[size] > 0 ? size : null))
+                }
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -59,6 +85,10 @@ const AddToCart = ({ styles, style_id }) => {
           <Grid item xs={4}>
             <Autocomplete
               autoComplete={true}
+              value={quantity}
+              onChange={(event, quantity) => {
+                setQuantity(quantity);
+              }}
               options={count(inventory)}
               renderInput={(params) => (
                 <TextField
@@ -75,6 +105,7 @@ const AddToCart = ({ styles, style_id }) => {
           <Grid item xs={4}>
             <Autocomplete
               autoComplete={true}
+              disabled={true}
               options={["-"]}
               renderInput={(params) => (
                 <TextField
@@ -89,52 +120,36 @@ const AddToCart = ({ styles, style_id }) => {
           </Grid>
         )}
       </Grid>
-      <br />
       <Grid container direction="row" spacing={1}>
-        <Grid item xs={8}>
-          <Button variant="outlined" fullWidth={true}>
-            ADD TO BAG
-          </Button>
-        </Grid>
+        {(() => addToBagButton())()}
         <Grid item xs>
           <Button variant="outlined">❤</Button>
         </Grid>
       </Grid>
-      <br />
-      <Grid container direction="row" spacing={1}>
-        <Avatar
-          style={{
-            backgroundColor: "blue",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          fb
-        </Avatar>
-        <Avatar
-          style={{
-            backgroundColor: "blue",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          tweet
-        </Avatar>
-        <Avatar
-          style={{
-            backgroundColor: "red",
-            margin: "10px",
-            width: "60px",
-            height: "60px",
-          }}
-        >
-          pintrest
-        </Avatar>
-      </Grid>
-    </Box>
+    </div>
   );
 };
 
 export default AddToCart;
+
+/* {(() => {
+          if (selectedSize !== null && inventory > 0) {
+            return (
+              <Grid item xs={8}>
+                <Button
+                  variant="outlined"
+                  fullWidth={true}
+                  onClick={() => setBag(info)}
+                >
+                  ADD TO BAG
+                </Button>
+              </Grid>
+            );
+          }
+          if (selectedSize === null) {
+            return "test";
+          }
+          if (inventory === 0) {
+            return "test2";
+          }
+        })()} */

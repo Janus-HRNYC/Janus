@@ -2,21 +2,28 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//     "& > *": {
+//       margin: theme.spacing(1),
+//     },
+//   },
+//   large: {
+//     width: theme.spacing(7),
+//     height: theme.spacing(7),
+//   },
+// }));
 
-const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
-  const classes = useStyles();
+const StyleSelector = ({
+  styles,
+  id,
+  style_id,
+  setStyle_id,
+  index,
+  setIndex,
+}) => {
+  // const classes = useStyles();
 
   return (
     <div>
@@ -32,7 +39,11 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
         }
         return <h2>{"loading..."}</h2>;
       })()}
-      <Grid container spacing={1} className={classes.root} xs={"auto"}>
+      <Grid
+        container
+        spacing={1}
+        // className={classes.root}
+      >
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (
             <Grid item key={i++}>
@@ -64,10 +75,13 @@ const StyleSelector = ({ styles, id, style_id, setStyle_id }) => {
                 color="primary"
               >
                 <Avatar
-                  className={classes.large}
+                  // className={classes.large}
                   src={style.photos[0]["thumbnail_url"]}
-                  style={{ margin: "10px", width: "80px", height: "80px" }}
-                  onClick={(e) => setStyle_id(style.style_id)}
+                  style={{ margin: "5px", width: "80px", height: "80px" }}
+                  onClick={(e) => {
+                    setStyle_id(style.style_id);
+                    setIndex(0);
+                  }}
                 />
               </Badge>
             </Grid>

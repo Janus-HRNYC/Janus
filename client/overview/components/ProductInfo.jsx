@@ -23,7 +23,7 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
   }, []);
 
   return (
-    <Box>
+    <div>
       <Grid
         container
         direction="row"
@@ -32,9 +32,16 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
         alignContent="center"
       >
         <Grid item>
-          <StarRating star={rating} />
+          <StarRating
+            star={rating}
+            //  style={{ marginTop: "30px" }}
+          />
         </Grid>
-        <Grid item>{`Read all ${ratingCount} reviews`}</Grid>
+        <Grid item>
+          <p
+          // style={{ paddingBottom: "5px" }}
+          >{`Read all ${ratingCount} reviews`}</p>
+        </Grid>
       </Grid>
       <div>{info.category}</div>
       <div>{info.name}</div>
@@ -65,8 +72,8 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
           }
         })()}
       </div>
-      <div width="50%">{info.description}</div>
-    </Box>
+      <div width="25%">{info.description}</div>
+    </div>
   );
 };
 

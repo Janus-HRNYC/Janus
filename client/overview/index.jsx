@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Gallery from "./components/Gallery";
 import ProductInfo from "./components/ProductInfo";
 import StyleSelector from "./components/StyleSelector";
 import AddToCart from "./components/AddToCart";
+import SocialMedia from "./components/SocialMedia";
 import { Grid } from "@material-ui/core";
 
 // useStyle
@@ -13,13 +13,12 @@ const Overview = (props) => {
   const {
     id,
     info,
-    getInfo,
     styles,
+    getInfo,
     getStyles,
     selected_id,
     getSelected,
   } = props;
-
   useEffect(() => {
     getInfo(id);
     getStyles(id);
@@ -31,30 +30,45 @@ const Overview = (props) => {
     setStyle_id(selected_id);
   }, [selected_id]);
 
+  const [index, setIndex] = useState(0);
+
   return (
     <Grid
       container
       direction="row"
-      spacing={2}
+      spacing={3}
       justify="center"
       alignItems="center"
-      xs={"auto"}
     >
-      {/* <Grid item xs={1}></Grid> */}
       <Grid item xs>
-        <Gallery id={id} style_id={style_id} styles={styles} />
+        <Gallery
+          id={id}
+          index={index}
+          setIndex={setIndex}
+          style_id={style_id}
+          styles={styles}
+        />
       </Grid>
-      <Grid item xs>
+      <Grid
+        item
+        xs
+        style={{
+          marginTop: "150px",
+          paddingRight: "50px",
+        }}
+      >
         <ProductInfo info={info} styles={styles} id={id} style_id={style_id} />
         <StyleSelector
           styles={styles}
           style_id={style_id}
           id={id}
           setStyle_id={setStyle_id}
+          index={index}
+          setIndex={setIndex}
         />
-        <AddToCart styles={styles} id={id} style_id={style_id} />
+        <AddToCart styles={styles} style_id={style_id} info={info} />
+        <SocialMedia />
       </Grid>
-      {/* <Grid item xs={1}></Grid> */}
     </Grid>
   );
 };
