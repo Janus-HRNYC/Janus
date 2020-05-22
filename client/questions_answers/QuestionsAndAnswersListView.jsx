@@ -13,6 +13,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   useEffect(() => {
     getAnswers(question)
   }, [question]);
+
   
   const getAnswers = (question) => {
     Axios.get(`http://18.224.200.47/qa/${question.question_id}/answers?count=100`)
@@ -31,7 +32,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     };
   
   const handleSeeMoreAnswersClicked = () => {
-    if (answerLimit === 2) setAnswerLimit(answers.length + 1);
+    if (answerLimit === 2) setAnswerLimit(answers.length + 10);
     else setAnswerLimit(2);
     setSeeMoreAnswersClicked(!seeMoreAnswersClicked);
   };
