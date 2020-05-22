@@ -86,7 +86,7 @@ const RelatedItems = (props) => {
           <Grid
             container
             direction={'row'}
-            justify="center"
+            justify="space-between"
             alignItems='center'
             spacing={3}
             margin= '16px 0px 12px 0px'
