@@ -75,7 +75,7 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
           while (i < 7) {
             return (
               <GridListTile key={i++}>
-                <img src={thumb} onClick={(e) => setIndex(i - 1)} />
+                <img src={thumb} onClick={(e) => setIndex(i - 1)} style={{}} />
               </GridListTile>
             );
           }

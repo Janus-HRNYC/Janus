@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, TextField, Button } from "@material-ui/core";
+import { Grid, Box, TextField, Button, Typography } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { StarBorder } from "@material-ui/icons";
 
-const AddToCart = ({ styles, style_id, info }) => {
+const AddToCart = ({ styles, style_id, info, id }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [inventory, setInventory] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [bag, setBag] = useState({});
+  const [bag, setBag] = useLocalStorage("cart", {});
 
   const count = (val) => {
     let result = [];
@@ -42,7 +42,11 @@ const AddToCart = ({ styles, style_id, info }) => {
         <Button
           variant="outlined"
           fullWidth={true}
-          onClick={() => setBag({ info, style_id, selectedSize, quantity })}
+          onClick={() =>
+            selectedSize !== null
+              ? setBag({ info, style_id, selectedSize, quantity })
+              : null
+          }
         >
           ADD TO CART
         </Button>
@@ -53,11 +57,16 @@ const AddToCart = ({ styles, style_id, info }) => {
   return (
     <>
       {selectedSize === null ? (
-        <div>
-          <p>Please select size</p>
-        </div>
+        <Typography variant="subtitle1" style={{ marginTop: "0px" }}>
+          Please select size
+        </Typography>
       ) : null}
-      <Grid container direction="row" spacing={1}>
+      <Grid
+        container
+        direction="row"
+        spacing={1}
+        style={{ marginTop: "-16px" }}
+      >
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (
             <Grid item key={i++} xs={6}>
@@ -142,6 +151,28 @@ const AddToCart = ({ styles, style_id, info }) => {
 
 export default AddToCart;
 
+const useLocalStorage = (key, initVal) => {
+  const [stored, setStored] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initVal;
+    } catch (err) {
+      console.error(err);
+      return initVal;
+    }
+  });
+
+  const setVal = (value) => {
+    try {
+      const valueToSave = value instanceof Function ? value(stored) : value;
+      setStored(valueToSave);
+      window.localStorage.setItem(key, JSON.stringify(valueToSave));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  return [stored, setVal];
+};
 /* {(() => {
           if (selectedSize !== null && inventory > 0) {
             return (
