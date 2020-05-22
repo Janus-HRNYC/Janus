@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import SearchForm from './SearchForm';
 import QuestionsAndAnswersList from './QuestionsAndAnswersList';
-import { Box, Grid, Container, Input, TextField } from '@material-ui/core';
+import { Box, Grid, Container, Input, TextField, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -65,8 +65,8 @@ const QuestionsAndAnswers = ({ id }) => {
       <Container>
         <Box title="QandA" className={classes.root} >
             
-            <h3 title="QandA">QUESTIONS AND ANSWERS</h3>
             
+            <Typography variant='subtitle1'>QUESTIONS & ANSWERS</Typography>
             <SearchForm
             searchTerm={searchTerm} 
             setSearchTerm={setSearchTerm} 

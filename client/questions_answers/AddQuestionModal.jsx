@@ -66,12 +66,18 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
         postQuestion();
         setImproperSubmission(false)
         setDisplayModal(!displayModal);
+        setUserDisplayName('')
+        setEmail('')
+        setQuestionAsked('')
     }
   };
 
   const handleOtherClick = () => {
     setDisplayModal(!displayModal)
     setImproperSubmission(false)
+    setUserDisplayName('')
+    setEmail('')
+    setQuestionAsked('')
 }
 
   const body = (

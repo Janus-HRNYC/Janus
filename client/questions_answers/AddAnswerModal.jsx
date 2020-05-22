@@ -70,12 +70,18 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
         postAnswer();
         setImproperSubmission(false)
         setDisplayModal(!displayModal);
+        setEmail('')
+        setUserDisplayName('')
+        setAnswerAsked('')   
     }
   };
 
   const handleOtherClick = () => {
       setDisplayModal(!displayModal)
       setImproperSubmission(false)
+      setEmail('')
+      setUserDisplayName('')
+      setAnswerAsked('')      
   }
 
   const body = (
