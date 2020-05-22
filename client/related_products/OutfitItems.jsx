@@ -90,10 +90,10 @@ const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, on
           justify='space-between'
         >
           {decreaseButtonAction()}
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} visibility='hidden' /> 
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} visibility='hidden' /> 
           {outfit.slice(limit, limit + 2).map((item, i) => {
             return (
-              <Outfitcards key={Math.random()} item={item.results} removeOutfit={onDeleteOutfit} info={info} styles={styles} onUpdateOutfit={onUpdateOutfit} />
+              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info} styles={styles} onUpdateOutfit={onUpdateOutfit} />
             )
           })}          
 
@@ -111,7 +111,7 @@ const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, on
           <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} />
           {outfit.slice(limit, limit + 3).map((item, i) => {
             return (
-              <Outfitcards key={Math.random()} item={item.results} removeOutfit={onDeleteOutfit} info={info} styles={styles} />
+              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info} styles={styles} />
             )
           })}
           {increaseButtonAction()}
