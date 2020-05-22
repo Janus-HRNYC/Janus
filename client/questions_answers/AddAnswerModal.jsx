@@ -162,8 +162,8 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
   );
 
   return (
-    <div title="QandA">
-      <p title="QandA" onClick={handleClick} style={{cursor: 'pointer'}}>Add Answer</p>
+    <React.Fragment>
+      <span title="QandA" onClick={handleClick} style={{cursor: 'pointer'}}>Add Answer</span>
       <Modal
         title="QandA"
         open={displayModal}
@@ -173,7 +173,8 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
       >
         {body}
       </Modal>
-    </div>
+    </React.Fragment>
+    
     
   );
 };
