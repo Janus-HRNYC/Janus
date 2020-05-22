@@ -29,25 +29,25 @@ const AddToCart = ({ styles, style_id, info }) => {
   };
 
   const addToBagButton = () => {
-    if (selectedSize !== null && inventory > 0) {
-      return (
-        <Grid item xs={8}>
-          <Button
-            variant="outlined"
-            fullWidth={true}
-            onClick={() => setBag({ info, style_id, selectedSize, quantity })}
-          >
-            ADD TO CART
-          </Button>
-        </Grid>
-      );
-    } else {
-      return (
-        <Grid item xs={8}>
-          <div style={{ width: "326px", height: "44px" }}></div>
-        </Grid>
-      );
-    }
+    // if (inventory < 1) {
+    //   return (
+    //     <Grid item xs={8}>
+    //       <div style={{ width: "326px", height: "44px" }}></div>
+    //     </Grid>
+    //   );
+    // }
+    // if (selectedSize !== null && inventory > 0) {
+    return (
+      <Grid item xs={8}>
+        <Button
+          variant="outlined"
+          fullWidth={true}
+          onClick={() => setBag({ info, style_id, selectedSize, quantity })}
+        >
+          ADD TO CART
+        </Button>
+      </Grid>
+    );
   };
 
   return (

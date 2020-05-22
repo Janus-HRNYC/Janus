@@ -31,6 +31,9 @@ const Overview = (props) => {
   }, [selected_id]);
 
   const [index, setIndex] = useState(0);
+  useEffect(() => {
+    setIndex(0);
+  }, [id]);
 
   return (
     <Grid
@@ -69,7 +72,9 @@ const Overview = (props) => {
           setIndex={setIndex}
           info={info}
         />
+        <br />
         <AddToCart styles={styles} style_id={style_id} info={info} />
+        <br />
         <SocialMedia />
       </Grid>
     </Grid>
