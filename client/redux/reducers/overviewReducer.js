@@ -13,7 +13,7 @@ const productIdReducer = {
   getStyles: (state = [], action) => {
     switch (action.type) {
       case actionType.getStyles:
-        return [...state].concat(action.results);
+        return action.results;
       default:
         return state;
     }

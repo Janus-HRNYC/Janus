@@ -35,10 +35,13 @@ const Overview = (props) => {
   return (
     <Grid
       container
-      direction="row"
       spacing={3}
-      justify="center"
-      alignItems="center"
+      style={{
+        direction: "row",
+        justify: "space-between",
+        marginTop: "150px",
+        marginBottom: "50px",
+      }}
     >
       <Grid item xs>
         <Gallery
@@ -52,10 +55,9 @@ const Overview = (props) => {
       <Grid
         item
         xs
-        style={{
-          marginTop: "150px",
-          paddingRight: "50px",
-        }}
+        // style={{
+        //   paddingRight: "50px",
+        // }}
       >
         <ProductInfo info={info} styles={styles} id={id} style_id={style_id} />
         <StyleSelector
@@ -65,6 +67,7 @@ const Overview = (props) => {
           setStyle_id={setStyle_id}
           index={index}
           setIndex={setIndex}
+          info={info}
         />
         <AddToCart styles={styles} style_id={style_id} info={info} />
         <SocialMedia />

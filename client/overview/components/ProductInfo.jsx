@@ -32,19 +32,21 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
         alignContent="center"
       >
         <Grid item>
-          <StarRating
-            star={rating}
-            //  style={{ marginTop: "30px" }}
-          />
+          <StarRating star={rating} />
         </Grid>
         <Grid item>
-          <p
-          // style={{ paddingBottom: "5px" }}
-          >{`Read all ${ratingCount} reviews`}</p>
+          <Box>{`Read all ${ratingCount} reviews`}</Box>
         </Grid>
       </Grid>
-      <div>{info.category}</div>
-      <div>{info.name}</div>
+      <Box>{info.category}</Box>
+      <Box
+        style={{
+          fontWeight: "bold",
+          fontSize: "24px",
+        }}
+      >
+        {info.name}
+      </Box>
       <div>
         {(() => {
           for (let i = 0; i < styles.length; i++) {
