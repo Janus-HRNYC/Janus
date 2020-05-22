@@ -1,11 +1,18 @@
 .QAthumnails {
     object-fit: cover;
-    width: 150px;
-    height: 150px
+    width: 80px;
+    height: 80px;
+    margin: 2px
 }
 
-#QAthumnails {
-    object-fit: cover;
-    width: 150px;
-    height: 150px
+#warningText {
+    color: red;
+}
+
+#warningTextBold {
+    font-weight: 800
+}
+
+#smallFont {
+    font-size: '8px'
 }

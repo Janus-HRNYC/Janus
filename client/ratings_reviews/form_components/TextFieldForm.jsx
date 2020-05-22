@@ -53,8 +53,6 @@ const TextFieldForm = ({
         error={error}
         fullWidth
       />
-      <br />
-      <br />
     </>
   );
 };
