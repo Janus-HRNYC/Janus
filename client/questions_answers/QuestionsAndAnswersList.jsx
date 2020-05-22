@@ -29,19 +29,30 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
         MORE ANSWERED QUESTIONS
       </Button>
   };
+  
 
   const searchFilter = () => {
       let filteredQuestions = [];
       if (searchTerm.length > 2) {
-          for (const question of questions) {
-            const lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
-            const lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
-            lowerCaseQuestion.includes(lowerCaseSearchTerm) ? filteredQuestions.push(question) : null;
-          }
-          return filteredQuestions
-      } else {
-          return questions
-      }
+        for (const question of questions) {
+                var found = false;
+                const lowerCaseQuestionsForSecondCheck = question.question_body.toLowerCase();
+                const searchArray = searchTerm.toLowerCase().split(' ')
+                searchArray.forEach((indAnswer) => {
+                  if (lowerCaseQuestionsForSecondCheck.includes(indAnswer)) {
+                    found = true;
+                  }
+                })
+             
+              const lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
+              const lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
+              lowerCaseQuestion.includes(lowerCaseSearchTerm) || found === true ? filteredQuestions.push(question) : null;
+            }
+            return filteredQuestions
+        } else {
+            return questions
+        }
+      
   };
 
   const useStyles = makeStyles((theme) => ({

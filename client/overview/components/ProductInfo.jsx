@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import StarRating from "../../ratings_reviews/StarRating";
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Typography } from "@material-ui/core";
 
 const ProductInfo = ({ info, id, styles, style_id }) => {
   const [rating, setRating] = useState(0);
@@ -35,59 +35,71 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
         <Grid item>
           <StarRating star={rating} />
         </Grid>
-        <Grid item>
-          <Box>{`Read all ${ratingCount} reviews`}</Box>
+        <Grid
+          item
+          style={{
+            marginTop: "4px",
+          }}
+        >
+          <Typography variant="subtitle1">
+            <Box>{`Read all ${ratingCount} reviews`}</Box>
+          </Typography>
         </Grid>
       </Grid>
-
-      <Box>{info.category}</Box>
-      <Box
-        style={{
-          fontWeight: "bold",
-          fontSize: "24px",
-        }}
+      <Typography
+        variant="subtitle1"
+        style={{ marginTop: "10px", marginBottom: "-2px" }}
       >
-        {info.name}
-      </Box>
-      <div>
-        {(() => {
-          for (let i = 0; i < styles.length; i++) {
-            if (styles[i].style_id === style_id && styles[i].sale_price > 0) {
-              return (
-                <Grid
-                  container
-                  direction="row"
-                  marginTop="16px"
-                  alignItems="center"
-                  spacing={1}
-                >
-                  <Grid item>
+        {info.category}
+      </Typography>
+      <Typography variant="h4">
+        <Box
+          style={{
+            fontWeight: "bold",
+            // fontSize: "24px",
+          }}
+        >
+          {info.name}
+        </Box>
+      </Typography>
+      {(() => {
+        for (let i = 0; i < styles.length; i++) {
+          if (styles[i].style_id === style_id && styles[i].sale_price > 0) {
+            return (
+              <Grid container direction="row" alignItems="center" spacing={1}>
+                <Grid item style={{ marginTop: "8px", marginBottom: "8px" }}>
+                  <Typography variant="subtitle1">
                     <Box color="red">{`$ ${styles[i].sale_price}`}</Box>
-                  </Grid>
-                  <Grid
-                    item
-                    style={{
-                      textDecorationLine: "line-through",
-                      textDecorationStyle: "solid",
-                    }}
-                  >
-                    {`$ ${styles[i].original_price}`}
-                  </Grid>
+                  </Typography>
                 </Grid>
-              );
-            } else if (styles[i].style_id === style_id) {
-              return (
-                <div>
+                <Grid
+                  item
+                  style={{
+                    textDecorationLine: "line-through",
+                    textDecorationStyle: "solid",
+                  }}
+                >
+                  <Typography variant="subtitle1">{`$ ${styles[i].original_price}`}</Typography>
+                </Grid>
+              </Grid>
+            );
+          } else if (styles[i].style_id === style_id) {
+            return (
+              <div>
+                <Typography
+                  variant="subtitle1"
+                  style={{ marginTop: "8px", marginBottom: "8px" }}
+                >
                   <Box> {`$ ${styles[i].original_price}`}</Box>
-                </div>
-              );
-            }
+                </Typography>
+              </div>
+            );
           }
-        })()}
-      </div>
-      <div width="25%" marginTop="16px" marginBottom="16px">
-        {info.description}
-      </div>
+        }
+      })()}
+      <Typography variant="subtitle1">
+        <div width="25%">{info.description}</div>
+      </Typography>
     </div>
   );
 };

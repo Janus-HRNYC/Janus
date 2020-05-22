@@ -42,7 +42,7 @@ const Overview = (props) => {
       style={{
         direction: "row",
         justify: "space-between",
-        marginTop: "150px",
+        marginTop: "75px",
         marginBottom: "50px",
       }}
     >
@@ -73,7 +73,7 @@ const Overview = (props) => {
           info={info}
         />
         <br />
-        <AddToCart styles={styles} style_id={style_id} info={info} />
+        <AddToCart styles={styles} style_id={style_id} info={info} id={id} />
         <br />
         <SocialMedia />
       </Grid>

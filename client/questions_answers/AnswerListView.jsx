@@ -46,7 +46,9 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
           padding: theme.spacing(0),
           width: '80px',
           height: '80px',
-          objectFit: 'cover'
+          objectFit: 'cover',
+          borderStyle: 'solid',
+          cursor: 'pointer'
         },
         yesAnswerMargin: {
           margin: theme.spacing(1.5),
@@ -77,16 +79,16 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
     return (
         <Box className={classes.root} title="QandA">
             <Grid container>
-              <Typography variant="h6">
                 <Grid item>
-                <b title="QandA">A:</b>&nbsp;
-                </Grid>
+              <Typography variant="h6">
+                A:&nbsp;
               </Typography>
-              <Typography variant="body1">
+                </Grid>
                 <Grid item className={classes.answerTextMarginTop}>
+              <Typography variant="body1">
                 {answer.body}
-                </Grid>
               </Typography>
+                </Grid>
             </Grid>
             {/* <Typography variant="body1">
               
