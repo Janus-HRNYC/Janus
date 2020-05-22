@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
 const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
   const classes = useStyles();
-
+  console.log(item);
   const displayPhoto = () => {
     const defaultPhoto = {
       id: 1,
@@ -39,72 +39,64 @@ const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
       title: 'default',
       description: 'default'
     }
-    if (!styles) {
+    if (!item.styles) {
       return (
         null
       )
     } else {
       let photoSrc = '';
-      photoSrc = getDefaultImg(styles);
+      photoSrc = getDefaultImg(item.styles);
       return (
         <CardMedia
           className={classes.media}
           image={photoSrc || defaultPhoto.src}
-          title={item.name}
+          title={item.results.name}
         />
       )
     }
   }
-  let results = salePrice(styles);
+  let results = salePrice(item.styles);
   const stylePrice = () => {
-    if (!results) {
+    results = salePrice(item.styles);
+    if (item.styles) {
       return (
         <Typography variant="body2" component="p">
-          {item.name}
+          {item.results.name}
           <br />
-          {`$${item.price}`}
+          {`$${results || 56}`}
         </Typography>
       )
     } else if (results[0] !== 'S') {
       return (
         <Typography variant="body2" component="p">
-          {item.name}
+          {item.results.name}
           <br />
-          {`$${results}`}
+          ${results || 65 }
         </Typography>
       )
     } else {
       return (
         <Typography variant="body2" component="p" color='red'>
-          {item.name}
+          {item.results.name}
           <br />
-          {`$${results}SALE`}
+          ${results}
         </Typography>
       )
     }
   }
   const showRating = () => {
-    let rating = avgRatings(item.ratings);
-    if (rating === 0) {
-      return (
-        <Box component='fieldset' mb={3} borderColor='transparent' visibility='hidden'>
-          <Rating name='read-only' value={0} readOnly />
-        </Box>
-      )
-    } else {
       return (
         <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Rating name='read-only' value={(rating)} readOnly />
+          <Rating name='read-only' value={Math.floor(Math.random() * (5 - 1) + 1)} readOnly />
         </Box>
       )
     }
-  }
   const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card>
       <CardHeader
         action={
-          <IconButton aria-label="settings" onClick={() => { removeOutfit(item.id) }}>
+          <IconButton aria-label="settings" onClick={() => { removeOutfit(item.results.id) }}>
             <HighlightOffIcon />
           </IconButton>
         }
@@ -114,13 +106,13 @@ const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
         <Typography variant="h5" component="h2">
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
-          {item.category}
+          {item.results.category}
         </Typography>
         {stylePrice()}
         {showRating()}
-        <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Rating name='read-only' value={5} readOnly />
-        </Box>
+        {/* <Box component='fieldset' mb={3} borderColor='transparent'>
+          <Rating name='read-only' value={Math.floor(Math.random() * (5-1) + 1)} readOnly />
+        </Box> */}
       </CardContent>
     </Card>
   );

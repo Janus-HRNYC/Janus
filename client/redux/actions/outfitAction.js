@@ -10,7 +10,7 @@ export const addOutfitAction = (outfit) => {
   }
   else {
     results = results.filter((ele) => {
-      return outfit.resutls.id !== ele.results.id
+      return outfit.results.id !== ele.results.id
     })
     console.log('|AFTER STORAGE| ', results);
   }
@@ -43,7 +43,6 @@ export const updateOutfit = () => {
     console.log('|LOCAL STORAGE| |IF| ', results)
     results = [];
   }
-  window.localStorage.setItem('outfits', JSON.stringify(results));
   return {
     type: actionType.updateOutfit,
     results: results,

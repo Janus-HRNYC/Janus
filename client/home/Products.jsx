@@ -10,7 +10,9 @@ import OverviewContainer from '../redux/containers/overviewContainer';
 const Products = () => {
   return (
     <div>
-      <OverviewContainer />
+      <div>
+        <OverviewContainer />
+      </div>
       <div>
         <h2>RELATED PRODUCTS</h2>
         <RelatedItems />
