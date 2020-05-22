@@ -41,15 +41,22 @@ const AddToCart = ({ styles, style_id, info }) => {
           </Button>
         </Grid>
       );
-    }
-    if (inventory === 0) {
-      return;
+    } else {
+      return (
+        <Grid item xs={8}>
+          <div style={{ width: "326px", height: "44px" }}></div>
+        </Grid>
+      );
     }
   };
 
   return (
     <>
-      {selectedSize === null ? <p>Please select size</p> : null}
+      {selectedSize === null ? (
+        <div>
+          <p>Please select size</p>
+        </div>
+      ) : null}
       <Grid container direction="row" spacing={1}>
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (

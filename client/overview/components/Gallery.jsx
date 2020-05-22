@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Fab } from "@material-ui/core";
+import { makeStyles, Fab, Grid } from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
 
 const Gallery = ({ id, style_id, styles, index, setIndex }) => {
   const [images, setImages] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
   useEffect(() => {
-    let result = [];
+    let photos = [];
+    let thumbs = [];
     for (let i = 0; i < styles.length; i++) {
       if (styles[i].style_id === style_id) {
         const payload = styles[i].photos;
         for (let j = 0; j < payload.length; j++) {
-          result.push(payload[j]["url"]);
+          photos.push(payload[j]["url"]);
+          thumbs.push(payload[j]["thumbnail_url"]);
         }
       }
     }
-    setImages(result);
+    setImages(photos);
+    setThumbnails(thumbs);
   }, [style_id]);
 
   const rightClick = () => {
@@ -43,6 +47,22 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
           zIndex: 10,
         }}
       />
+
+      {/* {thumbnails.map((thumbnail, i = 0) => (
+        <img
+          key={i++}
+          src={thumbnail}
+          style={{
+            flexDirection: "column",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+            left: 5,
+            zIndex: 12,
+          }}
+        />
+      ))} */}
+
       {index === 0 ? null : (
         <Fab
           onClick={leftClick}

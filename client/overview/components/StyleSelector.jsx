@@ -48,20 +48,12 @@ const StyleSelector = ({
         {styles.map((style, i = 0) =>
           style.style_id === style_id ? (
             <Grid item key={i++}>
-              <Badge
-                overlap="circle"
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                badgeContent="✔"
-                color="primary"
-              >
+              <Badge overlap="circle" badgeContent="✔" color="primary">
                 <Avatar
                   sizes={"large"}
                   variant={"circle"}
                   src={style.photos[0]["thumbnail_url"]}
-                  style={{ margin: "10px", width: "80px", height: "80px" }}
+                  style={{ width: "80px", height: "80px" }}
                 />
               </Badge>
             </Grid>
