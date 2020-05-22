@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
-import { Box, Grid, Badge, Avatar, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Badge,
+  Avatar,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -32,9 +39,16 @@ const StyleSelector = ({
         for (let i = 0; i < styles.length; i++) {
           if (styles[i].style_id === style_id) {
             return (
-              <Box
-                style={{ marginBottom: "8px", fontWeight: "bold" }}
-              >{`STYLE > ${styles[i].name}`}</Box>
+              <Typography
+                variant="h6"
+                style={{
+                  marginBottom: "4px",
+                  marginTop: "14px",
+                  fontWeight: "bold",
+                }}
+              >
+                {`STYLE > ${styles[i].name}`}
+              </Typography>
             );
           }
         }
@@ -55,7 +69,11 @@ const StyleSelector = ({
                   sizes={"large"}
                   variant={"circle"}
                   src={style.photos[0]["thumbnail_url"]}
-                  style={{ width: "80px", height: "80px" }}
+                  style={{
+                    margin: "8px",
+                    width: "80px",
+                    height: "80px",
+                  }}
                 />
               </Badge>
             </Grid>
@@ -72,10 +90,13 @@ const StyleSelector = ({
                 <Avatar
                   // className={classes.large}
                   src={style.photos[0]["thumbnail_url"]}
-                  style={{ margin: "5px", width: "80px", height: "80px" }}
+                  style={{
+                    margin: "8px",
+                    width: "80px",
+                    height: "80px",
+                  }}
                   onClick={(e) => {
                     setStyle_id(style.style_id);
-                    // setIndex(0);
                   }}
                 />
               </Badge>
