@@ -53,16 +53,18 @@ const QuestionsAndAnswers = ({ id }) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       margin: 'auto',
-      maxWidth: '1100px'
+      maxWidth: '1100px',
+      marginTop: theme.spacing(8)
     },
   }));
 
   const classes = useStyles();
 
   return (
-     <div title="QandA">
-        <Box title="QandA" className={classes.root} id='QAbottomMargin'>
-            <Container >
+     <Box className={classes.root}>
+      <Container>
+        <Box title="QandA" className={classes.root} >
+            
             <h3 title="QandA">QUESTIONS AND ANSWERS</h3>
             
             <SearchForm
@@ -78,9 +80,9 @@ const QuestionsAndAnswers = ({ id }) => {
             questions={questions}
             />
             
-            </Container>
         </Box>
-     </div> 
+            </Container>
+            </Box>
   );
 };
 

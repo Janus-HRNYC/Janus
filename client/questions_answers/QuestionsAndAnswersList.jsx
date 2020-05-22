@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
 import AddQuestionModal from './AddQuestionModal';
 import { Grid, Box, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, productName, searchTerm }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
@@ -43,13 +44,21 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
       }
   };
 
+  const useStyles = makeStyles((theme) => ({
+    moreQuestionsMargin: {
+      marginRight: theme.spacing(2)
+    }
+  }));
+
+  const classes = useStyles();
+
   return (
     <Box title="QandA">
       
         {searchFilter().sort((a, b) => (b.question_helpfulness - a.question_helpfulness))
           .map((question, i) => renderQuestions(question, i))}
       <Grid container>
-        <Grid item>
+        <Grid item className={classes.moreQuestionsMargin}>
           {moreQuestionsButton()}
         </Grid>
         <Grid item>
