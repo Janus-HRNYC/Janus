@@ -76,12 +76,12 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const useStyles = makeStyles((theme) => ({
     root: {
-      minHeight: '100px',
+      
       maxHeight: '450px',
-      overflowY: noOverFlow(),
+      overflowY: 'auto',
       overflowX: 'hidden',
       width: '1100px',
-      height: 'auto',
+      height: 'calc(auto + 25px)',
       margin: theme.spacing(0),
       padding: theme.spacing(0)
   
@@ -93,6 +93,22 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
       textAlign: 'right',
       whiteSpace: 'nowrap',
       position: 'flex'
+    },
+    questionText: {
+      fontWeight: 800,
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2)
+    },
+    borderLeft: {
+      borderLeft: "thin solid black"
+    },
+    underLineText: {
+      textDecoration: 'underline',
+      cursor: 'pointer'
+    },
+    helpFulAddAnswerText: {
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2)
     }
   }));
 
@@ -100,44 +116,37 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
  
 
   return (
-   
-    <Grid title="QandA" container justify='space-between' direction='row'>
-        <Grid title="QandA" item xs={6}
-         >
-        <Typography variant="body1">
-          <p>
-              <b>Q:</b>{' '}
-              <b>{question.question_body}</b>
-          </p>
-        </Typography>
+    <Grid>
+      <Grid title="QandA" container justify='space-between' direction='row'>
+        <Typography variant="h6">
+        <Grid title="QandA" item className={classes.questionText}>
+          Q: {question.question_body}
         </Grid >
-        <Typography variant="caption" align="right">
-          <Grid title="QandA" item xs={3} className={classes.textAlign}>
-              <p title="QandA" onClick={handleHelpfulQuestionClick} 
-              style={{cursor: 'pointer'}}>
-              Helpful? Yes({question.question_helpfulness})
-              </p>
-          </Grid >
         </Typography>
         <Typography variant="caption" align="right">
-          <Grid item xs={3} className={classes.textAlign}>
+          <Grid item  className={classes.helpFulAddAnswerText}>
+            Helpful?&nbsp;&nbsp;
+            <span title="QandA" onClick={handleHelpfulQuestionClick}  className={classes.underLineText}>
+              Yes
+            </span>&nbsp;
+            ({question.question_helpfulness})
+            &nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;
             <AddAnswerModal 
             getAnswers={getAnswers} 
-            question={question} 
+            question={question}
             productName={productName}/>
-
           </Grid>
-
-        </Typography>
-        
-        
-        {
-          answers.length > 0 ?
-          <Grid title="QandA" className={classes.root}>
-            {displayAnswersIfAny()}
-          </Grid>
-          : null
-        }
+          </Typography>
+        </Grid>
+        <Grid>
+          {
+            answers.length > 0 ?
+            <Grid title="QandA" className={classes.root}>
+              {displayAnswersIfAny()}
+            </Grid>
+            : null
+          }
+        </Grid>
             
         <Grid className={classes.moreAnswersButton}>{seeMoreAnswersButton()}</Grid>
     </Grid>
