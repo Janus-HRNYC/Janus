@@ -27,9 +27,9 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = ({ addOutfit, id, info }) => {
+const AddOutFitCard = ({ addOutfit, id, }) => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const bull = <span className={classes.bullet}>•</span>
   return (
     <Card>
       <CardHeader
@@ -41,7 +41,6 @@ const AddOutFitCard = ({ addOutfit, id, info }) => {
       />
       <CardContent>
         <Typography variant="h5" component="h2">
-
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           Add to Outfit
