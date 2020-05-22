@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     fontSize: 14,
   },
   pos: {
-    marginBottom: 12,
+    marginBottom: 8,
   },
 });
 
@@ -32,7 +32,14 @@ const AddOutFitCard = ({ addOutfit, id, styles }) => {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>
   return (
-    <Card>
+    <Card
+      container
+      direction={'row'}
+      justify="space-between"
+      alignItems='center'
+      spacing={3}
+      margin='16px 0px 12px 0px'
+    >
       <CardHeader
         action={
           <IconButton aria-label="settings" onClick={() => { addOutfit(id, styles) }}>
@@ -42,9 +49,9 @@ const AddOutFitCard = ({ addOutfit, id, styles }) => {
       />
       <CardContent>
         <Typography variant="h5" component="h2">
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
           Add to Outfit
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">          
         </Typography>
         <Typography variant="body2" component="p">
           <br />

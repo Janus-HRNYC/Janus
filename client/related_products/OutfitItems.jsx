@@ -5,12 +5,12 @@ import AddOutFitCard from './AddOutFitCard';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, onUpdateOutfit }) => {
   console.log(`|OUTFIT|`, outfit);
   const [limit, setLimit] = useState(0);
-  const [outfits, setOutfits] = useState([]); 
+  const [outfits, setOutfits] = useState([]);
   useEffect(() => {
     getStoredOutfits();
     onUpdateOutfit()
@@ -57,13 +57,15 @@ const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, on
     }
   }
   const increaseButtonAction = () => {
-    if (limit === outfit.length-2) {
+    if (limit === outfit.length - 1 ) {
       return (
-        <ArrowForwardIosIcon visibility='hidden' />
+        <IconButton aria-label={`setting`} onClick={increase} visibility='hidden' >
+          <ArrowForwardIosIcon />
+        </IconButton>
       )
     } else {
       return (
-        <IconButton aria-label={`setting`} onClick={increase} visibility='hidden' >
+        <IconButton aria-label={`setting`} onClick={increase} >
           <ArrowForwardIosIcon />
         </IconButton>
       )
@@ -87,16 +89,18 @@ const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, on
         <Grid
           container
           direction={'row'}
-          justify='space-between'
+          justify="space-between"
+          alignItems='center'
+          spacing={3}
+          margin='16px 0px 12px 0px'
         >
           {decreaseButtonAction()}
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} visibility='hidden' /> 
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} />
           {outfit.slice(limit, limit + 2).map((item, i) => {
             return (
               <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info} styles={styles} onUpdateOutfit={onUpdateOutfit} />
             )
-          })}          
-
+          })}
           {increaseButtonAction()}
         </Grid >
       )
@@ -109,7 +113,7 @@ const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, on
         >
           {decreaseButtonAction()}
           <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} />
-          {outfit.slice(limit, limit + 3).map((item, i) => {
+          {outfit.slice(limit, limit + 1).map((item, i) => {
             return (
               <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info} styles={styles} />
             )
