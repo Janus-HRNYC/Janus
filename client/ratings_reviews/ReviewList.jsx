@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   list: {
     maxHeight: '700px',
     overflow: 'auto',
-    paddingBottom: theme.spacing(2),
+    padding: theme.spacing(2),
   },
 
   selected: {
@@ -36,13 +36,13 @@ const ReviewList = (props) => {
   const classes = useStyles();
   const {
     list,
-    id,
     displayBySort,
     ratingsMeta,
     postReview,
     limit,
     setLimit,
     setFilterList,
+    info,
   } = props;
   const [sort, setSort] = useState('relevant');
   const listLength = list.length;
@@ -68,7 +68,7 @@ const ReviewList = (props) => {
 
   const handleChange = (e) => {
     setSort(e.target.value);
-    displayBySort(id, e.target.value);
+    displayBySort(info.id, e.target.value);
     setLimit(2);
     setFilterList([]);
   };
@@ -107,7 +107,11 @@ const ReviewList = (props) => {
       <Grid className={classes.list}>{renderReviewItem()}</Grid>
       <Grid container direction='row'>
         {renderMoreReviewButton()}
-        <AddReview ratingsMeta={ratingsMeta} postReview={postReview} id={id} />
+        <AddReview
+          ratingsMeta={ratingsMeta}
+          postReview={postReview}
+          info={info}
+        />
       </Grid>
     </>
   );

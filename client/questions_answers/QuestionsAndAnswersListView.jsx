@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import AnswerListView from './AnswerListView';
 import AddAnswerModal from './AddAnswerModal';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName }) => {
+const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName, searchTerm }) => {
   const [answers, setAnswers] = useState([]);
   const [answerLimit, setAnswerLimit] = useState(2);
   const [seeMoreAnswersClicked, setSeeMoreAnswersClicked] = useState(false);
@@ -30,7 +31,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     };
   
   const handleSeeMoreAnswersClicked = () => {
-    if (answerLimit === 2) setAnswerLimit(answers.length);
+    if (answerLimit === 2) setAnswerLimit(answers.length + 1);
     else setAnswerLimit(2);
     setSeeMoreAnswersClicked(!seeMoreAnswersClicked);
   };
@@ -59,40 +60,86 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     return 'Collapse Answers';
   };
 
-  // const outlineSearchTerms = () => {
-  //   if (question.question_body.toLowerCase().includes(searchTerm.toLowerCase()) {
-  //     let index = question.question_body.toLowerCase().indexOf(searchTerm.toLowerCase())
-  //   }
-  // }
+  
+  const noOverFlow = () => {
+    let picture = false
+    answers.forEach(answer => {
+      if (answer.photos.length > 0 && !seeMoreAnswersClicked) {
+        console.log('hitting foeEach')
+        picture = true
+      }
+    })
+    if (picture) return 'hidden'
+    else return 'auto'
+    
+  }
+
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      minHeight: '100px',
+      maxHeight: '450px',
+      overflowY: noOverFlow(),
+      overflowX: 'hidden',
+      width: '1100px',
+      height: 'auto',
+      margin: theme.spacing(0),
+      padding: theme.spacing(0)
+  
+    },
+    moreAnswersButton: {
+      topMargin: theme.spacing(0)
+    },
+    textAlign: {
+      textAlign: 'right',
+      whiteSpace: 'nowrap',
+      position: 'flex'
+    }
+  }));
+
+  const classes = useStyles()
+ 
 
   return (
    
     <Grid title="QandA" container justify='space-between' direction='row'>
-        <Grid title="QandA" item xs={8}
+        <Grid title="QandA" item xs={6}
          >
-        <p>
-            <b>Q:</b>{' '}
-            <b title="QandA">{question.question_body}</b>
-        </p>
+        <Typography variant="body1">
+          <p>
+              <b>Q:</b>{' '}
+              <b>{question.question_body}</b>
+          </p>
+        </Typography>
         </Grid >
-        <Grid title="QandA" item xs={2}>
-            <p title="QandA" onClick={handleHelpfulQuestionClick} 
-            style={{cursor: 'pointer'}}>
-            Helpful? Yes({question.question_helpfulness})
-            </p>
-        </Grid >
-          
+        <Typography variant="caption" align="right">
+          <Grid title="QandA" item xs={3} className={classes.textAlign}>
+              <p title="QandA" onClick={handleHelpfulQuestionClick} 
+              style={{cursor: 'pointer'}}>
+              Helpful? Yes({question.question_helpfulness})
+              </p>
+          </Grid >
+        </Typography>
+        <Typography variant="caption" align="right">
+          <Grid item xs={3} className={classes.textAlign}>
             <AddAnswerModal 
             getAnswers={getAnswers} 
             question={question} 
             productName={productName}/>
+
+          </Grid>
+
+        </Typography>
         
         
-        
-        <Grid title="QandA">
+        {
+          answers.length > 0 ?
+          <Grid title="QandA" className={classes.root}>
             {displayAnswersIfAny()}
-            {seeMoreAnswersButton()}
-        </Grid>
+          </Grid>
+          : null
+        }
+            
+        <Grid className={classes.moreAnswersButton}>{seeMoreAnswersButton()}</Grid>
     </Grid>
   );
 };
