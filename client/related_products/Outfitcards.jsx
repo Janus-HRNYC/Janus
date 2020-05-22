@@ -50,19 +50,20 @@ const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
         <CardMedia
           className={classes.media}
           image={photoSrc || defaultPhoto.src}
-          title={item.name}
+          title={item.results.name}
         />
       )
     }
   }
   let results = salePrice(item.styles);
   const stylePrice = () => {
-    if (!results) {
+    results = salePrice(item.styles);
+    if (item.styles) {
       return (
         <Typography variant="body2" component="p">
           {item.results.name}
           <br />
-          {`$${item.price}`}
+          {`$${results || 56}`}
         </Typography>
       )
     } else if (results[0] !== 'S') {
@@ -70,7 +71,7 @@ const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
         <Typography variant="body2" component="p">
           {item.results.name}
           <br />
-          {`$${results}`}
+          ${results || 65 }
         </Typography>
       )
     } else {
@@ -78,7 +79,7 @@ const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
         <Typography variant="body2" component="p" color='red'>
           {item.results.name}
           <br />
-          {`$${results}SALE`}
+          ${results}
         </Typography>
       )
     }
