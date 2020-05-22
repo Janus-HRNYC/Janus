@@ -1,36 +1,63 @@
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton'
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getDefaultImg } from '../utility/relatedUtility.js';
 import ComparisonModal from './ComparisonModal';
 import { salePrice, avgRatings } from './../utility/relatedUtility.js';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 
 
-const useStyles = makeStyles({  
-  media: {
-    paddingTop: '100%', // 16:9
+
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(8),
   },
-  title: {
-    fontSize: 14,
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
-  pos: {
-    marginBottom: 12,
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
   },
-  cardHeader: {
- 
-  }
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
 
-});
+// const useStyles = makeStyles({  
+//   media: {
+//     // paddingTop: '100%', // 16:9
+//     height: 120,
+//   // },
+//   // title: {
+//   //   fontSize: 14,
+//   // },
+//   // pos: {
+//   //   marginBottom: 12,
+//   // },
+//   cardHeader: { 
+//     height: 10,
+//   },
+//   card: {
+//     width: 225
+//   }
+
+// });
 
 const relatedItemsCard = (props) => {
   const {
@@ -38,7 +65,7 @@ const relatedItemsCard = (props) => {
     id,
     info,
   } = props;
-
+  const classes = useStyles();
   useEffect(() => {
     displayComparison()
   }, [])
@@ -52,7 +79,7 @@ const relatedItemsCard = (props) => {
       photoSrc = getDefaultImg(item.styles);
       return (
         <CardMedia
-          className={classes.media}
+          className={classes.cardMedia}
           image={photoSrc}
           title={item.name}
         />
@@ -114,14 +141,13 @@ const relatedItemsCard = (props) => {
       )
     }
   }
-  const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
         className={classes.cardHeader}
         action={
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" color='secondary' size='small' >
             {displayComparison()}
           </IconButton>
         }

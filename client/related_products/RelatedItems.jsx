@@ -74,6 +74,7 @@ const RelatedItems = (props) => {
       )
     }
   }
+
   const getReleatedItems = () => {
     // TODO: REFACTOR
     if (!relatedProducts.state) {
@@ -85,7 +86,10 @@ const RelatedItems = (props) => {
           <Grid
             container
             direction={'row'}
-            justify='space-between'
+            justify="center"
+            alignItems='center'
+            spacing={3}
+            margin= '16px 0px 12px 0px'
           >
             {decreaseButtonAction()}
             {relatedProducts.state.slice(limit, limit + 3).map((item, i) => {

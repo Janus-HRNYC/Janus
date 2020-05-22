@@ -30,8 +30,6 @@ const useStyles = makeStyles({
 });
 
 const Outfitcards = ({ onUpdateOutfit, removeOutfit, styles, item }) => {
-  console.log('ITEM________________________________', item.name);
-  console.log('ITEM________________________________', styles);
   const classes = useStyles();
 
   const displayPhoto = () => {

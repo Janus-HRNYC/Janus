@@ -12,6 +12,7 @@ import StarIcon from '@material-ui/icons/Star';
 import Checkbox from '@material-ui/core/Checkbox';
 import CommentIcon from '@material-ui/icons/Comment';
 import comparisonBuilder from '../utility/relatedUtility.js';
+import DoneIcon from '@material-ui/icons/Done'
 
 const getModalStyle = () => {
   const top = 50;
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     overflow: 'scroll'
+  },
+  compareItem: {
+    width: "33%"
   }
 }));
 
@@ -63,7 +67,6 @@ const ComparisonModal = ({ currentItem, info }) => {
 
   let comparisonObj = makeComparison(info.features, currentItem.features);
   const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
   const [displayModal, setDisplayModal] = useState(false);
 
@@ -84,9 +87,7 @@ const ComparisonModal = ({ currentItem, info }) => {
       return <ListItemText className={classes.compareItem}></ListItemText>
     } else if (item === 'true') {
       return <ListItemIcon className={classes.compareItem} style={{ contentAlign: side }}>
-        <SvgIcon>
-          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-        </SvgIcon>
+        <DoneIcon/>          
       </ListItemIcon>
     } else {
       return <ListItemText className={classes.compareItem} style={{ textAlign: side }}>{item}</ListItemText>
@@ -95,7 +96,7 @@ const ComparisonModal = ({ currentItem, info }) => {
 
   return (
     <div>
-      <IconButton aria-label="settings" color="secondary" onClick={handleClick}>
+      <IconButton aria-label="settings" color="primary" onClick={handleClick} size='small'>
         <StarBorderIcon />
       </IconButton>
       <Modal
@@ -103,19 +104,19 @@ const ComparisonModal = ({ currentItem, info }) => {
         onClose={handleOtherClick}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'>   
-          <List>
+        <List className={classes.paper}>
             <ListItem divider={true}>
               <ListItemText className={classes.compareItem} style={{ textAlign: "left" }}>{info.name}</ListItemText>
               <ListItemText className={classes.compareItem}></ListItemText>
               <ListItemText className={classes.compareItem} style={{ textAlign: "right" }} primaryTypographyProps={{ align: "right" }}>{currentItem.name}</ListItemText>
             </ListItem>
-            {Object.keys(comparisonObj).map((feature, idx) => {
+            {Object.keys(comparisonObj).map((feature) => {
               let left = comparisonObj[feature].left;
               let right = comparisonObj[feature].right;
               if ((left !== undefined && left !== 'false' && left !== 'null') ||
                 (right !== undefined && right !== 'false' && right !== 'null')) {
                 return (
-                  <ListItem divider={true} key={idx}>
+                  <ListItem divider={true} key={Math.random()}>
                     {body(left, "left")}
                     <ListItemText className={classes.compareItem} style={{ textAlign: "center" }}>{feature}</ListItemText>
                     {body(right, "right")}

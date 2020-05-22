@@ -6,19 +6,22 @@ module.exports = {
     /* this function checks if the default? is equal to 1 then returns the img for that path*/
     let results = '';
     for (const ele of stylesArr) {
-      console.log('|IN FOR LOOP |', ele.photos[0]);
-      results = ele.photos[0].thumbnail_url;
       if (ele['default?'] === 1) {
-        console.log('|PICTURE| ', results )
-        if (ele.photos[0].thumbnail_url === null) {
+        ele.photos.forEach((photo, i) => {
+          if (photo.thumbnail_url !== null || photo.thumbnail_url !== undefined) {
+            if (i === 0) {
+              results = photo.thumbnail_url;
+            }
+          }
+        });
+        if (ele.photos[0].url === null) {
           return '../../public/No_Default.jpg';
         }
-        return results = ele.photos[0].thumbnail_url || ele.photos[1].thumbnail_url || '../../public/No_Default.jpg';
-      } 
+        return results
+      }
     }
-    console.log('pic', results);
     // if no default value will return a placeholder img of photo not available.
-    return results ? '../../public/No_Default.jpg': results;
+    return results ? '../../public/No_Default.jpg' : results;
   },
   comparisonBuilder: (current, compare) => {
     let results = {};

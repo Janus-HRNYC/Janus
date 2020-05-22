@@ -8,7 +8,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 
 const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, onUpdateOutfit }) => {
-  console.log(`|STYLES|`, outfit);
+  console.log(`|OUTFIT|`, outfit);
   const [limit, setLimit] = useState(0);
   const [outfits, setOutfits] = useState([]); 
   useEffect(() => {
