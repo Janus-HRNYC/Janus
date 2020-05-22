@@ -36,12 +36,12 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
  
     const useStyles = makeStyles((theme) => ({
         root: {
-          height: 'calc(auto + 5px)'
+        
         },
         QAThumbnails: {
           marginLeft: theme.spacing(1),
           marginRight: theme.spacing(1),
-          marginTop: theme.spacing(0),
+          marginTop: theme.spacing(1),
           marginBottom: theme.spacing(0),
           padding: theme.spacing(0),
           width: '80px',
@@ -54,20 +54,50 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
         },
         smallFont: {
           fontSize: '10px'
-      }
+        },
+        underLineText: {
+          textDecoration: 'underline'
+        },
+        boldText: {
+          fontWeight: 800
+        },
+        borderLeft: {
+          borderLeft: "thin solid black"
+        },
+        answersMargins: {
+          marginBottom: theme.spacing(0)
+        },
+        answerTextMarginTop: {
+          marginTop: theme.spacing(.6)
+        }
       }));
 
       const classes = useStyles();
 
     return (
         <Box className={classes.root} title="QandA">
-            <Typography variant="body1">
-              <Grid title="QandA">
-                  <b title="QandA">A:</b>{' '}
-                  {answer.body}
+            <Grid container>
+              <Typography variant="h6">
+                <Grid item>
+                <b title="QandA">A:</b>&nbsp;
+                </Grid>
+              </Typography>
+              <Typography variant="body1">
+                <Grid item className={classes.answerTextMarginTop}>
+                {answer.body}
+                </Grid>
+              </Typography>
+            </Grid>
+            {/* <Typography variant="body1">
+              
+              <Grid title="QandA" className={classes.answersMargins}>
+                  <span variant="h6">
+                    <b title="QandA">A:</b>
+                  </span>
+                  &nbsp;{answer.body}
               </Grid>
 
-            </Typography>
+            </Typography> */}
             <Grid container
             >
             {answer.photos.length > 0 ?
@@ -83,28 +113,39 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
             direction='row'
             title="QandA"
             spacing={1}
+            className={classes.answersMargins}
             >
             <Typography variant="caption" gutterBottom>
             <Grid  className={classes.yesAnswerMargin} title="QandA" item >
-            by{' '}
+            &nbsp;&nbsp;&nbsp;&nbsp;by{' '}
             {
             answer.answerer_name === "Seller" ?
-            <b title="QandA">{answer.answerer_name}</b>
+            <span title="QandA" className={classes.boldText}>{answer.answerer_name}</span>
             :
             answer.answerer_name}{' '}
             -
-            {' '}{moment(answer.date).format('MMMM DD, YYYY')}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+            {' '}{moment(answer.date).format('MMMM DD, YYYY')}&nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;Helpful?&nbsp;&nbsp;
+            <span 
+            onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}} className={classes.underLineText}>Yes
+            </span>&nbsp;
+            ({answer.helpfulness})&nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;
+            <span 
+            onClick={handleReportAnswerClick} style={{cursor:'pointer'}} className={classes.underLineText}>Report
+            </span>
             </Grid>
+           </Typography>
+           </Grid>
+            {/* </Grid>
             </Typography>
             <Typography variant="caption" gutterBottom>
             <Grid className={classes.yesAnswerMargin} title="QandA" item onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
             Helpful? Yes({answer.helpfulness})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
             </Grid>
             </Typography>
-            <Typography variant="caption" gutterBottom>
+            <Typography variant="captxion" gutterBottom>
             <Grid  className={classes.yesAnswerMargin} title="QandA" item onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</Grid>
             </Typography >
-            </Grid>
+            </Grid> */}
             <PictureModal photoURL={photoURL} setDisplayPictureModal={setDisplayPictureModal} displayPictureModal={displayPictureModal}/>
         </Box>
        

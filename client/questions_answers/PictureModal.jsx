@@ -13,10 +13,6 @@ const getModalStyle = () => {
     };
   };
   
-  
-  
-
-  
 
   const useStyles = makeStyles((theme) => ({
     paper: {
@@ -34,9 +30,7 @@ const getModalStyle = () => {
     width: "500px",
     height: "500px"
     },
-    smallFont: {
-        fontSize: '12px'
-    }
+    
 
 }));
 
