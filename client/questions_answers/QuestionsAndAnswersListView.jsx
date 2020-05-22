@@ -52,7 +52,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
 
   const seeMoreAnswersButton = () => {
     if (answers.length > 2) {
-      return <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked}><b>{answerButtonTextChange()}</b></p>;
+      return <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked} className={classes.seeMoreAnswersFontWeight}>{answerButtonTextChange()}</p>;
     }
   };
 
@@ -61,19 +61,6 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     return 'Collapse Answers';
   };
 
-  
-  const noOverFlow = () => {
-    let picture = false
-    answers.forEach(answer => {
-      if (answer.photos.length > 0 && !seeMoreAnswersClicked) {
-        console.log('hitting foeEach')
-        picture = true
-      }
-    })
-    if (picture) return 'hidden'
-    else return 'auto'
-    
-  }
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -82,7 +69,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
       overflowY: 'auto',
       overflowX: 'hidden',
       width: '1100px',
-      height: 'calc(auto + 25px)',
+      
       margin: theme.spacing(0),
       padding: theme.spacing(0)
   
@@ -96,7 +83,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
       position: 'flex'
     },
     questionText: {
-      fontWeight: 800,
+      
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2)
     },
@@ -110,20 +97,24 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     helpFulAddAnswerText: {
       marginTop: theme.spacing(2),
       marginBottom: theme.spacing(2)
+    },
+    seeMoreAnswersFontWeight: {
+      fontWeight: 600
     }
   }));
 
   const classes = useStyles()
+  
  
 
   return (
     <Grid>
       <Grid title="QandA" container justify='space-between' direction='row'>
-        <Typography variant="h6">
         <Grid title="QandA" item className={classes.questionText}>
+        <Typography variant="h6">
           Q: {question.question_body}
-        </Grid >
         </Typography>
+        </Grid >
         <Typography variant="caption" align="right">
           <Grid item  className={classes.helpFulAddAnswerText}>
             Helpful?&nbsp;&nbsp;
