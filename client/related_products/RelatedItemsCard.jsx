@@ -1,77 +1,92 @@
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton'
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import { getDefaultImg } from '../utility/relatedUtility.js';
 import ComparisonModal from './ComparisonModal';
-import { salePrice } from './../utility/relatedUtility.js';
+import { salePrice, avgRatings } from './../utility/relatedUtility.js';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 
-const useStyles = makeStyles({
 
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  media: {
-    height: 0,
-    paddingTop: '100%', // 16:9
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
 
-});
+const useStyles = makeStyles((theme) => ({
+  cardGrid: {
+    paddingTop: theme.spacing(12),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cardMedia: {
+    paddingTop: '56.25%', // 16:9
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+}));
+
+// const useStyles = makeStyles({  
+//   media: {
+//     // paddingTop: '100%', // 16:9
+//     height: 120,
+//   // },
+//   // title: {
+//   //   fontSize: 14,
+//   // },
+//   // pos: {
+//   //   marginBottom: 12,
+//   // },
+//   cardHeader: { 
+//     height: 10,
+//   },
+//   card: {
+//     width: 225
+//   }
+
+// });
 
 const relatedItemsCard = (props) => {
   const {
     item,
     id,
     info,
-    onGetCurrent,
   } = props;
-
+  const classes = useStyles();
   useEffect(() => {
     displayComparison()
-  
-  }, []) 
-
+  }, [])
   const displayPhoto = () => {
-    console.log(item);
     if (!item.styles) {
       return (
         null
       )
     } else {
-      console.log(item.styles);
       let photoSrc = '';
       photoSrc = getDefaultImg(item.styles);
       return (
         <CardMedia
-           className={classes.media}
-           image={photoSrc}
-           title={item.name}
+          className={classes.cardMedia}
+          image={photoSrc}
+          title={item.name}
         />
       )
     }
   }
   let results = salePrice(item.styles);
-  console.log('item', results);
   const stylePrice = () => {
     if (!results) {
       return (
@@ -81,7 +96,7 @@ const relatedItemsCard = (props) => {
           {`$${item.price}`}
         </Typography>
       )
-    } else if (results[0] !== 'S' ) {
+    } else if (results[0] !== 'S') {
       return (
         <Typography variant="body2" component="p">
           {item.name}
@@ -110,17 +125,32 @@ const relatedItemsCard = (props) => {
       )
     }
   }
-  const classes = useStyles();
+  const showRating = () => {
+    let rating = avgRatings(item.ratings);
+    if (rating === 0) {
+      return (
+        <Box component='fieldset' mb={3} borderColor='transparent' visibility='hidden'>
+          <Rating name='read-only' value={0} readOnly />
+        </Box>
+      )
+    } else {
+      return (
+        <Box component='fieldset' mb={3} borderColor='transparent'>
+          <Rating name='read-only' value={(rating)} readOnly />
+        </Box>
+      )
+    }
+  }
   const bull = <span className={classes.bullet}>•</span>;
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardHeader
+        className={classes.cardHeader}
         action={
-          <IconButton aria-label="settings">
-            {displayComparison()}          
+          <IconButton aria-label="settings" color='secondary' size='small' >
+            {displayComparison()}
           </IconButton>
         }
-
       />
       {displayPhoto()}
       <CardContent>
@@ -130,15 +160,9 @@ const relatedItemsCard = (props) => {
           {item.category}
         </Typography>
         {stylePrice()}
-        <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Rating name='read-only' value={5} readOnly />
-        </Box>
+        {showRating()}
       </CardContent>
     </Card>
   );
 }
 export default relatedItemsCard;
-
-// TODO: GET META DATA
-// TODO: 
-// TODO: 
