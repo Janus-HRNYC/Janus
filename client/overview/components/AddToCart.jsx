@@ -7,7 +7,7 @@ const AddToCart = ({ styles, style_id, info, id }) => {
   const [selectedSize, setSelectedSize] = useState(null);
   const [inventory, setInventory] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [bag, setBag] = useLocalStorage("cart", {});
+  const [bag, setBag] = useLocalStorage("cart", []);
 
   const count = (val) => {
     let result = [];
