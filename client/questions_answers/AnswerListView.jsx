@@ -46,7 +46,9 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
           padding: theme.spacing(0),
           width: '80px',
           height: '80px',
-          objectFit: 'cover'
+          objectFit: 'cover',
+          borderStyle: 'solid',
+          cursor: 'pointer'
         },
         yesAnswerMargin: {
           margin: theme.spacing(1.5),

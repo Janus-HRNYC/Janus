@@ -28,8 +28,9 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
         container
         direction="row"
         spacing={1}
-        alignItems="baseline"
-        alignContent="center"
+        justify="flex-start"
+        alignItems="center"
+        // alignContent="center"
       >
         <Grid item>
           <StarRating star={rating} />
@@ -38,6 +39,7 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
           <Box>{`Read all ${ratingCount} reviews`}</Box>
         </Grid>
       </Grid>
+
       <Box>{info.category}</Box>
       <Box
         style={{
@@ -52,17 +54,26 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
           for (let i = 0; i < styles.length; i++) {
             if (styles[i].style_id === style_id && styles[i].sale_price > 0) {
               return (
-                <div>
-                  <Box color="red">{`$ ${styles[i].sale_price}`}</Box>
-                  <Box
+                <Grid
+                  container
+                  direction="row"
+                  marginTop="16px"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Grid item>
+                    <Box color="red">{`$ ${styles[i].sale_price}`}</Box>
+                  </Grid>
+                  <Grid
+                    item
                     style={{
                       textDecorationLine: "line-through",
                       textDecorationStyle: "solid",
                     }}
                   >
                     {`$ ${styles[i].original_price}`}
-                  </Box>
-                </div>
+                  </Grid>
+                </Grid>
               );
             } else if (styles[i].style_id === style_id) {
               return (
@@ -74,7 +85,9 @@ const ProductInfo = ({ info, id, styles, style_id }) => {
           }
         })()}
       </div>
-      <div width="25%">{info.description}</div>
+      <div width="25%" marginTop="16px" marginBottom="16px">
+        {info.description}
+      </div>
     </div>
   );
 };

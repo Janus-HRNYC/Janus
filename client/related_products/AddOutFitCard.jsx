@@ -27,21 +27,21 @@ const useStyles = makeStyles({
   },
 });
 
-const AddOutFitCard = ({ addOutfit, id, info }) => {
+const AddOutFitCard = ({ addOutfit, id, styles }) => {
+  console.log('|STYLES||', styles);
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
+  const bull = <span className={classes.bullet}>•</span>
   return (
     <Card>
       <CardHeader
         action={
-          <IconButton aria-label="settings" onClick={() => { addOutfit(id) }}>
+          <IconButton aria-label="settings" onClick={() => { addOutfit(id, styles) }}>
             <AddIcon />
           </IconButton>
         }
       />
       <CardContent>
         <Typography variant="h5" component="h2">
-
         </Typography>
         <Typography className={classes.pos} color="textSecondary">
           Add to Outfit
