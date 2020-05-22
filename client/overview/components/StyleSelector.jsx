@@ -33,7 +33,7 @@ const StyleSelector = ({
           if (styles[i].style_id === style_id) {
             return (
               <Box
-                style={{ fontWeight: "bold" }}
+                style={{ marginBottom: "8px", fontWeight: "bold" }}
               >{`STYLE > ${styles[i].name}`}</Box>
             );
           }
@@ -42,6 +42,8 @@ const StyleSelector = ({
       })()}
       <Grid
         container
+        direction="row"
+        alignItems="center"
         spacing={1}
         // className={classes.root}
       >
@@ -73,7 +75,7 @@ const StyleSelector = ({
                   style={{ margin: "5px", width: "80px", height: "80px" }}
                   onClick={(e) => {
                     setStyle_id(style.style_id);
-                    setIndex(0);
+                    // setIndex(0);
                   }}
                 />
               </Badge>

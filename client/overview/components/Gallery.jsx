@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, Fab, Grid } from "@material-ui/core";
+import {
+  makeStyles,
+  Fab,
+  Grid,
+  GridList,
+  GridListTile,
+} from "@material-ui/core";
 import { ArrowBack, ArrowForward } from "@material-ui/icons";
 
 const Gallery = ({ id, style_id, styles, index, setIndex }) => {
   const [images, setImages] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
+  const [img, setImg] = useState([]);
+
   useEffect(() => {
     let photos = [];
     let thumbs = [];
@@ -19,6 +27,7 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
     }
     setImages(photos);
     setThumbnails(thumbs);
+    setImg(photos[index]);
   }, [style_id]);
 
   const rightClick = () => {
@@ -39,30 +48,39 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
     >
       <img
         src={images[index]}
+        // onClick={expand}
         style={{
           objectFit: "cover",
           position: "relative",
           width: "750px",
-          height: "600px",
+          height: "700px",
           zIndex: 10,
         }}
       />
-
-      {/* {thumbnails.map((thumbnail, i = 0) => (
-        <img
-          key={i++}
-          src={thumbnail}
-          style={{
-            flexDirection: "column",
-            position: "absolute",
-            top: "50%",
-            transform: "translateY(-50%)",
-            left: 5,
-            zIndex: 12,
-          }}
-        />
-      ))} */}
-
+      <GridList
+        cols={1}
+        cellHeight={70}
+        spacing={8}
+        style={{
+          width: "70px",
+          maxHeight: "600px",
+          position: "absolute",
+          top: "25%",
+          transform: "translateY(-25%)",
+          left: 15,
+          zIndex: 12,
+        }}
+      >
+        {thumbnails.map((thumb, i = 0) => {
+          while (i < 7) {
+            return (
+              <GridListTile key={i++}>
+                <img src={thumb} onClick={(e) => setIndex(i - 1)} />
+              </GridListTile>
+            );
+          }
+        })}
+      </GridList>
       {index === 0 ? null : (
         <Fab
           onClick={leftClick}
@@ -71,9 +89,9 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
             position: "absolute",
             top: "50%",
             transform: "translateY(-50%)",
-            left: 5,
+            left: 100,
             zIndex: 12,
-            opacity: "33%",
+            opacity: "45%",
           }}
         >
           <ArrowBack style={{ color: "primary", fontSize: "32px" }} />
@@ -83,13 +101,13 @@ const Gallery = ({ id, style_id, styles, index, setIndex }) => {
         <Fab
           onClick={rightClick}
           style={{
-            // borderRadius: "50%",
+            // borderRadius: "100%",
             position: "absolute",
             top: "50%",
             transform: "translateY(-50%)",
-            right: 5,
+            right: 10,
             zIndex: 12,
-            opacity: "33%",
+            opacity: "45%",
           }}
         >
           <ArrowForward style={{ fontSize: "32px" }} />
@@ -112,3 +130,17 @@ export default Gallery;
 //       setImages(payload1);
 //     })
 //     .catch((err) => console.error(err)),
+
+// const [image, setImage] = useState([]);
+// const [thumbnail, setThumbnail] = useState([]);
+// setImage(images[index]);
+// setThumbnail(thumbnails[index]);
+// const [currentImage, setCurrentImage] = useState(images[index]);
+// const [thumbWasClicked, setThumbWasClicked] = useState(false);
+// useEffect(() => {
+//   thumbWasClicked ? setCurrentImage(thumbnails[index]) : null;
+//   setThumbWasClicked(false);
+// }, [thumbWasClicked]);
+// const thumbClick = () => {
+//   setThumbWasClicked(true);
+// };
