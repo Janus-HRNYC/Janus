@@ -6,12 +6,14 @@ const mapStateToProps = (store) => ({
   outfit: store.outfit,
   id: store.id,
   info: store.info,
+  styles: store.styles,
 });
 
 const mapDispatcchToProps = (dispatch) => {
   return {
     onDeleteOutfit: (id) => dispatch(actionCreator.removeOutfitAction(id)),
-    onAddOutfit: (productId) => dispatch(actionCreator.fetchOutfit(productId)),
+    onAddOutfit: (productId, styles) => dispatch(actionCreator.fetchOutfit(productId, styles)),
+    onUpdateOutfit: () => dispatch(actionCreator.updateOutfit())
   }
 }
 

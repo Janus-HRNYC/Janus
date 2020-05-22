@@ -39,21 +39,32 @@ const RelatedItems = (props) => {
   const decreaseButtonAction = () => {
     if (limit === 0) {
       return (
-        <ArrowBackIosIcon visibility='hidden'/>
+        <ArrowBackIosIcon visibility='hidden' />
+      )
+    } else if (limit.length === 0) {
+      return (
+        <IconButton aria-label={`setting`} onClick={decrease} >
+          <ArrowBackIosIcon />
+        </IconButton>
       )
     } else {
       return (
         <IconButton aria-label={`setting`} onClick={decrease} >
           <ArrowBackIosIcon />
         </IconButton>
-
       )
     }
   }
   const increaseButtonAction = () => {
-    if (limit === relatedProducts.state.length -3 ) {
+    if (limit === relatedProducts.state.length - 3) {
       return (
-        <ArrowForwardIosIcon visibility='hidden'/>
+        <ArrowForwardIosIcon visibility='hidden' />
+      )
+    } else if (limit.length === 0) {
+      return (
+        <IconButton aria-label={`setting`} onClick={increase} visibility='hidden' >
+          <ArrowForwardIosIcon />
+        </IconButton>
       )
     } else {
       return (

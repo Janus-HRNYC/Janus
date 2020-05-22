@@ -15,6 +15,7 @@ import ComparisonModal from './ComparisonModal';
 import { salePrice, avgRatings } from './../utility/relatedUtility.js';
 
 
+
 const useStyles = makeStyles({  
   media: {
     paddingTop: '100%', // 16:9

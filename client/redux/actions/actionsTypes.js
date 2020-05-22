@@ -14,3 +14,4 @@ export const deleteCompareItem = 'DELETE_COMPARE_ITEMS';
 export const getCurrentItem = 'GET_CURRENT_ITEM';
 export const getRelatedStyles = 'GET_RELATED_STYLES';
 export const setProducts = 'SET_PRODUCTS';
+export const updateOutfit = 'UPDATE_OUTFIT';

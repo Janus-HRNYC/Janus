@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import Outfitcards from './Outfitcards'
 import AddOutFitCard from './AddOutFitCard';
@@ -7,27 +7,27 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 
-const OutfitItems = ({ onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => {
-
+const OutfitItems = ({ onDeleteOutfit, styles, onAddOutfit, id, info, outfit, onUpdateOutfit }) => {
+  console.log(`|STYLES|`, outfit);
   const [limit, setLimit] = useState(0);
-  const [outfits, setOutfits] = useState([]);
-
+  const [outfits, setOutfits] = useState([]); 
   useEffect(() => {
     getStoredOutfits();
+    onUpdateOutfit()
   }, []);
 
   const getStoredOutfits = () => {
     let results = JSON.parse(window.localStorage.getItem('outfits'));
     if (results === null) {
-      console.log('|LOCAL STORAGE| |IF| ', results)
       results = [];
     }
     setOutfits(results);
+    console.log('Length: ', results.length);
   }
 
   const increase = () => {
-    if (limit >= outfits.length - 1) {
-      setLimit(outfits.length - 1);
+    if (limit >= outfit.length - 1) {
+      setLimit(outfit.length - 1);
     } else {
       setLimit(limit + 1);
     }
@@ -57,7 +57,7 @@ const OutfitItems = ({ onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => 
     }
   }
   const increaseButtonAction = () => {
-    if (limit === outfits.length - 3) {
+    if (limit === outfit.length-2) {
       return (
         <ArrowForwardIosIcon visibility='hidden' />
       )
@@ -72,20 +72,17 @@ const OutfitItems = ({ onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => 
 
   const getOutfits = () => {
     // TODO: REFACTOR
-    if (outfits === null) {
+    if (outfit === null) {
       return (
         <Grid
           container
           direction={'row'}
           justify='space-between'
-          >
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} />
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} visibility='hidden'/>
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} visibility='hidden'/>
+        >
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} />
         </Grid >
       );
-    } else {
-      console.log(outfits)
+    } else if (outfit.length === 1) {
       return (
         <Grid
           container
@@ -93,10 +90,28 @@ const OutfitItems = ({ onDeleteOutfit, ratingsMeta, onAddOutfit, id, info }) => 
           justify='space-between'
         >
           {decreaseButtonAction()}
-          <AddOutFitCard addOutfit={onAddOutfit} id={id} />
-          {outfits.slice(limit, limit + 2).map((item, i) => {
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} visibility='hidden' /> 
+          {outfit.slice(limit, limit + 2).map((item, i) => {
             return (
-              <Outfitcards key={Math.random()} item={item} removeOutfit={onDeleteOutfit} info={info} />
+              <Outfitcards key={Math.random()} item={item.results} removeOutfit={onDeleteOutfit} info={info} styles={styles} onUpdateOutfit={onUpdateOutfit} />
+            )
+          })}          
+
+          {increaseButtonAction()}
+        </Grid >
+      )
+    } else {
+      return (
+        <Grid
+          container
+          direction={'row'}
+          justify='space-between'
+        >
+          {decreaseButtonAction()}
+          <AddOutFitCard addOutfit={onAddOutfit} id={id} styles={styles} />
+          {outfit.slice(limit, limit + 3).map((item, i) => {
+            return (
+              <Outfitcards key={Math.random()} item={item.results} removeOutfit={onDeleteOutfit} info={info} styles={styles} />
             )
           })}
           {increaseButtonAction()}
