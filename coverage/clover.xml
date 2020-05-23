@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1589845061313" clover="3.2.0">
-  <project timestamp="1589845061314" name="All files">
-    <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0" elements="0" coveredelements="0" complexity="0" loc="0" ncloc="0" packages="0" files="0" classes="0"/>
+<coverage generated="1590250232384" clover="3.2.0">
+  <project timestamp="1590250232384" name="All files">
+    <metrics statements="45" coveredstatements="9" conditionals="52" coveredconditionals="1" methods="7" coveredmethods="1" elements="104" coveredelements="11" complexity="0" loc="45" ncloc="45" packages="2" files="3" classes="3"/>
+    <package name="ratings_reviews">
+      <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="references.js" path="/Users/olivercomia/HRNYC29_Senior/janus/Janus/client/ratings_reviews/references.js">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="ratings_reviews.form_components">
+      <metrics statements="44" coveredstatements="8" conditionals="52" coveredconditionals="1" methods="7" coveredmethods="1"/>
+      <file name="TextFieldForm.jsx" path="/Users/olivercomia/HRNYC29_Senior/janus/Janus/client/ratings_reviews/form_components/TextFieldForm.jsx">
+        <metrics statements="18" coveredstatements="5" conditionals="8" coveredconditionals="1" methods="4" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="30" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+      </file>
+      <file name="validation.js" path="/Users/olivercomia/HRNYC29_Senior/janus/Janus/client/ratings_reviews/form_components/validation.js">
+        <metrics statements="26" coveredstatements="3" conditionals="44" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="3" count="0" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="25" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="26" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="27" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="28" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
