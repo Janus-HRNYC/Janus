@@ -4,18 +4,20 @@ import { Typography, Slider, Grid } from '@material-ui/core';
 
 const ProductBreakdown = ({ label, value, marks }) => {
   return (
-    <Grid item md={10}>
-      <Typography variant='body1' gutterBottom>
-        {label}
-      </Typography>
-      <Slider
-        value={value}
-        step={null}
-        valueLabelDisplay='auto'
-        marks={marks}
-        disabled
-      />
-    </Grid>
+    <>
+      <Grid item md={10}>
+        <Typography variant='body1' gutterBottom>
+          {label}
+        </Typography>
+        <Slider
+          value={value}
+          step={null}
+          valueLabelDisplay='auto'
+          marks={marks}
+          disabled
+        />
+      </Grid>
+    </>
   );
 };
 

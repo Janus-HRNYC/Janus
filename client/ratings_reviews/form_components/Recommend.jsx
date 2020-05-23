@@ -14,22 +14,24 @@ const Recommend = ({ value, setForm }) => {
   };
 
   return (
-    <FormControl component='fieldset'>
-      <RadioGroup row name='position' value={value} onChange={handleChange}>
-        <FormControlLabel
-          value='1'
-          control={<Radio color='primary' />}
-          label='Yes'
-          labelPlacement='bottom'
-        />
-        <FormControlLabel
-          value='0'
-          control={<Radio color='primary' />}
-          label='No'
-          labelPlacement='bottom'
-        />
-      </RadioGroup>
-    </FormControl>
+    <>
+      <FormControl component='fieldset'>
+        <RadioGroup row name='position' value={value} onChange={handleChange}>
+          <FormControlLabel
+            value='1'
+            control={<Radio color='primary' />}
+            label='Yes'
+            labelPlacement='bottom'
+          />
+          <FormControlLabel
+            value='0'
+            control={<Radio color='primary' />}
+            label='No'
+            labelPlacement='bottom'
+          />
+        </RadioGroup>
+      </FormControl>
+    </>
   );
 };
 export default Recommend;

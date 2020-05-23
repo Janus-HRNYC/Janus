@@ -30,14 +30,16 @@ const Ratings = (props) => {
   };
 
   return (
-    <Grid container direction='column'>
-      <Grid item md={10}>
-        <RatingSummary ratings={ratings} recommended={recommended} />
+    <>
+      <Grid container direction='column'>
+        <Grid item md={10}>
+          <RatingSummary ratings={ratings} recommended={recommended} />
+        </Grid>
+        <Grid item md={10}>
+          {renderRatingBreakdown()}
+        </Grid>
       </Grid>
-      <Grid item md={10}>
-        {renderRatingBreakdown()}
-      </Grid>
-    </Grid>
+    </>
   );
 };
 

@@ -41,7 +41,6 @@ const TextFieldForm = ({
   return (
     <>
       <TextField
-        id='text-field-review'
         margin='dense'
         name={type}
         required={attributes.required}
