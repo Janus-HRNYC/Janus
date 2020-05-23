@@ -80,7 +80,6 @@ const RelatedItems = (props) => {
     if (!relatedProducts.state) {
       return null;
     } else {
-
       return (
         <div>
           <Grid

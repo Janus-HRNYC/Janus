@@ -85,9 +85,9 @@ const ComparisonModal = ({ currentItem, info }) => {
   const body = (item, side) => {
     if (item === undefined || item === 'false' || item === 'null') {
       return <ListItemText className={classes.compareItem}></ListItemText>
-    } else if (item === 'true') {
-      return <ListItemIcon className={classes.compareItem} style={{ contentAlign: side }}>
-        <DoneIcon/>          
+    } else if (item == true) {
+      return <ListItemIcon className={classes.compareItem} style={{ contentAlign: side }}>>
+        'HERE'
       </ListItemIcon>
     } else {
       return <ListItemText className={classes.compareItem} style={{ textAlign: side }}>{item}</ListItemText>

@@ -66,9 +66,11 @@ const relatedItemsCard = (props) => {
     info,
   } = props;
   const classes = useStyles();
-  useEffect(() => {
-    displayComparison()
+ 
+ useEffect(() => {
+  displayComparison()
   }, [])
+  
   const displayPhoto = () => {
     if (!item.styles) {
       return (
@@ -141,7 +143,6 @@ const relatedItemsCard = (props) => {
       )
     }
   }
-  const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card className={classes.card}>
       <CardHeader
