@@ -32,15 +32,10 @@ const Reviews = (props) => {
     getReviews(id);
   }, []);
 
-  console.log('Displaying Review Results; ', filterList);
-  console.log('Displaying Product info; ', info);
-
   const clickStarRating = (rating) => {
-    console.log('This has been clicked: ', rating);
     let filterByRatings = reviewResults.filter((review) => {
       return review.rating === rating;
     });
-    console.log('Filter Review Results; ', filterByRatings);
     setFilterList(filterByRatings);
     setLimit(2);
   };

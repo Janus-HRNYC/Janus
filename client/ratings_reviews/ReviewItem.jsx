@@ -66,7 +66,6 @@ const ReviewItem = ({ item }) => {
   };
 
   const renderResponse = (response) => {
-    console.log('Response', response);
     return response !== 'null' && response !== null && response !== '' ? (
       <Box className={classes.response}>
         <Typography variant='body2' className={classes.responseTitle}>

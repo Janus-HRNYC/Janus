@@ -24,7 +24,6 @@ export const getReviews = (id, sort = 'relevant', count = 100) => {
     return axios
       .get(`http://18.224.200.47/reviews/${id}/list`, query)
       .then((res) => {
-        console.log('Successful in GET: ', res.data);
         dispatch(reviewActions.setReviewResults(res.data.results));
         dispatch(getRatings(id));
       })
@@ -39,7 +38,6 @@ export const getRatings = (id) => {
     return axios
       .get(`http://18.224.200.47/reviews/${id}/meta`)
       .then((res) => {
-        console.log('Successful in GET meta: ', res);
         dispatch(reviewActions.setRatingsMeta(res.data));
       })
       .catch((err) => {
@@ -53,7 +51,6 @@ export const postReview = (id, form) => {
     axios
       .post(`http://18.224.200.47/reviews/${id}`, form)
       .then((res) => {
-        console.log('Successful in POST review: ', res);
         dispatch(getReviews(id, 'newest'));
       })
       .catch((err) => {
