@@ -59,10 +59,12 @@ const RatingSummary = ({ ratings, recommended }) => {
   };
 
   return (
-    <Box>
-      {renderStarRating()}
-      {renderPercentRecommend()}
-    </Box>
+    <>
+      <Box>
+        {renderStarRating()}
+        {renderPercentRecommend()}
+      </Box>
+    </>
   );
 };
 

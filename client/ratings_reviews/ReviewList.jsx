@@ -51,7 +51,7 @@ const ReviewList = (props) => {
     let displayReviews = list.filter((item) => {
       return list.indexOf(item) < limit;
     });
-    console.log('Display', displayReviews);
+
     return displayReviews ? (
       <div>
         {displayReviews.map((item) => (

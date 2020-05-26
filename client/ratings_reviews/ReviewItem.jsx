@@ -66,7 +66,6 @@ const ReviewItem = ({ item }) => {
   };
 
   const renderResponse = (response) => {
-    console.log('Response', response);
     return response !== 'null' && response !== null && response !== '' ? (
       <Box className={classes.response}>
         <Typography variant='body2' className={classes.responseTitle}>
@@ -80,51 +79,53 @@ const ReviewItem = ({ item }) => {
   };
 
   return (
-    <Box borderBottom={1}>
-      <Grid
-        container
-        direction='row'
-        justify='space-between'
-        className={classes.ratingReviewer}
-      >
-        <StarRating star={item.rating} size={'small'} />
-        <Grid className={classes.ratingReviewer} className={classes.reviewer}>
-          {item.recommend ? <CheckCircleIcon fontSize='small' /> : null}{' '}
+    <>
+      <Box borderBottom={1}>
+        <Grid
+          container
+          direction='row'
+          justify='space-between'
+          className={classes.ratingReviewer}
+        >
+          <StarRating star={item.rating} size={'small'} />
+          <Grid className={classes.ratingReviewer} className={classes.reviewer}>
+            {item.recommend ? <CheckCircleIcon fontSize='small' /> : null}{' '}
+            <Typography variant='caption'>
+              {item.reviewer_name}, {moment(item.date).format('MMMM DD, YYYY')}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Typography variant='h6' className={classes.bttomMargin3}>
+          {item.summary}
+        </Typography>
+        <Typography variant='body1' className={classes.bttomMargin2}>
+          {item.body}
+        </Typography>
+        <Grid className={classes.image}>
+          {item.photos.length > 0
+            ? item.photos.map((photo, i) => {
+                return (
+                  <Avatar
+                    key={i}
+                    variant='square'
+                    src={photo.url}
+                    className={classes.imageLarge}
+                  ></Avatar>
+                );
+              })
+            : null}
+        </Grid>
+        {renderRecommend(item.recommend)}
+        <br />
+        {renderResponse(item.response)}
+        <Grid className={classes.bttomMargin1}>
           <Typography variant='caption'>
-            {item.reviewer_name}, {moment(item.date).format('MMMM DD, YYYY')}
+            Helpful ? <a href='#'>Yes</a> ({item.helpfulness}) |{' '}
+            <a href='#'>Report</a>
           </Typography>
         </Grid>
-      </Grid>
-      <Typography variant='h6' className={classes.bttomMargin3}>
-        {item.summary}
-      </Typography>
-      <Typography variant='body1' className={classes.bttomMargin2}>
-        {item.body}
-      </Typography>
-      <Grid className={classes.image}>
-        {item.photos.length > 0
-          ? item.photos.map((photo, i) => {
-              return (
-                <Avatar
-                  key={i}
-                  variant='square'
-                  src={photo.url}
-                  className={classes.imageLarge}
-                ></Avatar>
-              );
-            })
-          : null}
-      </Grid>
-      {renderRecommend(item.recommend)}
-      <br />
-      {renderResponse(item.response)}
-      <Grid className={classes.bttomMargin1}>
-        <Typography variant='caption'>
-          Helpful ? <a href='#'>Yes</a> ({item.helpfulness}) |{' '}
-          <a href='#'>Report</a>
-        </Typography>
-      </Grid>
-    </Box>
+      </Box>
+    </>
   );
 };
 

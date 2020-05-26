@@ -32,26 +32,28 @@ const RatingBreakdown = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid container direction='row' className={classes.margin}>
-      <Grid item sm={12} md={3}>
-        <Button
-          size='small'
-          className={classes.button}
-          onClick={() => clickStarRating(rating)}
-        >
-          <Typography variant='body2' className={classes.numberRating}>
-            {rating} {rating === 1 ? 'star' : 'stars'}:{' '}
-          </Typography>
-        </Button>
+    <>
+      <Grid container direction='row' className={classes.margin}>
+        <Grid item sm={12} md={3}>
+          <Button
+            size='small'
+            className={classes.button}
+            onClick={() => clickStarRating(rating)}
+          >
+            <Typography variant='body2' className={classes.numberRating}>
+              {rating} {rating === 1 ? 'star' : 'stars'}:{' '}
+            </Typography>
+          </Button>
+        </Grid>
+        <Grid item sm={12} md={8}>
+          <BorderLinearProgress
+            variant='determinate'
+            color='primary'
+            value={ratingValue}
+          />
+        </Grid>
       </Grid>
-      <Grid item sm={12} md={8}>
-        <BorderLinearProgress
-          variant='determinate'
-          color='primary'
-          value={ratingValue}
-        />
-      </Grid>
-    </Grid>
+    </>
   );
 };
 
