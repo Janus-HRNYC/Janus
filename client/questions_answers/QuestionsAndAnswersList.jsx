@@ -7,67 +7,63 @@ import { makeStyles } from '@material-ui/core/styles';
 const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, productName, searchTerm }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
     
-  const handleMoreQuestionsClick = () => {
-    setQuestionLimit(questionLimit + 2);
-  };
-
-  const renderQuestions = (question, i) => {
-    if (i <= (questionLimit - 1)) {
-      return (
-    <QuestionsAndAnswersListView 
-    productId={productId} 
-    axiosQuestionRequest={axiosQuestionRequest} 
-    question={question} 
-    key={i}
-    productName={productName}
-    searchTerm={searchTerm} />)
-    }
-  };
-
-  const moreQuestionsButton = () => {
-        if (questions.length > questionLimit) return <Button title="QandA" variant='contained' onClick={handleMoreQuestionsClick}>
-        MORE ANSWERED QUESTIONS
-      </Button>
-  };
+  const handleMoreQuestionsClick = () => setQuestionLimit(questionLimit + 2);
   
-
-  const searchFilter = () => {
+  const moreQuestionsButton = () => questions.length > questionLimit ? 
+  <Button title="QandA" variant='contained' onClick={handleMoreQuestionsClick}>
+      MORE ANSWERED QUESTIONS
+    </Button>
+    : null
+    
+    const filterQuestionsBySearchTerm = () => {
       let filteredQuestions = [];
       if (searchTerm.length > 2) {
         for (const question of questions) {
-                var found = false;
-                const lowerCaseQuestionsForSecondCheck = question.question_body.toLowerCase();
-                const searchArray = searchTerm.toLowerCase().split(' ')
-                searchArray.forEach((indAnswer) => {
-                  if (lowerCaseQuestionsForSecondCheck.includes(indAnswer)) {
-                    found = true;
-                  }
-                })
-             
-              const lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
-              const lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
-              lowerCaseQuestion.includes(lowerCaseSearchTerm) || found === true ? filteredQuestions.push(question) : null;
-            }
-            return filteredQuestions
-        } else {
-            return questions
+          const lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
+          const lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
+          const found1 = lowerCaseQuestion.includes(lowerCaseSearchTerm)
+          
+          let found2 = false;
+          const lowerCaseQuestionsForSecondCheck = question.question_body.toLowerCase();
+          const searchArray = searchTerm.toLowerCase().split(' ')
+          searchArray.forEach((indAnswer) => {
+            lowerCaseQuestionsForSecondCheck.includes(indAnswer) && indAnswer.length > 2 ? found2 = true
+            : null
+          })
+          
+          found1 || found2 ? filteredQuestions.push(question) : null;
         }
-      
-  };
+        return filteredQuestions
+      } else {
+        return questions
+      }
+    };
+    
+    const renderQuestions = (question, i) => i <= (questionLimit - 1) ? 
+      <QuestionsAndAnswersListView 
+      key={i}
+      question={question} 
+      productId={productId} 
+      axiosQuestionRequest={axiosQuestionRequest} 
+      productName={productName}
+      />
+      : null
+    
+    const sortQuestionsByHelpful = (questions) => questions.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
 
-  const useStyles = makeStyles((theme) => ({
-    moreQuestionsMargin: {
-      marginRight: theme.spacing(2)
-    }
-  }));
-
-  const classes = useStyles();
-
-  return (
+    const displaySortedQuestionsIfAny = () => sortQuestionsByHelpful(filterQuestionsBySearchTerm()).map((question, i) => renderQuestions(question, i))
+    
+    const useStyles = makeStyles((theme) => ({
+      moreQuestionsMargin: {
+        marginRight: theme.spacing(2)
+      }
+    }));
+    
+    const classes = useStyles();
+    
+    return (
     <Box title="QandA">
-      
-        {searchFilter().sort((a, b) => (b.question_helpfulness - a.question_helpfulness))
-          .map((question, i) => renderQuestions(question, i))}
+      {displaySortedQuestionsIfAny()}
       <Grid container>
         <Grid item className={classes.moreQuestionsMargin}>
           {moreQuestionsButton()}
@@ -76,7 +72,8 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
           <AddQuestionModal 
           productName={productName} 
           productId={productId} 
-          axiosQuestionRequest={axiosQuestionRequest} />
+          axiosQuestionRequest={axiosQuestionRequest} 
+          />
         </Grid>
       </Grid>
     </Box>

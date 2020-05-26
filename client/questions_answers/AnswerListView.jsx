@@ -11,10 +11,11 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
 
   const [displayPictureModal, setDisplayPictureModal] = useState(false);  
   const [photoURL, setPhotoURL] = useState('')
+  const [reported, setReported] = useState(false)
+
   
   const handlePictureClick = (e) => {
     setDisplayPictureModal(!displayPictureModal)
-    console.log('e.target.value', e.target.title)
     setPhotoURL(e.target.title)
   }
   
@@ -30,7 +31,6 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
 
     const handleReportAnswerClick = () => {
         Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id}/report`)
-        .then(res => getAnswers(question))
         .catch(err => console.log(err));
     }
  
@@ -75,6 +75,11 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
       }));
 
       const classes = useStyles();
+      
+      const handleReportedClick = () => {
+        setReported(true);
+        handleReportAnswerClick();
+      }
 
     return (
         <Box className={classes.root} title="QandA">
@@ -90,21 +95,12 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
               </Typography>
                 </Grid>
             </Grid>
-            {/* <Typography variant="body1">
-              
-              <Grid title="QandA" className={classes.answersMargins}>
-                  <span variant="h6">
-                    <b title="QandA">A:</b>
-                  </span>
-                  &nbsp;{answer.body}
-              </Grid>
-
-            </Typography> */}
             <Grid container
             >
             {answer.photos.length > 0 ?
             answer.photos.map((photo, i) => {
               return <Grid   title="QandA" key={i} item onClick={(e) => {handlePictureClick(e)}}><img title="QandA" title={photo.url} className={classes.QAThumbnails} src={photo.url} /></Grid>
+              
             })
             : null
             }
@@ -132,22 +128,11 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
             </span>&nbsp;
             ({answer.helpfulness})&nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;
             <span 
-            onClick={handleReportAnswerClick} style={{cursor:'pointer'}} className={classes.underLineText}>Report
+            onClick={handleReportedClick} style={{cursor:'pointer'}} className={classes.underLineText}>{!reported ? 'Report' : 'Reported'}
             </span>
             </Grid>
            </Typography>
            </Grid>
-            {/* </Grid>
-            </Typography>
-            <Typography variant="caption" gutterBottom>
-            <Grid className={classes.yesAnswerMargin} title="QandA" item onClick={handleHelpFullAnswerClick} style={{cursor:'pointer'}}>
-            Helpful? Yes({answer.helpfulness})&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
-            </Grid>
-            </Typography>
-            <Typography variant="captxion" gutterBottom>
-            <Grid  className={classes.yesAnswerMargin} title="QandA" item onClick={handleReportAnswerClick} style={{cursor:'pointer'}}>Report</Grid>
-            </Typography >
-            </Grid> */}
             <PictureModal photoURL={photoURL} setDisplayPictureModal={setDisplayPictureModal} displayPictureModal={displayPictureModal}/>
         </Box>
        

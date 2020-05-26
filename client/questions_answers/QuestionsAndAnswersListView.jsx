@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import AnswerListView from './AnswerListView';
 import AddAnswerModal from './AddAnswerModal';
-import { Grid, Box, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName, searchTerm }) => {
+const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName }) => {
   const [answers, setAnswers] = useState([]);
   const [answerLimit, setAnswerLimit] = useState(2);
   const [seeMoreAnswersClicked, setSeeMoreAnswersClicked] = useState(false);
@@ -13,6 +13,10 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   useEffect(() => {
     getAnswers(question)
   }, [question]);
+
+  useEffect(() => {
+    seeMoreAnswersClicked ? setAnswerLimit(answers.length) : null;
+  }, [answers])
 
   
   const getAnswers = (question) => {
@@ -22,44 +26,37 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
   }
 
   const handleHelpfulQuestionClick = () => {
-      let check = localStorage.getItem(`${question.question_id}`)
-    if (!check) {
+      const checkIfUserClickedHelpfulQuestion = localStorage.getItem(`${question.question_id}`)
+      !checkIfUserClickedHelpfulQuestion ?
         Axios.put(`http://18.224.200.47/qa/question/${question.question_id}/helpful`)
-        .then((res) => axiosQuestionRequest(productId))
-        .catch((err) => console.log(err));
-        localStorage.setItem(`${question.question_id}`, true)
-        }
+        .then(res => axiosQuestionRequest(productId))
+        .then(localStorage.setItem(`${question.question_id}`, true))
+        .catch(err => console.log(err))
+      : null
     };
   
   const handleSeeMoreAnswersClicked = () => {
-    if (answerLimit === 2) setAnswerLimit(answers.length + 10);
-    else setAnswerLimit(2);
+    !seeMoreAnswersClicked ? setAnswerLimit(answers.length)
+    : setAnswerLimit(2);
     setSeeMoreAnswersClicked(!seeMoreAnswersClicked);
   };
 
-  const renderAnswers = (i, answer) => {
-    if (i <= (answerLimit - 1)) {
-      return <AnswerListView key={i} answer={answer} question={question} getAnswers={getAnswers} />
-    }
-  };
+  const renderAnswers = (i, answer) => i <= (answerLimit - 1) ? 
+    <AnswerListView key={i} answer={answer} question={question} getAnswers={getAnswers} /> 
+  : null
 
-  const displayAnswersIfAny = () => {
-      if (answers.length > 0) {
-           return (answers.sort((a, b) => ((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller') || (b.helpfulness - a.helpfulness)))
-            .map((answer, i) => renderAnswers(i, answer)))
-      }
-  }
+  const displayAnswersIfAny = () => answers.length > 0 ? 
+      (answers.sort((a, b) => ((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller') || (b.helpfulness - a.helpfulness)))
+      .map((answer, i) => renderAnswers(i, answer)))
+      : null
+  
 
-  const seeMoreAnswersButton = () => {
-    if (answers.length > 2) {
-      return <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked} className={classes.seeMoreAnswersFontWeight}>{answerButtonTextChange()}</p>;
-    }
-  };
+  const seeMoreAnswersButton = () => answers.length > 2 ?
+      <p title="QandA" style={{cursor:'pointer'}} onClick={handleSeeMoreAnswersClicked} className={classes.seeMoreAnswersFontWeight}>{answerButtonTextChange()}</p>
+      : null
 
-  const answerButtonTextChange = () => {
-    if (!seeMoreAnswersClicked) return 'See More Answers';
-    return 'Collapse Answers';
-  };
+  const answerButtonTextChange = () => !seeMoreAnswersClicked ? 'See More Answers' : 'Collapse Answers'
+  
 
 
   const useStyles = makeStyles((theme) => ({
@@ -123,7 +120,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
             </span>&nbsp;
             ({question.question_helpfulness})
             &nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;
-            <AddAnswerModal 
+            <AddAnswerModal
             getAnswers={getAnswers} 
             question={question}
             productName={productName}/>
