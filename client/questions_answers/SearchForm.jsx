@@ -15,25 +15,12 @@ const SearchForm = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <div title="QandA">
-      {/* <form  title="QandA" onSubmit={(e) => {e.preventDefault()}}>
-        <TextField id="outlined-basic" 
-        fullWidth
-        title="QandA"
-        variant="outlined" 
-        value={searchTerm} 
-        placeholder="Have a question? Search for answers..." 
-       
-        onChange={handleSearchChange}/>
-        
-        </form> */}
-        <FormControl fullWidth  variant="outlined">
-          
+        <FormControl fullWidth  variant="outlined">  
           <OutlinedInput
             id="outlined-adornment-amount"
             value={searchTerm}
             placeholder="Have a question? Search for answers..." 
             endAdornment={<SearchIcon position="end"></SearchIcon>}
-            labelWidth={0}
             onChange={handleSearchChange}
           />
         </FormControl>

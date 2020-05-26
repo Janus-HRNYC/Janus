@@ -54,7 +54,7 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
         photos: photos
     })
     .then(res => getAnswers(question))
-    .catch(err => console.log(err))
+    .catch(err => console.error(err))
 }
 
   const handleClick = () => {
