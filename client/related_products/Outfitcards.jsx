@@ -47,13 +47,13 @@ const Outfitcards = ({ removeOutfit, item }) => {
     if (!results) {
       return (
         <Typography variant="body2" component="p">
-          {`$${results}`}
+          {`$${results || item.price}`}
         </Typography>
       );
     } else {
       return (
-        <Typography variant="body2" component="p" color="textPrimary">
-          {`$${results}`}
+        <Typography variant="body2" component="p">
+          {`$${results || item.price}`}
         </Typography>
       );
     }
