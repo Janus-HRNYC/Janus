@@ -13,7 +13,6 @@ const getModalStyle = () => {
     };
   };
   
-
   const useStyles = makeStyles((theme) => ({
     paper: {
       position: 'absolute',
@@ -30,8 +29,6 @@ const getModalStyle = () => {
     width: "500px",
     height: "500px"
     },
-    
-
 }));
 
 const PictureModal = ( { photoURL, setDisplayPictureModal, displayPictureModal } ) => {

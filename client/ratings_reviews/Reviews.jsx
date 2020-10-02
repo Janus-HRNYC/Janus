@@ -32,45 +32,42 @@ const Reviews = (props) => {
     getReviews(id);
   }, []);
 
-  console.log('Displaying Review Results; ', filterList);
-  console.log('Displaying Product info; ', info);
-
   const clickStarRating = (rating) => {
-    console.log('This has been clicked: ', rating);
     let filterByRatings = reviewResults.filter((review) => {
       return review.rating === rating;
     });
-    console.log('Filter Review Results; ', filterByRatings);
     setFilterList(filterByRatings);
     setLimit(2);
   };
 
   return (
-    <Box className={classes.root}>
-      <Container>
-        <Typography variant='subtitle1'>RATINGS & REVIEWS</Typography>
-        <Grid container direction='row' justify='space-between'>
-          <Grid item md={4}>
-            <Ratings
-              ratingsMeta={ratingsMeta}
-              clickStarRating={clickStarRating}
-            />
+    <>
+      <Box className={classes.root}>
+        <Container>
+          <Typography variant='subtitle1'>RATINGS & REVIEWS</Typography>
+          <Grid container direction='row' justify='space-between'>
+            <Grid item md={4}>
+              <Ratings
+                ratingsMeta={ratingsMeta}
+                clickStarRating={clickStarRating}
+              />
+            </Grid>
+            <Grid item md={8}>
+              <ReviewList
+                list={displayList}
+                displayBySort={displayBySort}
+                ratingsMeta={ratingsMeta}
+                postReview={postReview}
+                limit={limit}
+                setLimit={setLimit}
+                setFilterList={setFilterList}
+                info={info}
+              />
+            </Grid>
           </Grid>
-          <Grid item md={8}>
-            <ReviewList
-              list={displayList}
-              displayBySort={displayBySort}
-              ratingsMeta={ratingsMeta}
-              postReview={postReview}
-              limit={limit}
-              setLimit={setLimit}
-              setFilterList={setFilterList}
-              info={info}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </>
   );
 };
 
