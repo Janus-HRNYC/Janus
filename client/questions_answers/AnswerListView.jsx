@@ -3,12 +3,9 @@ import Axios from 'axios';
 import moment from 'moment';
 import { Grid, Box, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { spacing } from '@material-ui/system';
 import PictureModal from './PictureModal'
 
-
 const AnswerListView = ({ answer, question, getAnswers }) => {
-
   const [displayPictureModal, setDisplayPictureModal] = useState(false);  
   const [photoURL, setPhotoURL] = useState('')
   const [reported, setReported] = useState(false)
@@ -20,17 +17,17 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
   }
   
   const handleHelpFullAnswerClick = () => {
-        let check = localStorage.getItem(`${answer.answer_id}`)
+        let check = localStorage.getItem(`${answer.answer_id || answer.id}`)
         if (!check) {
-        Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id}/helpful`)
-        .then(res => getAnswers(question))
+        Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id || answer.id}/helpful`)
+        .then(() => getAnswers(question))
         .catch(err => console.log(err));
-        localStorage.setItem(`${answer.answer_id}`, true)
+        localStorage.setItem(`${answer.answer_id || answer.id}`, true)
         }
     }
 
     const handleReportAnswerClick = () => {
-        Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id}/report`)
+        Axios.put(`http://18.224.200.47/qa/answer/${answer.answer_id || answer.id}/report`)
         .catch(err => console.log(err));
     }
  
@@ -99,9 +96,7 @@ const AnswerListView = ({ answer, question, getAnswers }) => {
             >
             {answer.photos.length > 0 ?
             answer.photos.map((photo, i) => {
-              return <Grid   title="QandA" key={i} item onClick={(e) => {handlePictureClick(e)}}><img title="QandA" title={photo.url} className={classes.QAThumbnails} src={photo.url} /></Grid>
-              
-            })
+              return <Grid   title="QandA" key={i} item onClick={(e) => {handlePictureClick(e)}}><img title="QandA" title={photo.url || photo} className={classes.QAThumbnails} src={photo.url || photo} /></Grid>})
             : null
             }
             </Grid>

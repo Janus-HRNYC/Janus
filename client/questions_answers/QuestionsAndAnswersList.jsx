@@ -3,9 +3,12 @@ import QuestionsAndAnswersListView from './QuestionsAndAnswersListView';
 import AddQuestionModal from './AddQuestionModal';
 import { Grid, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux'
 
-const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, productName, searchTerm }) => {
+const QuestionsAndAnswersList = ({ searchTerm }) => {
   const [questionLimit, setQuestionLimit] = useState(2);
+
+  const questions = useSelector(state => state.questions) 
     
   const handleMoreQuestionsClick = () => setQuestionLimit(questionLimit + 2);
   
@@ -19,20 +22,26 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
       let filteredQuestions = [];
       if (searchTerm.length > 2) {
         for (const question of questions) {
-          const lowerCaseSearchTerm = searchTerm.toLowerCase().split(' ').join('');
-          const lowerCaseQuestion = question.question_body.toLowerCase().split(' ').join('');
-          const found1 = lowerCaseQuestion.includes(lowerCaseSearchTerm)
+          let copiedQuestion = {...question}
+          const regex1 = new RegExp(searchTerm.replace(/\s/g, '').replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i')
+          const found1 = regex1.test(copiedQuestion.question_body.replace(/\s/g, ''))
           
           let found2 = false;
-          const lowerCaseQuestionsForSecondCheck = question.question_body.toLowerCase();
-          const searchArray = searchTerm.toLowerCase().split(' ')
-          searchArray.forEach((indAnswer) => {
-            lowerCaseQuestionsForSecondCheck.includes(indAnswer) && indAnswer.length > 2 ? found2 = true
-            : null
+          let count = 0;
+          const searchArray = searchTerm.split(' ')
+
+          searchArray.forEach((searchWord) => {
+            const regex = new RegExp(searchWord.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i')
+            if (regex.test(copiedQuestion.question_body) && searchWord.length > 2) count++
           })
-          
-          found1 || found2 ? filteredQuestions.push(question) : null;
+
+          if (count > 0) {
+            copiedQuestion.count = count
+            found2 = true
+          }
+          found1 || found2 ? filteredQuestions.push(copiedQuestion) : null;
         }
+        filteredQuestions.sort((a, b) => b.count - a.count)
         return filteredQuestions
       } else {
         return questions
@@ -41,15 +50,12 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
     
     const renderQuestions = (question, i) => i <= (questionLimit - 1) ? 
       <QuestionsAndAnswersListView 
-      key={i}
+      key={question.question_id}
       question={question} 
-      productId={productId} 
-      axiosQuestionRequest={axiosQuestionRequest} 
-      productName={productName}
       />
       : null
     
-    const sortQuestionsByHelpful = (questions) => questions.sort((a, b) => b.question_helpfulness - a.question_helpfulness)
+    const sortQuestionsByHelpful = (questions) => questions.slice().sort((a, b) => b.question_helpfulness - a.question_helpfulness)
 
     const displaySortedQuestionsIfAny = () => sortQuestionsByHelpful(filterQuestionsBySearchTerm()).map((question, i) => renderQuestions(question, i))
     
@@ -69,11 +75,7 @@ const QuestionsAndAnswersList = ({ questions, axiosQuestionRequest, productId, p
           {moreQuestionsButton()}
         </Grid>
         <Grid item>
-          <AddQuestionModal 
-          productName={productName} 
-          productId={productId} 
-          axiosQuestionRequest={axiosQuestionRequest} 
-          />
+          <AddQuestionModal />
         </Grid>
       </Grid>
     </Box>

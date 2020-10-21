@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Button, TextField, Box, Grid, Typography } from '@material-ui/core';
+import { Modal, Button, TextField, Box, Grid } from '@material-ui/core';
 import Axios from 'axios';
-
+import { useSelector } from 'react-redux'
 
 const getModalStyle = () => {
   const top = 50;
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const AddAnswerModal = ({ productName, question, getAnswers }) => {
+const AddAnswerModal = ({ question, getAnswers }) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -45,6 +45,8 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
   const [email, setEmail] = useState('');
   const [photos, setPhotos] = useState([])
   const [improperSubmission, setImproperSubmission] = useState(false);
+
+  const productName = useSelector(state => state.productName)
 
   const postAnswer = () => {
     Axios.post(`http://18.224.200.47/qa/${question.question_id}/answers`, {
@@ -62,9 +64,8 @@ const AddAnswerModal = ({ productName, question, getAnswers }) => {
         setDisplayModal(true)
     } else if (answerAsked.length < 1 
         || userDisplayName.length < 1 
-        || email.length < 1
-        || !email.includes('@') 
-        || !email.includes('.')) {
+        || email.length < 4
+        || !email.includes('@' || '.')) {
         setImproperSubmission(true)
     } else {
         postAnswer();

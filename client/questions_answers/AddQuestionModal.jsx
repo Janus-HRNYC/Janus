@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Button, TextField, Box, Grid } from '@material-ui/core';
 import Axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux'
+import { axiosQuestionRequest } from '../redux/actions/Q&AActions/questionsAction'
+
 
 const getModalStyle = () => {
   const top = 50;
@@ -33,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
+const AddQuestionModal = () => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = useState(getModalStyle);
@@ -43,13 +46,17 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
   const [email, setEmail] = useState('')
   const [improperSubmission, setImproperSubmission] = useState(false);
 
+  const dispatch = useDispatch()
+  const productName = useSelector(state => state.productName)
+  const productId = useSelector(state => state.id)
+
   const postQuestion = () => {
     Axios.post(`http://18.224.200.47/qa/${productId}`, {
       body: questionAsked,
       name: userDisplayName,
       email: email
     })
-    .then(res => axiosQuestionRequest(productId))
+    .then(() => dispatch(axiosQuestionRequest(productId)))
     .catch(err => console.log(err))
   }
 
@@ -59,8 +66,7 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
     } else if (questionAsked.length < 1 
         || userDisplayName.length < 1 
         || email.length < 1
-        || !email.includes('@') 
-        || !email.includes('.')) {
+        || !email.includes('@' || '.')) {
         setImproperSubmission(true)
     } else {
         postQuestion();
@@ -72,7 +78,7 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
     }
   };
 
-  const handleOtherClick = () => {
+  const handleOutsideModalClick = () => {
     setDisplayModal(!displayModal)
     setImproperSubmission(false)
     setUserDisplayName('')
@@ -143,7 +149,7 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
               improperSubmission ?
               <div title="QandA">
                 <p title="QandA" id="warningTextBold">You must enter the following:</p>
-                <p title="QandA">Your Answer</p>
+                <p title="QandA">Your Question</p>
                 <p title="QandA">Your Nickname</p>
                 <p title="QandA">Your Email in the proper format</p>
               </div>
@@ -152,8 +158,6 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
           }
           </Grid>
         </Grid>
-        
-      
      
       <Button title="QandA" variant='contained' onClick={handleClick}>
         Submit
@@ -169,7 +173,7 @@ const AddQuestionModal = ({ productName, productId, axiosQuestionRequest }) => {
       <Modal
         title="QandA"
         open={displayModal}
-        onClose={handleOtherClick}
+        onClose={handleOutsideModalClick}
         aria-labelledby='simple-modal-title'
         aria-describedby='simple-modal-description'
       >

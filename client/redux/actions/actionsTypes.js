@@ -15,3 +15,5 @@ export const getCurrentItem = 'GET_CURRENT_ITEM';
 export const getRelatedStyles = 'GET_RELATED_STYLES';
 export const setProducts = 'SET_PRODUCTS';
 export const updateOutfit = 'UPDATE_OUTFIT';
+export const getQuestions = "GET_QUESTIONS";
+export const getProductName = "GET_PRODUCT_NAME";

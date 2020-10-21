@@ -1,17 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { TextField } from '@material-ui/core';
+import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 
 const SearchForm = ({ searchTerm, setSearchTerm }) => {
-
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   return (
     <div title="QandA">
@@ -21,7 +14,7 @@ const SearchForm = ({ searchTerm, setSearchTerm }) => {
             value={searchTerm}
             placeholder="Have a question? Search for answers..." 
             endAdornment={<SearchIcon position="end"></SearchIcon>}
-            onChange={handleSearchChange}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </FormControl>
     </div>

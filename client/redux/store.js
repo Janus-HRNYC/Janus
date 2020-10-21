@@ -19,6 +19,8 @@ const initialState = {
   info: {},
   compareProducts: {},
   relatedStyles: [],
+  questions: [],
+  productName: [],
 };
 
 const logger = (store) => {

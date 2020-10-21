@@ -4,24 +4,31 @@ import AnswerListView from './AnswerListView';
 import AddAnswerModal from './AddAnswerModal';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector, useDispatch } from 'react-redux'
+import { axiosQuestionRequest } from '../redux/actions/Q&AActions/questionsAction'
 
-const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest, productName }) => {
+const QuestionsAndAnswersListView = ({ question }) => {
   const [answers, setAnswers] = useState([]);
   const [answerLimit, setAnswerLimit] = useState(2);
   const [seeMoreAnswersClicked, setSeeMoreAnswersClicked] = useState(false);
-  
-  useEffect(() => {
-    getAnswers(question)
-  }, [question]);
+
+  const dispatch = useDispatch()
+  const productId = useSelector(state => state.id)
 
   useEffect(() => {
-    seeMoreAnswersClicked ? setAnswerLimit(answers.length) : null;
+    setAnswers(Object.values(question.answers))
+  }, [question])
+
+  useEffect(() => {
+      seeMoreAnswersClicked ? setAnswerLimit(answers.length) : null;
   }, [answers])
 
   
   const getAnswers = (question) => {
     Axios.get(`http://18.224.200.47/qa/${question.question_id}/answers?count=100`)
-    .then(res => setAnswers(res.data.results))
+    .then(res => {
+      setAnswers(res.data.results)
+    })
     .catch(err => console.log(err));
   }
 
@@ -29,7 +36,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
       const checkIfUserClickedHelpfulQuestion = localStorage.getItem(`${question.question_id}`)
       !checkIfUserClickedHelpfulQuestion ?
         Axios.put(`http://18.224.200.47/qa/question/${question.question_id}/helpful`)
-        .then(res => axiosQuestionRequest(productId))
+        .then(res => dispatch(axiosQuestionRequest(productId)))
         .then(localStorage.setItem(`${question.question_id}`, true))
         .catch(err => console.log(err))
       : null
@@ -41,8 +48,11 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
     setSeeMoreAnswersClicked(!seeMoreAnswersClicked);
   };
 
+  const displayAnswers = () => answers.sort((a, b) => ((b.answerer_name === 'Seller') - (a.answerer_name === 'Seller') || (b.helpfulness - a.helpfulness)))
+  .map((answer, i) => renderAnswers(i, answer))
+
   const renderAnswers = (i, answer) => i <= (answerLimit - 1) ? 
-    <AnswerListView key={i} answer={answer} question={question} getAnswers={getAnswers} /> 
+    <AnswerListView key={answer.id || answer.answer_id} answer={answer} question={question} getAnswers={getAnswers} /> 
   : null
 
   const displayAnswersIfAny = () => answers.length > 0 ? 
@@ -122,8 +132,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
             &nbsp;&nbsp;&nbsp;<span className={classes.borderLeft}></span>&nbsp;&nbsp;&nbsp;
             <AddAnswerModal
             getAnswers={getAnswers} 
-            question={question}
-            productName={productName}/>
+            question={question}/>
           </Grid>
           </Typography>
         </Grid>
@@ -131,7 +140,7 @@ const QuestionsAndAnswersListView = ({ question, productId, axiosQuestionRequest
           {
             answers.length > 0 ?
             <Grid title="QandA" className={classes.root}>
-              {displayAnswersIfAny()}
+              {answers ? displayAnswersIfAny() : null}
             </Grid>
             : null
           }

@@ -6,6 +6,7 @@ import productIdReducer from './overviewReducer';
 import homeReducer from './homeReducer.js';
 import comparisonReducer from './comparisonReducer';
 import relatedStylesReducer from './relatedStylesReducer'
+import questionsAndAnswersReducer from './Q&AReducer/Q&AReducer'
 
 const rootReducer = combineReducers({
   products: homeReducer.setProductsReducer,
@@ -21,6 +22,8 @@ const rootReducer = combineReducers({
   styles: productIdReducer.getStyles,
   compareProducts: comparisonReducer.updateReducer,
   relatedStyles: relatedStylesReducer.addStyle,
+  questions: questionsAndAnswersReducer.questionsReducer,
+  productName: questionsAndAnswersReducer.productNameReducer,
 });
 
 export default rootReducer;
